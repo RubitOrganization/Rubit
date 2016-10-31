@@ -32,7 +32,10 @@ The following **required** functionality is completed:
 * [ ] User can view a list of 5 requests in the RequestList Activity
   * [ ] 1-2 Random new request will popup to replace the old requests after every 10 seconds
   * [ ] Click the request will make users the next person ready for the task  
- 
+  
+## Wireframe
+Here's the illlustration of Rubit App functions:
+https://drive.google.com/open?id=0ByLC-o1OX1vCN2lFUXNLNHB3SUU
 
 ## Video Walkthrough
 
