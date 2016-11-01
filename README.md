@@ -82,6 +82,7 @@ The following functionality is completed:
   * [ ] User can review the content of request
 
 **SETTINGS_ACTIVITY**
+
 **OTHERS**  
   
 ## Wireframe
