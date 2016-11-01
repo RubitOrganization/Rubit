@@ -19,7 +19,7 @@ Time spent: **4** weeks spent in total
 
 The following **required** functionality is completed:
 
-* [ ] **FIRST_USE**
+**FIRST_USE**
 
   * [ ] Splash Screen
     * [ ] (Optional) *Rub Rub gesture* to call the Genie out of the Lamp
@@ -32,7 +32,7 @@ The following **required** functionality is completed:
     * [ ] User can update their *Information"
     * [ ] (Optional) User can *Upload Pictures and Videos* to their profile
 
-* [ ] **MAIN_SCREEN_ACTIVITY** 
+**MAIN_SCREEN_ACTIVITY** 
 
   * [ ] *Pop-up notification* on the top to show request notification from other users
     * [ ] (Optional) *Animation* The speech buble popup with "Pudding effect"
@@ -49,7 +49,7 @@ The following **required** functionality is completed:
   * [ ] *Animation* When the keyboard shows up, the Edit Text place above the keyboard, then the Go Button. The logo will become smaller then move to the left. A TextView appears on the Right display exactly what users are typing with White color Tag symbol and Black Text.
   * [ ] (Optional) *Animation* After User click Go, the Go Button will move to the EditText, grab the text and quickly move to the Logo. The Logo zoom in into a white ball, then rotate, then the **REQUESTING_ACTIVITY* will be called
 
-* [ ] **REQUESTING_ACTIVITY** from MainScreenActivity
+**REQUESTING_ACTIVITY** from MainScreenActivity
 
   * [ ] Most suitable users's portfolio, whose can handle the task will full-screen appears
     * [ ] User can scan through a list of items in the Porfolio by Vertical scrolling
@@ -59,20 +59,20 @@ The following **required** functionality is completed:
   * [ ] User can immediately *Chat* with Candidate or *Save the Profile* for later review
   * [ ] User can *Choose Multiple* Candidates if he/she need more than 1 people
 
-* [ ] ** DETAILED_TASK_ACTIVITY** from MainScreenActivity
+** DETAILED_TASK_ACTIVITY** from MainScreenActivity
 
   * [ ] User can add *Task name, Requirement and Note* about the task
   * [ ] User can add *Address* or *Pin on Map to select address* for sending request to the address nearby users 
   * [ ] (Optional) User can *Attach pictures, voice note or video*
   * [ ] (Optional) User can choose *Payment or different types of Award*
 
-* [ ] ** CHATTING_ACTIVITY** 
+** CHATTING_ACTIVITY** 
 
   * [ ] User can chat with others in real time
   * [ ] User can review the content of request
 
-* [ ] **SETTINGS_ACTIVITY**
-* [ ] **OTHERS**  
+**SETTINGS_ACTIVITY**
+**OTHERS**  
   
 ## Wireframe
 Here's the illlustration of Rubit App functions:
