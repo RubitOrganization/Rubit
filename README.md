@@ -1,4 +1,4 @@
-# Project 3 - *Rubit*
+# Project 4 - *Rubit*
 
 **Rubit** is an android app that allows a user to ask other users helping them with a task.
 
@@ -13,7 +13,7 @@ Time spent: **4** weeks spent in total
   * Psychological concept based on the old story that everyone know: (rub rub the lamp, a genie will appears) -> (rub rub it, someone will help)
   * Develop a unique habit for User, so make them remember the app
   * Marketing concept: "If you need something, then just rub it", similarly to "Uber there" or "Google it"
-* **Countdown:** The app will automatically switch to the next events after a specific amount of time. Pyschological concept to push User: "do it more quickly"
+* **Countdown:** The app will automatically switch to the next events after a specific amount of time. Psychological concept to push User: "do it more quickly"
 
 ## User Stories
 
@@ -21,77 +21,110 @@ The following functionality is completed:
 
 **FIRST_USE**
 
-  * [ ] Splash Screen +Optional+
+  * [ ] Opening Screen **_Optional_**
+    * [x] Splash screen as the moment
     * [ ] **Rub Rub gesture** to call the Genie out of the Lamp
-    * [ ] +Optional+ **Animation** for the logo
     * [ ] **Small pop up and animation** to help User know that they need to rub rub the lamp
-  * [ ] +Optional+ 3-4 **Introduction screen** to summary the functions
-  * [ ] **Login & Register** Activity (Refer to the WireFrame)
+    * [ ] **_Optional_** **Animation** for the logo
+  * [ ] **_Optional_** 3-4 **Introduction screen** to summary the functions
+    * [ ] 3 - 4 activities
+    * [ ] Replace by fragment
+    * [ ] **_Optional_** Slide animation or something else
+  * [ ] **Login** Activity
+    * Login through current app
+    * Third parties login (Facebook, Google, etc)
+  * [ ] **Register** Activity
+    * Register through current app
+    * Third parties register (Facebook, Google, etc)
   * [ ] **FieldSelect** Activity - Ask User choosing their favourite field
+    * [ ] Static selected field at the moment
+    * [ ] **_Optional_** Animation moving around randomly applied.
   * [ ] **UpdatePortfolio** Activity - Ask User to update their Portfolio
-    * [ ] User can update their information"
-    * [ ] +Optional+ User can **Upload Pictures and Videos** to their profile
+    * [ ] User can update their information
+    * [ ] **_Optional_** User can **Upload Picture/GIF** as an avatar
+    * [ ] **_Optional_** User can **Upload Video** as an avatar
 
 **MAIN_SCREEN_ACTIVITY** 
 
   * [ ] **Pop-up notification** on the top to show request notification from other users
-    * [ ] +Optional+ **Animation** The speech buble popup with "Pudding effect"
-    * [ ] **Countdown** The new request will pop up after every 10 seconds
     * [ ] Click the pop-up will head to the **REQUEST_LIST_ACTIVITY**
+    * [ ] **_Optional_** **Animation** The speech bubble popup with "Pudding effect"
+    * [ ] **_Optional_** **Countdown** The new request will pop up after every 10 seconds
   * [ ] **Logo** in the middle
-    * [ ] +Optional+ **Animation** The logo will show emotion: smile while user typing and sad while user delete
-  * [ ] **Go Button** Floating Action Button???
-    * [ ] **Rub Rub gesture** instead of clicking the Button
+    * [ ] **_Optional_** **Animation** The logo will show emotion: smile while user typing 
+    * [ ] **_Optional_** **Animation** The logo will show emotion: sad while user delete
+  * [ ] **Go Selection**
+    * [ ] **Rub Rub gesture** Clicking the Button as Floating Action Button
+    * [ ] The **REQUESTING_ACTIVITY** will be called if it is selected
+    * [ ] **_Optional_** **Rub Rub gesture**
   * [ ] **Request EditText**
-    * [ ] **TAG SYSTEM** The app will automatically recognize symbol like # or @ and record the text value after them
+    * [ ] **_Optional_** **TAG SYSTEM** The app will automatically recognize symbol like # or @ and record the text value after them
       * [ ] # means to people of. Ex: #CoderSchool = to people from CoderSchool
-      * [ ] @ has various meaning. May be it mention a specific user, an adress or a time. The app should automatically recognize the type and record it accurately
+      * [ ] @ has various meaning. May be it mention a specific user, an address or a time. The app should automatically recognize the type and record it accurately
       * [ ] **Animation** The tagged words with symbol will be changed to bold textStyle and color change to Blue inside the EditText
-  * [ ] +Optional+ **Animation** When the keyboard shows up, the Edit Text place above the keyboard, then the Go Button. The logo will become smaller then move to the left. A TextView appears on the Right display exactly what users are typing with White color Tag symbol and Black Text.
-  * [ ] +Optional+ **Animation** After User click Go, the Go Button will move to the EditText, grab the text and quickly move to the Logo. The Logo zoom in into a white ball, then rotate, then the **REQUESTING_ACTIVITY** will be called
+  * [ ] **_Optional_** **Extra Animation** 
+    * [ ] When the keyboard shows up, the Edit Text place above the keyboard, then the Go Button.
+    * [ ] The logo will become smaller then move to the left.
+    * [ ] Apply White color for Tag symbol #.
+    * [ ] Apply ? (blue) color for Tag symbol @.
+    * [ ] Special effect on Go Selection
+        * [ ] The Go Button will move to the EditText
+        * [ ] Grab the text and quickly move to the Logo
+        * [ ] The Logo zoom in into a white ball, then rotate then the **REQUESTING_ACTIVITY** will be called
 
 **REQUESTING_LIST_ACTIVITY** from MainScreenActivity
 
-  * [ ] User can see a list of 5 request bubles from other users
-    * [ ] +Optional+ Display in 3 types of buble depends on the length of text (Refer to the WireFrame)
-    * [ ] **Mini Badge** sticked to the request bubles to show the type or payment (reward), or the request required something or not, or is there any note, image, etc. attached or not
-    * [ ] 2 new random request will popup to replace the old 2 ones after every 10 seconds
-  * [ ] +Optional+ **Animation** The speech buble popup with "Pudding effect"
-  * [ ] **PullToRequest** User can pull to load a whole 5 new requests
+  * [ ] User can see a list of 5 request from other users
+    * [ ] Display list with 5 elements as minimum
+    * [ ] **_Optional_** 2 new random request will popup to replace the old 2 ones after every 10 seconds
+    * [ ] **_Optional_** Display in 3 types of bubble depends on the length of text (Refer to the WireFrame)
+    * [ ] **_Optional_** **Mini Badge** sticks to the request to show the type or payment (reward), or the request required something or not, or is there any note, image, etc. attached or not
+    * [ ] **_Optional_** **Animation** The speech bubble popup with "Pudding effect"
+  * [ ] **Pull To Request** User can pull to load a whole 5 new requests
+    * [ ] Refresh list
+    * [ ] Color progress bar appear to notify + Make the blur/transparent background
+    * [ ] **_Optional_** Animation for that background.
+  * [ ] **Loading more effect** if user scroll down
+    * [ ] Add 5 more to list
+    * [ ] Color progress bar appear to notify
+    * [ ] **_Optional_** Animation for that Color progress bar.
 
 **REQUESTING_ACTIVITY** from MainScreenActivity
 
   * [ ] Most suitable users's portfolio, whose can handle the task will full-screen appears
-    * [ ] User can scan through a list of items in the Porfolio by Vertical scrolling
-    * [ ] Users can see more element of an item by Horizontal scrolling (refer to the WireFrame)
-    * [ ] +Optional+ Clicking each item in the list, *DetailedPortfolioItem* Activity will show up for more details
+    * [ ] A list of items in the Portfolio by Vertical scrolling
+    * [ ] More element of an item by Horizontal scrolling (refer to the WireFrame)
+    * [ ] **_Optional_** Clicking each item in the list, **DetailedPortfolioItem** Activity will show up for more details
   * [ ] **Countdown** User can see the portfolio of each members in 30 seconds, after that, the next profile will show up
-  * [ ] User can immediately **Chat** with Candidate or *Save the Profile* for later review
-  * [ ] +Optional+ User can **Choose Multiple** Candidates if he/she need more than 1 people
+  * [ ]  With the selected candidate
+    * [ ] User can immediately **Chat** if that both are online
+    * [ ] **_Optional_** Follow/Subscribe: **Save the Profile** for later review
+    * [ ] **_Optional_** User can **Choose Multiple** Candidates if he/she need more than 1 people
 
 **DETAILED_TASK_ACTIVITY** from MainScreenActivity
 
   * [ ] User can add **Task name, Requirement and Note** about the task
-  * [ ] User can add **Address** or **Pin on Map to select address** for sending request to the address nearby users 
-  * [ ] +Optional+ User can *Attach pictures, voice note or video**
-  * [ ] +Optional+ User can choose **Payment or different types of Award**
+  * [ ] User can add **Address** 
+  * [ ] **_Optional_** **Pin on Map to select address** for sending request to the address nearby users 
+  * [ ] **_Optional_** User can **Attach pictures, voice note or video**
+  * [ ] **_Optional_** User can choose **Payment or different types of Award**
 
 **CHATTING_ACTIVITY** 
 
   * [ ] User can chat with others in real time
   * [ ] User can review the content of request
 
-**SETTINGS_ACTIVITY**
+**SETTINGS_ACTIVITY (Optional)**
 
 **OTHERS** 
-* [ ] +Bonus+ **Credit System:** When Users help others, they will receive credit
-* [ ] +Bonus+ **Friend System:** Just social network functions like Facebook
-* [ ] +Bonus+ **Mention Function:** If users can't handle the job, but they know who can do it, they can just pick him (for one who already has Rubit account) or send a message with a link (for someone who does not have account in Rubit - This also play roles as an invitation to join). The Introducer will also get a part of Credit.
-* [ ] +Bonus+ **Badge System:** Users can receive badge from authorized organizations to prove their achivements. Ex: CoderSchool badge == graduates from CC
-* [ ] +Bonus+ **Payment System:** Considering ~
+* [ ] **_Bonus_** **Credit System:** When Users help others, they will receive credit
+* [ ] **_Bonus_** **Friend System:** Just social network functions like Facebook
+* [ ] **_Bonus_** **Mention Function:** If users can't handle the job, but they know who can do it, they can just pick him (for one who already has Rubit account) or send a message with a link (for someone who does not have account in Rubit - This also play roles as an invitation to join). The Introducer will also get a part of Credit.
+* [ ] **_Bonus_** **Badge System:** Users can receive badge from authorized organizations to prove their achievements. Ex: CoderSchool badge == graduates from CC
+* [ ] **_Bonus_** **Payment System:** Considering ~
   
 ## Wireframe
-Here's the illlustration of Rubit App functions:
+Here's the illustration of Rubit App functions:
 https://drive.google.com/open?id=0ByLC-o1OX1vCN2lFUXNLNHB3SUU
 
 ## Video Walkthrough
