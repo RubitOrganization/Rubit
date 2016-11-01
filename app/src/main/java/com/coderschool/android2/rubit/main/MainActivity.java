@@ -5,11 +5,16 @@
  * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
  */
 
-package com.coderschool.android2.rubit;
+package com.coderschool.android2.rubit.main;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.coderschool.android2.rubit.R;
+
+/**
+ * {@link MainActivity}
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
