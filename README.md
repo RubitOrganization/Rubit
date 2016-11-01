@@ -6,15 +6,14 @@ Time spent: **4** weeks spent in total
 
 ## Concepts
 
-  **COMMUNITY CONCEPT* This app aims to build a *COMMUNITY*, not a *SERVICE*
+* **COMMUNITY CONCEPT** This app aims to build a *COMMUNITY*, not a *SERVICE*
 
-  **Emotional Logo** A logo which can smile, sad, blink, etc based on the context. Psychological concept to push User
-  **Rub Rub Gesture** Instead of clicking or Swiping, User rub rub (Swipe 2-3 times) an object to see an event. 
-    - Psychological concept based on the old story that everyone know: (rub rub the lamp, a genie will appears) -> (rub rub it, someone will help)
-    - Develop a unique habit for User, so make them remember the app
-    - Marketing concept: "If you need something, then just rub it", similarly to "Uber there" or "Google it"
-  **Countdown** The app will automatically switch to the next events after a specific amount of time. Pyschological concept to push User: "do it more quickly"
-
+* **Emotional Logo** A logo which can smile, sad, blink, etc based on the context. Psychological concept to push User
+* **Rub Rub Gesture** Instead of clicking or Swiping, User rub rub (Swipe 2-3 times) an object to see an event. 
+  * Psychological concept based on the old story that everyone know: (rub rub the lamp, a genie will appears) -> (rub rub it, someone will help)
+  * Develop a unique habit for User, so make them remember the app
+  * Marketing concept: "If you need something, then just rub it", similarly to "Uber there" or "Google it"
+* **Countdown** The app will automatically switch to the next events after a specific amount of time. Pyschological concept to push User: "do it more quickly"
 ## User Stories
 
 The following **required** functionality is completed:
