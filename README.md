@@ -83,7 +83,12 @@ The following functionality is completed:
 
 **SETTINGS_ACTIVITY**
 
-**OTHERS**  
+**OTHERS** 
+* [ ] (Bonus) **Credit System:** When Users help others, they will receive credit
+* [ ] (Bonus) **Friend System:** Just social network functions like Facebook
+* [ ] (Bonus) **Mention Function:** If users can't handle the job, but they know who can do it, they can just pick him (for one who already has Rubit account) or send a message with a link (for someone who does not have account in Rubit - This also play roles as an invitation to join). The Introducer will also get a part of Credit.
+* [ ] (Bonus) **Badge System:** Users can receive badge from authorized organizations to prove their achivements. Ex: CoderSchool badge == graduates from CC
+* [ ] (Bonus) **Payment System:** Considering ~
   
 ## Wireframe
 Here's the illlustration of Rubit App functions:
