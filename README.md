@@ -21,7 +21,7 @@ The following functionality is completed:
 
 **FIRST_USE**
 
-  * [ ] Splash Screen
+  * [ ] Splash Screen "Optional"
     * [ ] **Rub Rub gesture** to call the Genie out of the Lamp
     * [ ] **Animation** for the logo
     * [ ] **Small pop up and animation** to help User know that they need to rub rub the lamp
@@ -69,14 +69,14 @@ The following functionality is completed:
   * [ ] User can immediately **Chat** with Candidate or *Save the Profile* for later review
   * [ ] User can **Choose Multiple** Candidates if he/she need more than 1 people
 
-** DETAILED_TASK_ACTIVITY** from MainScreenActivity
+**DETAILED_TASK_ACTIVITY** from MainScreenActivity
 
   * [ ] User can add **Task name, Requirement and Note** about the task
   * [ ] User can add **Address** or **Pin on Map to select address** for sending request to the address nearby users 
   * [ ] User can *Attach pictures, voice note or video**
   * [ ] User can choose **Payment or different types of Award**
 
-** CHATTING_ACTIVITY** 
+**CHATTING_ACTIVITY** 
 
   * [ ] User can chat with others in real time
   * [ ] User can review the content of request
