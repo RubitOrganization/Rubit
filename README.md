@@ -4,34 +4,75 @@
 
 Time spent: **4** weeks spent in total
 
+## Concepts
+
+  **COMMUNITY CONCEPT* This app aims to build a *COMMUNITY*, not a *SERVICE*
+
+  **Emotional Logo** A logo which can smile, sad, blink, etc based on the context. Psychological concept to push User
+  **Rub Rub Gesture** Instead of clicking or Swiping, User rub rub (Swipe 2-3 times) an object to see an event. 
+    - Psychological concept based on the old story that everyone know: (rub rub the lamp, a genie will appears) -> (rub rub it, someone will help)
+    - Develop a unique habit for User, so make them remember the app
+    - Marketing concept: "If you need something, then just rub it", similarly to "Uber there" or "Google it"
+  **Countdown** The app will automatically switch to the next events after a specific amount of time. Pyschological concept to push User: "do it more quickly"
+
 ## User Stories
 
 The following **required** functionality is completed:
 
-* [ ]   User can **sign up an a account and signin to the app** 
+* [ ] **FIRST_USE**
 
-* [ ]   In the main screen, use can:**
-  * [ ] Add quick request with special Tag like # or @
-  * [ ] See request notification popup from user
-  * [ ] Click the popup will head to the RequestList Activity
-  * [ ] UAccess the DetailedTaskActivity
+  * [ ] Splash Screen
+    * [ ] (Optional) *Rub Rub gesture* to call the Genie out of the Lamp
+    * [ ] (Optional) *Animation* for the logo
+    * [ ] (Optional) *Small pop up and animation* to help User know that they need to rub rub the lamp
+  * [ ] 3-4 *Introduction screen* to summary the functions
+  * [ ] *Login* & Register* Activity (Refer to the WireFrame)
+  * [ ] *FieldSelect* Activity - Ask User choosing their favourite field
+  * [ ] *UpdatePortfolio* Activity - Ask User to update their Portfolio
+    * [ ] User can update their *Information"
+    * [ ] (Optional) User can *Upload Pictures and Videos* to their profile
 
-* [ ] User can add detailed request in DetailedTaskActivity
-  * [ ] User can add Name of Task and Note
-  * [ ] User can choose an Address or pick a Location on a Map to send request to nearby users
-  * [ ] User can attach Picture or Voice Note 
+* [ ] **MAIN_SCREEN_ACTIVITY** 
 
-* [ ] User can view Portfolio of Helper in Portfolio Activity
-  * [ ] Random (quite random) helper Portfolio will show up
-  * [ ] User can see all the Reward, Past Event, Photos of previous projects
-  * [ ] Add the timer so the app will switch to the next Helper after 30 seconds
-  * [ ] User can choose to chat or save the profile for later view
+  * [ ] *Pop-up notification* on the top to show request notification from other users
+    * [ ] (Optional) *Animation* The speech buble popup with "Pudding effect"
+    * [ ] *Countdown* The new request will pop up after every 10 seconds
+  * [ ] *Logo* in the middle
+    * [ ] (Optional) *Animation* The logo will show emotion: smile while user typing and sad while user delete
+  * [ ] *Go Button* Floating Action Button???
+    * [ ] (Optional) *Rub Rub gesture instead of clicking the Button
+  * [ ] *Request EditText*
+    * [ ] **TAG SYSTEM** The app will automatically recognize symbol like # or @ and record the text value after them
+      * [ ] # means to people of. Ex: #CoderSchool = to people from CoderSchool
+      * [ ] (Optional) @ has various meaning. May be it mention a specific user, an adress or a time. The app should automatically recognize the type and record it accurately
+      * [ ] *Animation* The tagged words with symbol will be changed to bold textStyle and color change to Blue inside the EditText
+  * [ ] *Animation* When the keyboard shows up, the Edit Text place above the keyboard, then the Go Button. The logo will become smaller then move to the left. A TextView appears on the Right display exactly what users are typing with White color Tag symbol and Black Text.
+  * [ ] (Optional) *Animation* After User click Go, the Go Button will move to the EditText, grab the text and quickly move to the Logo. The Logo zoom in into a white ball, then rotate, then the **REQUESTING_ACTIVITY* will be called
 
-* [ ] User can chat with other Helper in Chat Activity
+* [ ] **REQUESTING_ACTIVITY** from MainScreenActivity
 
-* [ ] User can view a list of 5 requests in the RequestList Activity
-  * [ ] 1-2 Random new request will popup to replace the old requests after every 10 seconds
-  * [ ] Click the request will make users the next person ready for the task  
+  * [ ] Most suitable users's portfolio, whose can handle the task will full-screen appears
+    * [ ] User can scan through a list of items in the Porfolio by Vertical scrolling
+    * [ ] Users can see more element of an item by Horizontal scrolling (refer to the WireFrame)
+    * [ ] (Optional) Clicking each item in the list, *DetailedPortfolioItem* Activity will show up for more details
+  * [ ] *Countdown* User can see the portfolio of each members in 30 seconds, after that, the next profile will show up
+  * [ ] User can immediately *Chat* with Candidate or *Save the Profile* for later review
+  * [ ] User can *Choose Multiple* Candidates if he/she need more than 1 people
+
+* [ ] ** DETAILED_TASK_ACTIVITY** from MainScreenActivity
+
+  * [ ] User can add *Task name, Requirement and Note* about the task
+  * [ ] User can add *Address* or *Pin on Map to select address* for sending request to the address nearby users 
+  * [ ] (Optional) User can *Attach pictures, voice note or video*
+  * [ ] (Optional) User can choose *Payment or different types of Award*
+
+* [ ] ** CHATTING_ACTIVITY** 
+
+  * [ ] User can chat with others in real time
+  * [ ] User can review the content of request
+
+* [ ] **SETTINGS_ACTIVITY**
+* [ ] **OTHERS**  
   
 ## Wireframe
 Here's the illlustration of Rubit App functions:
