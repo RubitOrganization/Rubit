@@ -21,7 +21,7 @@ The following functionality is completed:
 
 **FIRST_USE**
 
-  * [ ] Splash Screen "Optional"
+  * [ ] Splash Screen (Optional)
     * [ ] **Rub Rub gesture** to call the Genie out of the Lamp
     * [ ] **Animation** for the logo
     * [ ] **Small pop up and animation** to help User know that they need to rub rub the lamp
