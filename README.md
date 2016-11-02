@@ -7,10 +7,11 @@ Time spent: **4** weeks spent in total
 ## Contributors
 
 | Email                     | Name              | Role      |
-| --------------------------|:-----------------:| ---------:|
-| rubit1359@gmail.com       | :Ethan Tran       | Developer |
-| manetivinay@gmail.com     | :Vinay Maneti     | Developer |
-| tien.workinfo@gmail.com   | :Tien Nguyen      | Developer |
+| --------------------------|-------------------| ----------|
+| rubit1359@gmail.com       | Ethan Tran        | Developer |
+| manetivinay@gmail.com     | Vinay Maneti      | Developer |
+| tien.workinfo@gmail.com   | Tien Nguyen       | Developer |
+
 ## Concepts
 
 * **COMMUNITY CONCEPT:** This app aims to build a *COMMUNITY*, not a *SERVICE*
