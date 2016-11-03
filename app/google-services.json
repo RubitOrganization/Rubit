@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "742986200320",
+    "firebase_url": "https://rubit-a3f5f.firebaseio.com",
+    "project_id": "rubit-a3f5f",
+    "storage_bucket": "rubit-a3f5f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:742986200320:android:99f49dff9b72fd43",
+        "android_client_info": {
+          "package_name": "com.coderschool.android2.rubit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "742986200320-0auksq3p29lsd1l0ij0sqkobka5vcd9t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.coderschool.android2.rubit",
+            "certificate_hash": "DDB8EC96753934EB62B6DB39543788B6265B79F9"
+          }
+        },
+        {
+          "client_id": "742986200320-vhvej3r7k9aeqetul3bs9438upomk71d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLHEc6aKeDChmfIFPEvM7ZR0SJIDLWT4Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "742986200320-vhvej3r7k9aeqetul3bs9438upomk71d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
