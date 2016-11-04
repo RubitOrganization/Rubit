@@ -15,11 +15,35 @@
       },
       "oauth_client": [
         {
-          "client_id": "742986200320-0auksq3p29lsd1l0ij0sqkobka5vcd9t.apps.googleusercontent.com",
+          "client_id": "742986200320-8omv53dim7ubjmbesi4h79llhaovi2ou.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.coderschool.android2.rubit",
+            "certificate_hash": "20456A5B4C65E001545352872245E631DD697AD5"
+          }
+        },
+        {
+          "client_id": "742986200320-f9lk6vndf7r0vp8hvpk1ts2maoqrn301.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.coderschool.android2.rubit",
+            "certificate_hash": "4800630DF21B68DF2B34344C0DA92EE6259CC8D9"
+          }
+        },
+        {
+          "client_id": "742986200320-8en1t8q118fn8tidb2rp1v4on3belhr9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.coderschool.android2.rubit",
             "certificate_hash": "DDB8EC96753934EB62B6DB39543788B6265B79F9"
+          }
+        },
+        {
+          "client_id": "742986200320-1laoj19h04bpbplhp0rkgpopfnglm0u6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.coderschool.android2.rubit",
+            "certificate_hash": "9F7F53FFCA5D1482B09D224E7875D28D0F53431D"
           }
         },
         {
