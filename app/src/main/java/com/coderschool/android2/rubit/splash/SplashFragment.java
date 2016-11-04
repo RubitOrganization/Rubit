@@ -10,6 +10,7 @@ package com.coderschool.android2.rubit.splash;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,8 +21,6 @@ import android.widget.ImageView;
 import com.coderschool.android2.rubit.R;
 import com.coderschool.android2.rubit.constants.IntentConstants;
 import com.coderschool.android2.rubit.main.MainActivity;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * {@link SplashFragment} display an Logo image.
@@ -90,7 +89,7 @@ public class SplashFragment extends Fragment implements SplashContact.View {
     }
 
     @Override
-    public void setPresenter(SplashContact.Presenter presenter) {
-        mPresenter = checkNotNull(presenter);
+    public void setPresenter(@NonNull SplashContact.Presenter presenter) {
+        mPresenter = presenter;
     }
 }

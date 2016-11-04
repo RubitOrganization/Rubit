@@ -11,9 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-
 /**
  * {@link ActivityUtils} provides methods to help Activities load their UI.
  *
@@ -27,10 +24,6 @@ public class ActivityUtils {
      */
     public static void addFragmentToActivity(final @NonNull FragmentManager fragmentManager,
                                              final @NonNull Fragment fragment, final int frameId) {
-        // Validate
-        checkNotNull(fragmentManager);
-        checkNotNull(fragment);
-
         // Action
         fragmentManager.beginTransaction()
                 .add(frameId, fragment)

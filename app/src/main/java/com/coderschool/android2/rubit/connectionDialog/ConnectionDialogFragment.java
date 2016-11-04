@@ -11,6 +11,7 @@ package com.coderschool.android2.rubit.connectionDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import android.widget.Button;
 
 import com.coderschool.android2.rubit.R;
 import com.coderschool.android2.rubit.constants.IntentConstants;
+import com.coderschool.android2.rubit.utils.ConnectionUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +33,7 @@ import butterknife.ButterKnife;
  */
 public class ConnectionDialogFragment extends DialogFragment {
 
+    private static FragmentManager mFragmentManager;
     @BindView(R.id.btnRetry)
     protected Button mBtnRetry;
 
@@ -46,7 +49,9 @@ public class ConnectionDialogFragment extends DialogFragment {
      * @param title {@link String}
      * @return {@link ConnectionDialogFragment}
      */
-    public static ConnectionDialogFragment newInstance(final String title) {
+    public static ConnectionDialogFragment newInstance(final FragmentManager fragmentManager, final String title) {
+        mFragmentManager = fragmentManager;
+
         final Bundle args = new Bundle();
         args.putString(IntentConstants.DIALOG_CONNECTION_TITLE, title);
 
@@ -97,8 +102,10 @@ public class ConnectionDialogFragment extends DialogFragment {
      * on connection dialog dismiss
      */
     private void onConnectionDialogDismiss() {
-        final ConnectionDialogListener listener = (ConnectionDialogListener) getActivity();
-        listener.onFinishConnectionDialog();
-        this.dismiss();
+        if (ConnectionUtils.verifyConnectionDialog(getContext(), mFragmentManager)) {
+            final ConnectionDialogListener listener = (ConnectionDialogListener) getActivity();
+            listener.onFinishConnectionDialog();
+            this.dismiss();
+        }
     }
 }

@@ -9,8 +9,6 @@ package com.coderschool.android2.rubit.splash;
 
 import android.support.annotation.NonNull;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 /**
  * {@link SplashPresenter}
  *
@@ -26,7 +24,7 @@ class SplashPresenter implements SplashContact.Presenter {
      * @param view {@link SplashContact.View}
      */
     SplashPresenter(@NonNull SplashContact.View view) {
-        mView = checkNotNull(view, "View cannot be null!");
+        mView = view;
         mView.setPresenter(this);
     }
 

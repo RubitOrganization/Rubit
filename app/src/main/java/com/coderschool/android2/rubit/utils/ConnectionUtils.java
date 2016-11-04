@@ -34,8 +34,8 @@ public class ConnectionUtils {
         if (isConnected(context)) {
             return true;
         } else {
-            final ConnectionDialogFragment connectionDialogFragment
-                    = ConnectionDialogFragment.newInstance(context.getString(R.string.text_connection_error_title));
+            final ConnectionDialogFragment connectionDialogFragment = ConnectionDialogFragment.newInstance(
+                    fragmentManager, context.getString(R.string.text_connection_error_title));
             connectionDialogFragment.show(fragmentManager, IntentConstants.DIALOG_CONNECTION_TAG);
             return false;
         }
