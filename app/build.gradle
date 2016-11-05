@@ -6,8 +6,11 @@
  */
 
 apply plugin: 'com.android.application'
+///*applied for java annotations*/
 apply plugin: 'android-apt'
+/*applied for butterknife*/
 apply plugin: 'com.neenbedankt.android-apt'
+/*applied for java-8 retrolambada*/
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
@@ -39,6 +42,7 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/LICENSE-FIREBASE.txt'
         exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE-FIREBASE_jvm.txt'
     }
     testOptions.unitTests.all {
         testLogging {
@@ -117,6 +121,7 @@ dependencies {
 
     // Firebase
     compile 'com.google.firebase:firebase-database:9.4.0'
+    /*firebase-auth allows easy management of authenticated users of your application*/
     compile 'com.google.firebase:firebase-auth:9.4.0'
     compile 'com.google.firebase:firebase-config:9.4.0'
     compile 'com.google.android.gms:play-services-appinvite:9.4.0'
@@ -125,6 +130,11 @@ dependencies {
     compile 'com.google.firebase:firebase-crash:9.4.0'
     compile 'com.google.firebase:firebase-analytics:9.4.0'
     compile 'com.firebaseui:firebase-ui-database:0.4.0'
+    // Firebase Client
+    compile 'com.firebase:firebase-client-android:2.5.2'
 }
 
+//apply Google Services Gradle Plugin
 apply plugin: 'com.google.gms.google-services'
+
+

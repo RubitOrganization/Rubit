@@ -1,26 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
-  ~ Unauthorized copying of this file, via any medium is strictly prohibited
-  ~ Proprietary and confidential
-  ~ Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
-  -->
-
-<RelativeLayout android:id="@+id/activity_main"
+<RelativeLayout android:id="@+id/activity_splash"
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".main.MainActivity">
+                android:orientation="vertical"
+                tools:context=".splash.SplashActivity">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/toolbar_layout"/>
-
         <FrameLayout
-            android:id="@+id/contentFrame"
+            android:id="@+id/contentLoginFrame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </android.support.design.widget.CoordinatorLayout>

@@ -10,4 +10,8 @@
     <string name="text_connection_error_title">Connection Issue</string>
     <string name="text_connection_error">Unable to connect to the Internet. Please check your connection!</string>
     <string name="button_try_again">Try Again</string>
+    <string name="hello_world">hello world!!</string>
+    <string name="sign_in">Sign In</string>
+    <string name="google_play_services_error">Google Play Services error</string>
+    <string name="sign_out">Sign out</string>
 </resources>
