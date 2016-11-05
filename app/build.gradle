@@ -136,5 +136,3 @@ dependencies {
 
 //apply Google Services Gradle Plugin
 apply plugin: 'com.google.gms.google-services'
-
-

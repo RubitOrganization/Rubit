@@ -71,7 +71,7 @@ public class SplashFragment extends Fragment implements SplashContact.View {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.splash_fragment, container, false);
+        View root = inflater.inflate(R.layout.fragment_splash, container, false);
         mImage = (ImageView) root.findViewById(R.id.imgLogo);
         return root;
     }

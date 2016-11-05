@@ -14,4 +14,8 @@
     <string name="sign_in">Sign In</string>
     <string name="google_play_services_error">Google Play Services error</string>
     <string name="sign_out">Sign out</string>
+    <string name="image_content_description">Image Content Description</string>
+    <string name="text_details">Details</string>
+    <string name="text_quest_bar">Please fill in your request!  </string>
+    <string name="textRequestPop">Request Pop</string>
 </resources>

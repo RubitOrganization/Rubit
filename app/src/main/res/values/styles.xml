@@ -33,6 +33,17 @@
         <item name="android:textColorSecondary">@color/colorAccent</item>
     </style>
 
-    <style name="ActionBarPopupThemeOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="ActionBarPopupThemeOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- TextBorder -->
+    <style name="TextBorder">
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:background">@drawable/text_background</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
 </resources>
