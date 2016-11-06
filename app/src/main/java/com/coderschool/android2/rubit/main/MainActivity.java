@@ -21,6 +21,7 @@ import com.coderschool.android2.rubit.R;
 import com.coderschool.android2.rubit.connectionDialog.ConnectionDialogListener;
 import com.coderschool.android2.rubit.login.LoginActivity;
 import com.coderschool.android2.rubit.utils.ConnectionUtils;
+import com.coderschool.android2.rubit.utils.GoogleApiClientUtils;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -87,10 +88,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setUpGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /*FragmentActivity*/, this /*onConnectionFailedListener*/)
-                .addApi(Auth.GOOGLE_SIGN_IN_API)
-                .build();
+        mGoogleApiClient = GoogleApiClientUtils.authGoogleApiClient(this, this, this, null);
     }
 
     @Override

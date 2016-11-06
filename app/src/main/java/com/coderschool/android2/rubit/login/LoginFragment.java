@@ -22,6 +22,7 @@ import com.coderschool.android2.rubit.R;
 import com.coderschool.android2.rubit.connectionDialog.ConnectionDialogListener;
 import com.coderschool.android2.rubit.main.MainActivity;
 import com.coderschool.android2.rubit.utils.ConnectionUtils;
+import com.coderschool.android2.rubit.utils.GoogleApiClientUtils;
 import com.coderschool.android2.rubit.utils.ProgressDialogHelper;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -80,10 +81,7 @@ public class LoginFragment extends Fragment
                 .requestEmail()
                 .build();
 
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                .enableAutoManage(getActivity() /*FragmentActivity*/, this /*OnConnectionFailedListener*/)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
-                .build();
+        mGoogleApiClient = GoogleApiClientUtils.authGoogleApiClient(getActivity(), getActivity(), this, googleSignInOptions);
         //Initialise FirebaseAuth
         mFirebaseAuth = FirebaseAuth.getInstance();
 
