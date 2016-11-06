@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
+ */
+
 package com.coderschool.android2.rubit.login;
 
 import android.content.Intent;
@@ -12,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.coderschool.android2.rubit.R;
+import com.coderschool.android2.rubit.connectionDialog.ConnectionDialogListener;
 import com.coderschool.android2.rubit.main.MainActivity;
 import com.coderschool.android2.rubit.utils.ConnectionUtils;
 import com.coderschool.android2.rubit.utils.ProgressDialogHelper;
@@ -37,8 +45,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Created by vinay on 03/11/16.
  */
-
-public class LoginFragment extends Fragment implements LoginContact.View, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+public class LoginFragment extends Fragment
+        implements ConnectionDialogListener, LoginContact.View, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     public static final String TAG = LoginFragment.class.getSimpleName();
     private static final int RC_SIGN_IN = 9001;
     private LoginContact.Presenter mPresenter;
@@ -194,7 +202,7 @@ public class LoginFragment extends Fragment implements LoginContact.View, Google
     }
 
     private void signIn() {
-        if (ConnectionUtils.verifyConnectionDialog(getActivity(), getActivity().getSupportFragmentManager())) {
+        if (ConnectionUtils.verifyConnectionDialogForFragment(getActivity(), this, getActivity().getSupportFragmentManager())) {
             new ProgressDialogHelper(getActivity());
             ProgressDialogHelper.show();
             Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
@@ -204,4 +212,8 @@ public class LoginFragment extends Fragment implements LoginContact.View, Google
         }
     }
 
+    @Override
+    public void onFinishConnectionDialog() {
+        signIn();
+    }
 }

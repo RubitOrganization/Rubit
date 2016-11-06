@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.coderschool.android2.rubit.R;
+import com.coderschool.android2.rubit.connectionDialog.ConnectionDialogListener;
 import com.coderschool.android2.rubit.constants.IntentConstants;
 import com.coderschool.android2.rubit.login.LoginActivity;
 import com.coderschool.android2.rubit.main.MainActivity;
@@ -32,7 +33,8 @@ import com.google.firebase.auth.FirebaseUser;
  *
  * @author TienVNguyen
  */
-public class SplashFragment extends Fragment implements SplashContact.View {
+public class SplashFragment extends Fragment
+        implements ConnectionDialogListener, SplashContact.View {
 
     private static final String TAG = SplashFragment.class.getSimpleName();
     private ImageView mImage;
@@ -98,7 +100,7 @@ public class SplashFragment extends Fragment implements SplashContact.View {
      * Get the action after the time out.
      */
     private void runnableAction() {
-        if (ConnectionUtils.verifyConnectionDialog(getActivity(), getActivity().getSupportFragmentManager())) {
+        if (ConnectionUtils.verifyConnectionDialogForFragment(getActivity(), this, getActivity().getSupportFragmentManager())) {
             if (mFirebaseUser == null) {
                 final Intent intent = new Intent(getContext(), LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -116,5 +118,10 @@ public class SplashFragment extends Fragment implements SplashContact.View {
     @Override
     public void setPresenter(@NonNull SplashContact.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    @Override
+    public void onFinishConnectionDialog() {
+        runnableAction();
     }
 }

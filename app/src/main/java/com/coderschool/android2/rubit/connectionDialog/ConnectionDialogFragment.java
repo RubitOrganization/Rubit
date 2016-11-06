@@ -8,9 +8,11 @@
 package com.coderschool.android2.rubit.connectionDialog;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +35,10 @@ import butterknife.ButterKnife;
  */
 public class ConnectionDialogFragment extends DialogFragment {
 
+    private static Activity mActivity;
+    private static Fragment mFragment;
     private static FragmentManager mFragmentManager;
+
     @BindView(R.id.btnRetry)
     protected Button mBtnRetry;
 
@@ -46,10 +51,18 @@ public class ConnectionDialogFragment extends DialogFragment {
     /**
      * newInstance
      *
-     * @param title {@link String}
+     * @param activity        {@link Activity}
+     * @param fragment        {@link Fragment}
+     * @param fragmentManager {@link FragmentManager}
+     * @param title           {@link String}
      * @return {@link ConnectionDialogFragment}
      */
-    public static ConnectionDialogFragment newInstance(final FragmentManager fragmentManager, final String title) {
+    public static ConnectionDialogFragment newInstance(final Activity activity,
+                                                       final Fragment fragment,
+                                                       final FragmentManager fragmentManager,
+                                                       final String title) {
+        mActivity = activity;
+        mFragment = fragment;
         mFragmentManager = fragmentManager;
 
         final Bundle args = new Bundle();
@@ -102,10 +115,22 @@ public class ConnectionDialogFragment extends DialogFragment {
      * on connection dialog dismiss
      */
     private void onConnectionDialogDismiss() {
-        if (ConnectionUtils.verifyConnectionDialog(getContext(), mFragmentManager)) {
-            final ConnectionDialogListener listener = (ConnectionDialogListener) getActivity();
-            listener.onFinishConnectionDialog();
+        boolean isConnected;
+        ConnectionDialogListener listener;
+        if (null == mFragment) {
+            isConnected = ConnectionUtils.verifyConnectionDialogForActivity(mActivity, mFragmentManager);
+            listener = (ConnectionDialogListener) mActivity;
+        } else {
+            isConnected = ConnectionUtils.verifyConnectionDialogForFragment(mActivity, mFragment, mFragmentManager);
+            listener = (ConnectionDialogListener) mFragment;
+        }
+
+        if (isConnected) {
             this.dismiss();
+            mActivity = null;
+            mFragment = null;
+            mFragmentManager = null;
+            listener.onFinishConnectionDialog();
         }
     }
 }

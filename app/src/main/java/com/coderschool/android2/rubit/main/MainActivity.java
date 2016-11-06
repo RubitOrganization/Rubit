@@ -31,9 +31,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * {@link MainActivity}
+ * {@link MainActivity} displays main screen.
+ *
+ * @author TienVNguyen
  */
-public class MainActivity extends AppCompatActivity implements ConnectionDialogListener, GoogleApiClient.OnConnectionFailedListener {
+public class MainActivity extends AppCompatActivity
+        implements ConnectionDialogListener, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.toolbar_actionbar)
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionDialogL
 
         if (getSupportActionBar() != null)
             getSupportActionBar().setTitle("MainActivity");
-        if (!ConnectionUtils.verifyConnectionDialog(this, getSupportFragmentManager())) {
+        if (!ConnectionUtils.verifyConnectionDialogForActivity(this, getSupportFragmentManager())) {
             Log.e("Test!", "Test");
         } else {
             //initialise Firebase Auth
