@@ -48,6 +48,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -89,7 +90,7 @@ public class FaceFragment extends Fragment
     private RequestModel mRequestModel = new RequestModel();
     private UserModel mUserMode = new UserModel();
 
-    private String mDisplayName, mEmail, mPhotoUrl;
+    private String uid, mDisplayName, mEmail, mPhotoUrl;
     /**
      * runnable
      */
@@ -118,12 +119,48 @@ public class FaceFragment extends Fragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (ConnectionUtils.verifyConnectionDialogForFragment(getActivity(), this, getActivity().getSupportFragmentManager())) {
+            setUpGoogleApiClient();
             setUpFirebase();
             getCurrentUser();
             verifyCurrentUser();
-            setUpGoogleApiClient();
+            //createUserInFirebaseIfNotExist();
         }
     }
+
+//    private void createUserInFirebaseIfNotExist() {
+//        if (!ConnectionUtils.verifyConnectionDialogForFragment(getActivity(), this, getActivity().getSupportFragmentManager())) {
+//            Log.e("Test!", "Test");
+//        } else {
+//            //initialise Firebase Auth
+//            final DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+//            if (uid != null) {
+//                UserModel user = new UserModel(uid, mEmail, mDisplayName, mPhotoUrl);
+//                mDatabaseReference.child(DatabaseConstants.RUBIT_USERS)
+//                        .child(uid)
+//                        .addListenerForSingleValueEvent(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//                                if (!dataSnapshot.exists()) {
+//                                    userDoesNotExistsPushToFirebase(user, mDatabaseReference);
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//                                System.out.println("failed to create new User in rubit_users: " + databaseError.getCode());
+//                            }
+//                        });
+//            } else {
+//                Log.e(TAG, "UID is null");
+//            }
+//        }
+//    }
+
+//    private void userDoesNotExistsPushToFirebase(UserModel user, DatabaseReference mDatabaseReference) {
+//        mDatabaseReference.child(DatabaseConstants.RUBIT_USERS)
+//                .child(uid)
+//                .setValue(user);
+//    }
 
     @Override
     public void onResume() {
@@ -192,6 +229,7 @@ public class FaceFragment extends Fragment
             startActivity(new Intent(getActivity(), LoginActivity.class));
             getActivity().finish();
         } else {
+            uid = mFirebaseUser.getUid();
             mDisplayName = mFirebaseUser.getDisplayName();
             mEmail = mFirebaseUser.getEmail();
             mPhotoUrl = String.valueOf(mFirebaseUser.getPhotoUrl());

@@ -1,3 +1,8 @@
+package com.coderschool.android2.rubit.models;
+
+import android.os.Parcelable;
+
+import java.util.Map;
 /*
  * Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
@@ -5,11 +10,6 @@
  * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
  */
 
-package com.coderschool.android2.rubit.models;
-
-import android.os.Parcelable;
-
-import java.util.Map;
 
 /**
  * {@link UserModel}
@@ -28,6 +28,7 @@ public class UserModel implements Parcelable {
             return new UserModel[size];
         }
     };
+
     private String uid;
     private String email;
     private String displayName;
