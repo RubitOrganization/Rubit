@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar_actionbar)
     Toolbar mToolbar;
-
     private MainFragment mMainFragment;
     private MainPresenter mMainPresenter;
 
@@ -59,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private void setUpPresenter() {
         mMainPresenter = new MainPresenter(mMainFragment);
     }
+
 
     /**
      * set up fragment
