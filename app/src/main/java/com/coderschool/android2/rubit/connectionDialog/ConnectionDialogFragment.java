@@ -127,8 +127,6 @@ public class ConnectionDialogFragment extends DialogFragment {
 
         if (isConnected) {
             this.dismiss();
-            mActivity = null;
-            mFragment = null;
             mFragmentManager = null;
             listener.onFinishConnectionDialog();
         }

@@ -7,26 +7,12 @@
 
 package com.coderschool.android2.rubit.main;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.coderschool.android2.rubit.R;
-import com.coderschool.android2.rubit.connectionDialog.ConnectionDialogListener;
-import com.coderschool.android2.rubit.login.LoginActivity;
-import com.coderschool.android2.rubit.utils.ConnectionUtils;
-import com.coderschool.android2.rubit.utils.GoogleApiClientUtils;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.coderschool.android2.rubit.utils.ActivityUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,102 +22,54 @@ import butterknife.ButterKnife;
  *
  * @author TienVNguyen
  */
-public class MainActivity extends AppCompatActivity
-        implements ConnectionDialogListener, GoogleApiClient.OnConnectionFailedListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+
     @BindView(R.id.toolbar_actionbar)
     Toolbar mToolbar;
-    private FirebaseAuth mFirebaseAuth;
-    private FirebaseUser mFirebaseUser;
-    private String mDisplayName, mEmail, mPhotoUrl;
-    private GoogleApiClient mGoogleApiClient;
+
+    private MainFragment mMainFragment;
+    private MainPresenter mMainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setUpLayout();
+        setUpFragment();
+        setUpPresenter();
+    }
+
+    /**
+     * set up layout
+     */
+    private void setUpLayout() {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
 
         if (getSupportActionBar() != null)
             getSupportActionBar().setTitle("MainActivity");
-        if (!ConnectionUtils.verifyConnectionDialogForActivity(this, getSupportFragmentManager())) {
-            Log.e("Test!", "Test");
-        } else {
-            //initialise Firebase Auth
-            setUpFirebase();
-            getCurrentUser();
+    }
 
-            if (mFirebaseUser == null) {
-                // Not signed in. launch the sign in activity
-                startActivity(new Intent(this, LoginActivity.class));
-                finish();
-                return;
-            } else {
-                mDisplayName = mFirebaseUser.getDisplayName();
-                mEmail = mFirebaseUser.getEmail();
-                mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
-                Toast.makeText(this, "name :-" + mDisplayName + " mEmail:-" + mEmail, Toast.LENGTH_LONG).show();
-            }
+    /**
+     * set up presenter
+     */
+    private void setUpPresenter() {
+        mMainPresenter = new MainPresenter(mMainFragment);
+    }
 
-            setUpGoogleApiClient();
+    /**
+     * set up fragment
+     */
+    private void setUpFragment() {
+        mMainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        if (null == mMainFragment) {
+            mMainFragment = MainFragment.newInstance();
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+                    mMainFragment,
+                    R.id.contentFrame);
         }
-    }
-
-    private void getCurrentUser() {
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
-    }
-
-    private void setUpFirebase() {
-        mFirebaseAuth = FirebaseAuth.getInstance();
-    }
-
-    private void setUpGoogleApiClient() {
-        mGoogleApiClient = GoogleApiClientUtils.authGoogleApiClient(this, this, this, null);
-    }
-
-    @Override
-    public void onFinishConnectionDialog() {
-
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.d(TAG, "onConnectionFailed:-" + connectionResult);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //Inflate the menu; this adds items to the actionbar if it is parent
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.signout:
-                mFirebaseAuth.signOut();
-                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
-                mFirebaseUser = null;
-                mPhotoUrl = null;
-                Intent intent = new Intent(this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mGoogleApiClient.stopAutoManage(this);
-        mGoogleApiClient.disconnect();
     }
 }

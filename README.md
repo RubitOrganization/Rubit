@@ -29,7 +29,7 @@ The following functionality is completed:
 
 **FIRST_USE**
 
-  * [ ] Opening Screen **_(Optional)_**
+  * [x] Opening Screen **_(Optional)_**
     * [x] ~~Splash screen as the moment~~
     * [ ] **Rub Rub gesture** to call the Genie out of the Lamp
     * [ ] **Small pop up and animation** to help User know that they need to rub rub the lamp
@@ -38,9 +38,9 @@ The following functionality is completed:
     * [ ] 3 - 4 activities
     * [ ] Replace by fragment
     * [ ] **_(Optional)_** Slide animation or something else
-  * [ ] **Login** Activity
+  * [x] **Login** Activity
     * [ ] Login through current app
-    * [ ] Third parties login (Facebook, Google, etc)
+    * [x] ~~Third parties login (Facebook, Google, etc)~~
   * [ ] **Register** Activity
     * [ ] Register through current app
     * [ ] Third parties register (Facebook, Google, etc)
@@ -54,17 +54,19 @@ The following functionality is completed:
 
 **MAIN_SCREEN_ACTIVITY** 
 
-  * [ ] **Pop-up notification** on the top to show request notification from other users
-    * [ ] Click the pop-up will head to the **REQUEST_LIST_ACTIVITY**
+  * [x] **Pop-up notification** on the top to show request notification from other users
+    * [x] ~~Click the pop-up will head to the **REQUEST_LIST_ACTIVITY**~~
     * [ ] **_(Optional)_** **Animation** The speech bubble popup with "Pudding effect"
     * [ ] **_(Optional)_** **Countdown** The new request will pop up after every 10 seconds
   * [ ] **Logo** in the middle
     * [ ] **_(Optional)_** **Animation** The logo will show emotion: smile while user typing 
     * [ ] **_(Optional)_** **Animation** The logo will show emotion: sad while user delete
-  * [ ] **Go Selection**
+  * [x] **Go Selection**
     * [ ] **Rub Rub gesture** Clicking the Button as Floating Action Button
-    * [ ] The **REQUESTING_ACTIVITY** will be called if it is selected
+    * [x] ~~The **REQUESTING_ACTIVITY** will be called if it is selected~~
     * [ ] **_(Optional)_** **Rub Rub gesture**
+  * [x] **Details Selection**
+    * [x] ~~Click the Details will head to the **DETAILED_TASK_ACTIVITY**~~
   * [ ] **Request EditText**
     * [ ] **_(Optional)_** **TAG SYSTEM** The app will automatically recognize symbol like # or @ and record the text value after them
       * [ ] # means to people of. Ex: #CoderSchool = to people from CoderSchool

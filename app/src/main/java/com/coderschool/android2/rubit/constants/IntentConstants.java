@@ -20,6 +20,11 @@ public class IntentConstants {
     public final static int SPLASH_TIME_OUT = 1000;
 
     /**
+     * POP_REQUEST_TIME
+     */
+    public final static int POP_REQUEST_TIME = 10000;
+
+    /**
      * DIALOG_CONNECTION_TAG
      */
     public final static String DIALOG_CONNECTION_TAG = "dialog_connection";
@@ -28,4 +33,14 @@ public class IntentConstants {
      * DIALOG_CONNECTION_TITLE
      */
     public final static String DIALOG_CONNECTION_TITLE = "DIALOG_CONNECTION_TITLE";
+
+    /**
+     * REQUEST_MODEL
+     */
+    public final static String REQUEST_MODEL = "REQUEST_MODEL";
+
+    /**
+     * QUEST
+     */
+    public final static String QUEST = "QUEST";
 }
