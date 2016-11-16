@@ -20,7 +20,9 @@ import android.widget.Toast;
 
 import com.coderschool.android2.rubit.R;
 import com.coderschool.android2.rubit.connectionDialog.ConnectionDialogListener;
+import com.coderschool.android2.rubit.constants.DatabaseConstants;
 import com.coderschool.android2.rubit.face.FaceActivity;
+import com.coderschool.android2.rubit.models.UserModel;
 import com.coderschool.android2.rubit.utils.ConnectionUtils;
 import com.coderschool.android2.rubit.utils.GoogleApiClientUtils;
 import com.coderschool.android2.rubit.utils.ProgressDialogHelper;
@@ -37,6 +39,11 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -143,8 +150,35 @@ public class LoginFragment extends Fragment
                             Log.w(TAG, String.format("signInWithCredential:%s", task.getException()));
                             Toast.makeText(getActivity(), "Authentication Failed", Toast.LENGTH_LONG).show();
                         } else {
-                            Toast.makeText(getActivity(), "Login Success", Toast.LENGTH_LONG).show();
-                            startMainActivity();
+                            if (null != mFirebaseAuth.getCurrentUser()) {
+                                final DatabaseReference rubitUsers = FirebaseDatabase.getInstance()
+                                        .getReference()
+                                        .child(DatabaseConstants.RUBIT_USERS);
+                                rubitUsers.child(mFirebaseAuth.getCurrentUser().getUid())
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                if (!dataSnapshot.exists()) {
+                                                    UserModel user = new UserModel(
+                                                            String.valueOf(mFirebaseAuth.getCurrentUser().getUid()),
+                                                            account.getEmail(),
+                                                            account.getDisplayName(),
+                                                            String.valueOf(account.getPhotoUrl()),
+                                                            0,
+                                                            false, null, null);
+
+                                                    rubitUsers.child(mFirebaseAuth.getCurrentUser().getUid()).setValue(user);
+                                                }
+                                                Toast.makeText(getActivity(), "Login Success", Toast.LENGTH_LONG).show();
+                                                startMainActivity();
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
+                            }
                         }
                     }
                 });
