@@ -5,17 +5,17 @@
  * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
  */
 
-package com.coderschool.android2.rubit.main;
+package com.coderschool.android2.rubit.face;
 
 import com.coderschool.android2.rubit.base.BasePresenter;
 import com.coderschool.android2.rubit.base.BaseView;
 
 /**
- * {@link MainContact}
+ * {@link FaceContact}
  *
  * @author TienVNguyen
  */
-interface MainContact {
+interface FaceContact {
 
     interface View extends BaseView<Presenter> {
 

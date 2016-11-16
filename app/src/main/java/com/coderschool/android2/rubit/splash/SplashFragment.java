@@ -22,8 +22,8 @@ import android.widget.ImageView;
 import com.coderschool.android2.rubit.R;
 import com.coderschool.android2.rubit.connectionDialog.ConnectionDialogListener;
 import com.coderschool.android2.rubit.constants.IntentConstants;
+import com.coderschool.android2.rubit.face.FaceActivity;
 import com.coderschool.android2.rubit.login.LoginActivity;
-import com.coderschool.android2.rubit.main.MainActivity;
 import com.coderschool.android2.rubit.utils.ConnectionUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -106,7 +106,7 @@ public class SplashFragment extends Fragment
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             } else {
-                final Intent intent = new Intent(getContext(), MainActivity.class);
+                final Intent intent = new Intent(getContext(), FaceActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

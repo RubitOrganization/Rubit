@@ -40,7 +40,12 @@ public class DatabaseConstants {
     public final static String PHOTO_URL = "photoUrl";
 
     /**
-     * TEXT
+     * SUBJECT
      */
-    public final static String TEXT = "text";
+    public final static String SUBJECT = "subject";
+
+    /**
+     * COMPLETED
+     */
+    public final static String COMPLETED = "completed";
 }

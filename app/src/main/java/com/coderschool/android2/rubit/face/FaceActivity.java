@@ -5,7 +5,7 @@
  * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
  */
 
-package com.coderschool.android2.rubit.main;
+package com.coderschool.android2.rubit.face;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,19 +18,19 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * {@link MainActivity} displays main screen.
+ * {@link FaceActivity} displays main screen.
  *
  * @author TienVNguyen
  */
-public class MainActivity extends AppCompatActivity {
+public class FaceActivity extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = FaceActivity.class.getSimpleName();
 
     @BindView(R.id.toolbar_actionbar)
     Toolbar mToolbar;
 
-    private MainFragment mMainFragment;
-    private MainPresenter mMainPresenter;
+    private FaceFragment mFaceFragment;
+    private FacePresenter mMainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,30 +45,30 @@ public class MainActivity extends AppCompatActivity {
      * set up layout
      */
     private void setUpLayout() {
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_face);
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
 
         if (getSupportActionBar() != null)
-            getSupportActionBar().setTitle("MainActivity");
+            getSupportActionBar().setTitle("FaceActivity");
     }
 
     /**
      * set up presenter
      */
     private void setUpPresenter() {
-        mMainPresenter = new MainPresenter(mMainFragment);
+        mMainPresenter = new FacePresenter(mFaceFragment);
     }
 
     /**
      * set up fragment
      */
     private void setUpFragment() {
-        mMainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
-        if (null == mMainFragment) {
-            mMainFragment = MainFragment.newInstance();
+        mFaceFragment = (FaceFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        if (null == mFaceFragment) {
+            mFaceFragment = FaceFragment.newInstance();
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    mMainFragment,
+                    mFaceFragment,
                     R.id.contentFrame);
         }
     }

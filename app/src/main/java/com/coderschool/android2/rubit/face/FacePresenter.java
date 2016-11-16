@@ -5,25 +5,25 @@
  * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
  */
 
-package com.coderschool.android2.rubit.main;
+package com.coderschool.android2.rubit.face;
 
 import android.support.annotation.NonNull;
 
 /**
- * {@link MainPresenter}
+ * {@link FacePresenter}
  *
  * @author TienVNguyen
  */
-class MainPresenter implements MainContact.Presenter {
+class FacePresenter implements FaceContact.Presenter {
 
-    private MainContact.View mvView;
+    private FaceContact.View mvView;
 
     /**
      * Constructor
      *
-     * @param view {@link MainContact.View}
+     * @param view {@link FaceContact.View}
      */
-    MainPresenter(final @NonNull MainContact.View view) {
+    FacePresenter(final @NonNull FaceContact.View view) {
         mvView = view;
         mvView.setPresenter(this);
 

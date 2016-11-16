@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.coderschool.android2.rubit.R;
 import com.coderschool.android2.rubit.connectionDialog.ConnectionDialogListener;
-import com.coderschool.android2.rubit.main.MainActivity;
+import com.coderschool.android2.rubit.face.FaceActivity;
 import com.coderschool.android2.rubit.utils.ConnectionUtils;
 import com.coderschool.android2.rubit.utils.GoogleApiClientUtils;
 import com.coderschool.android2.rubit.utils.ProgressDialogHelper;
@@ -50,13 +50,11 @@ public class LoginFragment extends Fragment
         implements ConnectionDialogListener, LoginContact.View, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     public static final String TAG = LoginFragment.class.getSimpleName();
     private static final int RC_SIGN_IN = 9001;
-    private LoginContact.Presenter mPresenter;
-
-    private GoogleApiClient mGoogleApiClient;
-    private FirebaseAuth mFirebaseAuth;
-
     @BindView(R.id.sign_in_button)
     SignInButton mSignInButton;
+    private LoginContact.Presenter mPresenter;
+    private GoogleApiClient mGoogleApiClient;
+    private FirebaseAuth mFirebaseAuth;
 
 
     public LoginFragment() {
@@ -169,7 +167,7 @@ public class LoginFragment extends Fragment
 //    }
 
     private void startMainActivity() {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(getActivity(), FaceActivity.class);
         startActivity(intent);
         getActivity().finish();
     }

@@ -7,76 +7,101 @@
 
 package com.coderschool.android2.rubit.models;
 
-import com.google.gson.annotations.SerializedName;
-
-import org.parceler.Parcel;
+import android.os.Parcelable;
 
 /**
  * {@link RequestModel}
  *
  * @author TienVNguyen
  */
-@Parcel(analyze = {RequestModel.class})
-public class RequestModel {
-    @SerializedName("userId")
-    private String mUserId;
-    @SerializedName("displayName")
-    private String mUserName;
-    @SerializedName("email")
-    private String mEmail;
-    @SerializedName("text")
-    private String mRequest;
-    @SerializedName("photoUrl")
-    private String mProfilePicture;
+public class RequestModel implements Parcelable {
+    public static final Creator<RequestModel> CREATOR = new Creator<RequestModel>() {
+        @Override
+        public RequestModel createFromParcel(android.os.Parcel in) {
+            return new RequestModel(in);
+        }
+
+        @Override
+        public RequestModel[] newArray(int size) {
+            return new RequestModel[size];
+        }
+    };
+    private String uid;
+    private String requestId;
+    private String subject;
+    private boolean isConnected;
+    private boolean isCompleted;
 
     public RequestModel() {
     }
 
-    public RequestModel(String mUserId, String mUserName, String mEmail, String mRequest, String mProfilePicture) {
-        this.mUserId = mUserId;
-        this.mUserName = mUserName;
-        this.mEmail = mEmail;
-        this.mRequest = mRequest;
-        this.mProfilePicture = mProfilePicture;
+    public RequestModel(String uid, String requestId, String subject, boolean isConnected, boolean isCompleted) {
+        this.uid = uid;
+        this.requestId = requestId;
+        this.subject = subject;
+        this.isConnected = isConnected;
+        this.isCompleted = isCompleted;
     }
 
-    public String getmUserId() {
-        return mUserId;
+    protected RequestModel(android.os.Parcel in) {
+        uid = in.readString();
+        requestId = in.readString();
+        subject = in.readString();
+        isConnected = in.readByte() != 0;
+        isCompleted = in.readByte() != 0;
     }
 
-    public void setmUserId(String mUserId) {
-        this.mUserId = mUserId;
+    public String getUid() {
+        return uid;
     }
 
-    public String getmUserName() {
-        return mUserName;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
-    public void setmUserName(String mUserName) {
-        this.mUserName = mUserName;
+    public String getRequestId() {
+        return requestId;
     }
 
-    public String getmEmail() {
-        return mEmail;
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
     }
 
-    public void setmEmail(String mEmail) {
-        this.mEmail = mEmail;
+    public String getSubject() {
+        return subject;
     }
 
-    public String getmRequest() {
-        return mRequest;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
-    public void setmRequest(String mRequest) {
-        this.mRequest = mRequest;
+    public boolean isConnected() {
+        return isConnected;
     }
 
-    public String getmProfilePicture() {
-        return mProfilePicture;
+    public void setConnected(boolean connected) {
+        isConnected = connected;
     }
 
-    public void setmProfilePicture(String mProfilePicture) {
-        this.mProfilePicture = mProfilePicture;
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(android.os.Parcel parcel, int i) {
+        parcel.writeString(uid);
+        parcel.writeString(requestId);
+        parcel.writeString(subject);
+        parcel.writeByte((byte) (isConnected ? 1 : 0));
+        parcel.writeByte((byte) (isCompleted ? 1 : 0));
     }
 }

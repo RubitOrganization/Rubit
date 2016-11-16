@@ -5,12 +5,11 @@
  * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
  */
 
-package com.coderschool.android2.rubit.main;
+package com.coderschool.android2.rubit.face;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -30,13 +29,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coderschool.android2.rubit.R;
+import com.coderschool.android2.rubit.chat.ChatActivity;
 import com.coderschool.android2.rubit.connectionDialog.ConnectionDialogListener;
 import com.coderschool.android2.rubit.constants.DatabaseConstants;
 import com.coderschool.android2.rubit.constants.IntentConstants;
 import com.coderschool.android2.rubit.detailsTask.DetailsTaskActivity;
 import com.coderschool.android2.rubit.login.LoginActivity;
 import com.coderschool.android2.rubit.models.RequestModel;
-import com.coderschool.android2.rubit.request.RequestActivity;
+import com.coderschool.android2.rubit.models.UserModel;
 import com.coderschool.android2.rubit.requestList.RequestListActivity;
 import com.coderschool.android2.rubit.utils.ConnectionUtils;
 import com.coderschool.android2.rubit.utils.GoogleApiClientUtils;
@@ -49,21 +49,23 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * {@link MainFragment}
+ * {@link FaceFragment}
  *
  * @author TienNguyen
  */
-public class MainFragment extends Fragment
-        implements MainContact.View, ConnectionDialogListener, GoogleApiClient.OnConnectionFailedListener {
+public class FaceFragment extends Fragment
+        implements FaceContact.View, ConnectionDialogListener, GoogleApiClient.OnConnectionFailedListener {
 
-    private static final String TAG = MainFragment.class.getSimpleName();
+    private static final String TAG = FaceFragment.class.getSimpleName();
 
     @BindView(R.id.imgLogo)
     ImageView imgLogo;
@@ -78,12 +80,14 @@ public class MainFragment extends Fragment
     @BindView(R.id.edtQuestBar)
     EditText edtQuestBar;
 
-    private MainContact.Presenter mPresenter;
+    private FaceContact.Presenter mPresenter;
+    private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private GoogleApiClient mGoogleApiClient;
     private Handler handler = new Handler();
     private RequestModel mRequestModel = new RequestModel();
+    private UserModel mUserMode = new UserModel();
 
     private String mDisplayName, mEmail, mPhotoUrl;
     /**
@@ -94,18 +98,18 @@ public class MainFragment extends Fragment
     /**
      * Constructor
      */
-    public MainFragment() {
+    public FaceFragment() {
     }
 
     /**
      * newInstance
      *
-     * @return {@link MainFragment}
+     * @return {@link FaceFragment}
      */
-    public static MainFragment newInstance() {
+    public static FaceFragment newInstance() {
         final Bundle args = new Bundle();
 
-        final MainFragment fragment = new MainFragment();
+        final FaceFragment fragment = new FaceFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -145,48 +149,39 @@ public class MainFragment extends Fragment
     public void startRunnableForPop() {
         handler.postDelayed(runnable, IntentConstants.POP_REQUEST_TIME);
 
-        final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mFirebaseDatabase.getReference(DatabaseConstants.REQUEST)
+                .orderByChild(mFirebaseUser.getUid())
+                .equalTo(null)
+                .limitToFirst(1)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            mRequestModel.setSubject(String.valueOf(snapshot.child(DatabaseConstants.SUBJECT).getValue()));
+                            mFirebaseDatabase.getReference(DatabaseConstants.RUBIT_USERS)
+                                    .child(String.valueOf(snapshot.child(DatabaseConstants.UID).getValue()))
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            mUserMode.setPhotoUrl(String.valueOf(dataSnapshot.child(DatabaseConstants.PHOTO_URL).getValue()));
+                                            showProfilePicture();
+                                            showRequestPop();
+                                        }
 
-        final Query queryRefForRequests = firebaseDatabase.getReference(DatabaseConstants.REQUEST)
-                .orderByChild(DatabaseConstants.USER_ID)
-                .limitToFirst(1);
-        queryRefForRequests.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    mRequestModel.setmRequest(snapshot.child(DatabaseConstants.TEXT).getValue().toString());
-                    mRequestModel.setmUserId(snapshot.child(DatabaseConstants.USER_ID).getValue().toString());
-                    showRequestPop();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed in requests: " + databaseError.getCode());
-            }
-        });
-
-        final Query queryRefForUsers = firebaseDatabase.getReference(DatabaseConstants.RUBIT_USERS)
-                .orderByChild(DatabaseConstants.USER_ID)
-                .limitToFirst(1);
-        queryRefForUsers.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String uid = snapshot.child(DatabaseConstants.UID).getValue().toString();
-                    if (null != uid && uid.equals(mRequestModel.getmUserId())) {
-                        mRequestModel.setmProfilePicture(snapshot.child(DatabaseConstants.PHOTO_URL).getValue().toString());
-                        showProfilePicture();
-                        break;
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+                                            System.out.println("The read failed in user: " + databaseError.getCode());
+                                        }
+                                    });
+                        }
                     }
-                }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed in rubit_users: " + databaseError.getCode());
-            }
-        });
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        System.out.println("The read failed in requests: " + databaseError.getCode());
+                    }
+                });
     }
 
     /**
@@ -214,7 +209,7 @@ public class MainFragment extends Fragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_main, container, false);
+        final View view = inflater.inflate(R.layout.fragment_face, container, false);
         if (null != view) {
             ButterKnife.bind(this, view);
         }
@@ -256,15 +251,15 @@ public class MainFragment extends Fragment
     }
 
     @Override
-    public void setPresenter(MainContact.Presenter presenter) {
+    public void setPresenter(FaceContact.Presenter presenter) {
         mPresenter = presenter;
     }
 
     @Override
     public void showRequestPop() {
-        if (null != mRequestModel.getmRequest() && 0 < mRequestModel.getmRequest().length()) {
+        if (null != mRequestModel.getSubject() && 0 < mRequestModel.getSubject().length()) {
             txtPop.setVisibility(View.VISIBLE);
-            txtPop.setText(mRequestModel.getmRequest());
+            txtPop.setText(mRequestModel.getSubject());
         } else {
             txtPop.setVisibility(View.GONE);
         }
@@ -272,9 +267,9 @@ public class MainFragment extends Fragment
 
     @Override
     public void showProfilePicture() {
-        if (null != mRequestModel.getmProfilePicture() && 0 < mRequestModel.getmProfilePicture().length()) {
+        if (null != mUserMode.getPhotoUrl() && 0 < mUserMode.getPhotoUrl().length()) {
             imgProfilePicture.setVisibility(View.VISIBLE);
-            ImageUtils.loadingImageWithRoundTransform(getContext(), imgProfilePicture, mRequestModel.getmProfilePicture(), true);
+            ImageUtils.loadingImageWithRoundTransform(getContext(), imgProfilePicture, mUserMode.getPhotoUrl(), true);
         } else {
             imgProfilePicture.setVisibility(View.GONE);
         }
@@ -304,7 +299,7 @@ public class MainFragment extends Fragment
             stopRunnableForPop();
 
             final Intent intent = new Intent(getContext(), RequestListActivity.class);
-            intent.putExtra(IntentConstants.REQUEST_MODEL, (Parcelable) mRequestModel);
+            intent.putExtra(IntentConstants.REQUEST_MODEL, mRequestModel);
             startActivity(intent);
         });
     }
@@ -315,7 +310,7 @@ public class MainFragment extends Fragment
             stopRunnableForPop();
 
             final Intent intent = new Intent(getContext(), RequestListActivity.class);
-            intent.putExtra(IntentConstants.REQUEST_MODEL, (Parcelable) mRequestModel);
+            intent.putExtra(IntentConstants.REQUEST_MODEL, mRequestModel);
             startActivity(intent);
         });
     }
@@ -323,11 +318,40 @@ public class MainFragment extends Fragment
     @Override
     public void btnGoOnclick() {
         imgGo.setOnClickListener(view -> {
+            if (0 >= edtQuestBar.getText().length()) {
+                return;
+            }
+
             stopRunnableForPop();
 
-            final Intent intent = new Intent(getContext(), RequestActivity.class);
-            intent.putExtra(IntentConstants.QUEST, edtQuestBar.getText().toString());
-            startActivity(intent);
+            final RequestModel newRequest = new RequestModel();
+            newRequest.setSubject(edtQuestBar.getText().toString());
+            newRequest.setUid(mFirebaseUser.getUid());
+            newRequest.setConnected(false);
+            newRequest.setCompleted(false);
+
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
+            mFirebaseDatabase.getReference()
+                    .child(DatabaseConstants.REQUEST)
+                    .child(edtQuestBar.getText().toString())
+                    .setValue(newRequest).addOnCompleteListener(task -> {
+
+                Map<String, Object> requests = new HashMap<>();
+                requests.put(newRequest.getSubject(), true);
+
+                mFirebaseDatabase.getReference()
+                        .child(DatabaseConstants.RUBIT_USERS)
+                        .child(mFirebaseUser.getUid()).child(DatabaseConstants.REQUEST)
+                        .updateChildren(requests, (databaseError, databaseReference) -> {
+
+                            final Intent intent = new Intent(FaceFragment.this.getContext(), ChatActivity.class);
+                            intent.putExtra(IntentConstants.QUEST, edtQuestBar.getText().toString());
+                            intent.putExtra(IntentConstants.USER_ID, mFirebaseUser.getUid());
+                            FaceFragment.this.startActivity(intent);
+                        });
+            });
+
+
         });
     }
 
