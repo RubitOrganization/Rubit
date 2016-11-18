@@ -15,12 +15,17 @@ import com.google.firebase.database.FirebaseDatabase;
 public class FirebaseUtils {
 
 
+    public static FirebaseAuth getFirebaseNewInstnace() {
+        return FirebaseAuth.getInstance();
+    }
+
+
     //Base reference
     public static DatabaseReference getBaseRef() {
         return FirebaseDatabase.getInstance().getReference();
     }
 
-    //get currentuserId
+    //get currentUserId
     public static String getCurrentUserId() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -47,7 +52,13 @@ public class FirebaseUtils {
             }
 
         }
-        return new UserModel(name, email, picture);
+        return new UserModel(
+                getCurrentUserId(),
+                email,
+                name,
+                String.valueOf(picture),
+                0,
+                false, null, null);
     }
 
     // get Current userRef
@@ -58,11 +69,6 @@ public class FirebaseUtils {
         }
         return null;
     }
-
-    public static DatabaseReference getCurrentUserKey() {
-        return getBaseRef().getKey() != null ? getBaseRef().child(DatabaseConstants.RUBIT_USERS).child(getBaseRef().getKey()) : null;
-    }
-
 
     //get reference for user table
     public static DatabaseReference getRubitUser() {

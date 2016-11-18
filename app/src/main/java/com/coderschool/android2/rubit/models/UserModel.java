@@ -41,7 +41,14 @@ public class UserModel implements Parcelable {
     public UserModel() {
     }
 
-    public UserModel(String uid, String email, String displayName, String photoUrl, double credit, boolean isConnected, Map<String, Boolean> tags, Map<String, Boolean> requests) {
+    public UserModel(String uid,
+                     String email,
+                     String displayName,
+                     String photoUrl,
+                     double credit,
+                     boolean isConnected,
+                     Map<String, Boolean> tags,
+                     Map<String, Boolean> requests) {
         this.uid = uid;
         this.email = email;
         this.displayName = displayName;
@@ -59,12 +66,6 @@ public class UserModel implements Parcelable {
         photoUrl = in.readString();
         credit = in.readDouble();
         isConnected = in.readByte() != 0;
-    }
-
-    public UserModel(String name, String email, String picture) {
-        this.mDisplayName = name;
-        this.mEmail = email;
-        this.mPhotoUrl = picture;
     }
 
     public String getUid() {
