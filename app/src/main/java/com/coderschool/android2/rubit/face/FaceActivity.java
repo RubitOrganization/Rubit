@@ -60,6 +60,7 @@ public class FaceActivity extends AppCompatActivity {
         mMainPresenter = new FacePresenter(mFaceFragment);
     }
 
+
     /**
      * set up fragment
      */

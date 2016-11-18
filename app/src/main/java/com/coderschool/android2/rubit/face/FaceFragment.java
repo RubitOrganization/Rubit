@@ -26,7 +26,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.coderschool.android2.rubit.R;
 import com.coderschool.android2.rubit.chat.ChatActivity;
@@ -39,6 +38,7 @@ import com.coderschool.android2.rubit.models.RequestModel;
 import com.coderschool.android2.rubit.models.UserModel;
 import com.coderschool.android2.rubit.requestList.RequestListActivity;
 import com.coderschool.android2.rubit.utils.ConnectionUtils;
+import com.coderschool.android2.rubit.utils.FirebaseUtils;
 import com.coderschool.android2.rubit.utils.GoogleApiClientUtils;
 import com.coderschool.android2.rubit.utils.ImageUtils;
 import com.google.android.gms.auth.api.Auth;
@@ -89,7 +89,6 @@ public class FaceFragment extends Fragment
     private RequestModel mRequestModel = new RequestModel();
     private UserModel mUserMode = new UserModel();
 
-    private String mDisplayName, mEmail, mPhotoUrl;
     /**
      * runnable
      */
@@ -118,10 +117,9 @@ public class FaceFragment extends Fragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (ConnectionUtils.verifyConnectionDialogForFragment(getActivity(), this, getActivity().getSupportFragmentManager())) {
-            setUpFirebase();
-            getCurrentUser();
-            verifyCurrentUser();
             setUpGoogleApiClient();
+            setUpFirebase();
+            verifyDoesUserExists();
         }
     }
 
@@ -130,7 +128,6 @@ public class FaceFragment extends Fragment
         super.onResume();
         if (ConnectionUtils.verifyConnectionDialogForFragment(getActivity(), this, getActivity().getSupportFragmentManager())) {
             mPresenter.start();
-            getCurrentUser();
             runnable.run();
         }
     }
@@ -148,54 +145,52 @@ public class FaceFragment extends Fragment
      */
     public void startRunnableForPop() {
         handler.postDelayed(runnable, IntentConstants.POP_REQUEST_TIME);
+        if (FirebaseUtils.getCurrentUserId() != null) {
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
+            mFirebaseDatabase.getReference(DatabaseConstants.REQUEST)
+                    .orderByChild(FirebaseUtils.getCurrentUserId())
+                    .equalTo(null)
+                    .limitToFirst(1)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                mRequestModel.setSubject(String.valueOf(snapshot.child(DatabaseConstants.SUBJECT).getValue()));
+                                mFirebaseDatabase.getReference(DatabaseConstants.RUBIT_USERS)
+                                        .child(String.valueOf(snapshot.child(DatabaseConstants.UID).getValue()))
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                mUserMode.setPhotoUrl(String.valueOf(dataSnapshot.child(DatabaseConstants.PHOTO_URL).getValue()));
+                                                showProfilePicture();
+                                                showRequestPop();
+                                            }
 
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mFirebaseDatabase.getReference(DatabaseConstants.REQUEST)
-                .orderByChild(mFirebaseUser.getUid())
-                .equalTo(null)
-                .limitToFirst(1)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            mRequestModel.setSubject(String.valueOf(snapshot.child(DatabaseConstants.SUBJECT).getValue()));
-                            mFirebaseDatabase.getReference(DatabaseConstants.RUBIT_USERS)
-                                    .child(String.valueOf(snapshot.child(DatabaseConstants.UID).getValue()))
-                                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(DataSnapshot dataSnapshot) {
-                                            mUserMode.setPhotoUrl(String.valueOf(dataSnapshot.child(DatabaseConstants.PHOTO_URL).getValue()));
-                                            showProfilePicture();
-                                            showRequestPop();
-                                        }
-
-                                        @Override
-                                        public void onCancelled(DatabaseError databaseError) {
-                                            System.out.println("The read failed in user: " + databaseError.getCode());
-                                        }
-                                    });
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+                                                System.out.println("The read failed in user: " + databaseError.getCode());
+                                            }
+                                        });
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        System.out.println("The read failed in requests: " + databaseError.getCode());
-                    }
-                });
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            System.out.println("The read failed in requests: " + databaseError.getCode());
+                        }
+                    });
+        } else {
+            Log.e(TAG, "Current user Id is null, we need to handle this case");
+        }
     }
 
     /**
      * verify current user
      */
-    private void verifyCurrentUser() {
-        if (mFirebaseUser == null) {
+    private void verifyDoesUserExists() {
+        if (FirebaseUtils.getCurrentUserRef() == null) {
             startActivity(new Intent(getActivity(), LoginActivity.class));
             getActivity().finish();
-        } else {
-            mDisplayName = mFirebaseUser.getDisplayName();
-            mEmail = mFirebaseUser.getEmail();
-            mPhotoUrl = String.valueOf(mFirebaseUser.getPhotoUrl());
-            Toast.makeText(getActivity(), "name :-" + mDisplayName + " mEmail:-" + mEmail, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -220,10 +215,10 @@ public class FaceFragment extends Fragment
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.signout:
+                // we need to make name, photourl and email to null on logout
                 mFirebaseAuth.signOut();
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient);
                 mFirebaseUser = null;
-                mPhotoUrl = null;
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -377,16 +372,9 @@ public class FaceFragment extends Fragment
     }
 
     /**
-     * get current user
-     */
-    private void getCurrentUser() {
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
-    }
-
-    /**
      * set up Firebase
      */
     private void setUpFirebase() {
-        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseAuth = FirebaseUtils.getFirebaseNewInstnace();
     }
 }
