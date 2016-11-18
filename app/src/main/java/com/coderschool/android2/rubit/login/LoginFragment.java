@@ -125,11 +125,17 @@ public class LoginFragment extends Fragment
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
-                firebaseAuthWithGoogle(account);
+                if (account != null)
+                    firebaseAuthWithGoogle(account);
+                else
+                    Log.e(TAG, "Account value is null");
             } else {
                 // Google Sign In failed
                 Log.e(TAG, "Google Sign In failed.");
             }
+        } else {
+            // Google Sign In failed
+            Log.e(TAG, "Google Sign In failed.");
         }
     }
 
@@ -168,7 +174,6 @@ public class LoginFragment extends Fragment
                                     UserModel user = FirebaseUtils.getUserDetails();
                                     rubitUser.child(currentUserId).setValue(user);
                                     Toast.makeText(getActivity(), "Login Success", Toast.LENGTH_LONG).show();
-                                    startMainActivity();
                                 }
                             }
 
@@ -177,6 +182,7 @@ public class LoginFragment extends Fragment
                                 System.out.println("failed to create new User in rubit_users: " + databaseError.getCode());
                             }
                         });
+                startMainActivity();
             }
         }
     }
@@ -243,4 +249,6 @@ public class LoginFragment extends Fragment
     public void onFinishConnectionDialog() {
         signIn();
     }
+
 }
+
