@@ -61,6 +61,12 @@ public class UserModel implements Parcelable {
         isConnected = in.readByte() != 0;
     }
 
+    public UserModel(String name, String email, String picture) {
+        this.mDisplayName = name;
+        this.mEmail = email;
+        this.mPhotoUrl = picture;
+    }
+
     public String getUid() {
         return uid;
     }
