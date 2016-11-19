@@ -15,5 +15,6 @@
     <dimen name="activity_padding_message">24dp</dimen>
     <dimen name="text_size_message">16sp</dimen>
     <dimen name="text_size_message_title">24sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
     <!--<dimen name="headerbar_elevation">4dp</dimen>-->
 </resources>
