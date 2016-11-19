@@ -19,7 +19,7 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!-- SplashActivity -->
+        <!-- Splash Screen -->
         <activity
             android:name=".splash.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -29,30 +29,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- loginActivity -->
+        <!-- Login Screen -->
         <activity
             android:name=".login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <!-- FaceActivity -->
+        <!-- Face Screen -->
         <activity
             android:name=".face.FaceActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <!-- RequestActivity -->
+        <!-- Request Screen -->
         <activity
             android:name=".request.RequestActivity"
             android:theme="@style/AppTheme" />
-        <!-- RequestListActivity -->
+        <!-- Request List Screen -->
         <activity
             android:name=".requestList.RequestListActivity"
             android:theme="@style/AppTheme" />
-        <!-- DetailsTaskActivity -->
+        <!-- Details Task Screen -->
         <activity
             android:name=".detailsTask.DetailsTaskActivity"
             android:theme="@style/AppTheme" />
-        <!-- ChatActivity -->
+        <!-- Chat Screen -->
         <activity
             android:name=".chat.ChatActivity"
+            android:theme="@style/AppTheme" />
+        <!-- Portfolio Screen -->
+        <activity
+            android:name=".portfolio.PortfolioActivity"
             android:theme="@style/AppTheme" />
     </application>
 
