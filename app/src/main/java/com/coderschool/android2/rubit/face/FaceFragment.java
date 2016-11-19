@@ -321,7 +321,7 @@ public class FaceFragment extends Fragment
 
             final RequestModel newRequest = new RequestModel();
             newRequest.setSubject(edtQuestBar.getText().toString());
-            newRequest.setUid(mFirebaseUser.getUid());
+            newRequest.setUid(FirebaseUtils.getCurrentUserId());
             newRequest.setConnected(false);
             newRequest.setCompleted(false);
 
@@ -336,12 +336,12 @@ public class FaceFragment extends Fragment
 
                 mFirebaseDatabase.getReference()
                         .child(DatabaseConstants.RUBIT_USERS)
-                        .child(mFirebaseUser.getUid()).child(DatabaseConstants.REQUEST)
+                        .child(FirebaseUtils.getCurrentUserId()).child(DatabaseConstants.REQUEST)
                         .updateChildren(requests, (databaseError, databaseReference) -> {
 
                             final Intent intent = new Intent(FaceFragment.this.getContext(), ChatActivity.class);
                             intent.putExtra(IntentConstants.QUEST, edtQuestBar.getText().toString());
-                            intent.putExtra(IntentConstants.USER_ID, mFirebaseUser.getUid());
+                            intent.putExtra(IntentConstants.USER_ID, FirebaseUtils.getCurrentUserId());
                             FaceFragment.this.startActivity(intent);
                         });
             });
