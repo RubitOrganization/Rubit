@@ -28,7 +28,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.coderschool.android2.rubit.R;
-import com.coderschool.android2.rubit.chat.ChatActivity;
 import com.coderschool.android2.rubit.connectionDialog.ConnectionDialogListener;
 import com.coderschool.android2.rubit.constants.DatabaseConstants;
 import com.coderschool.android2.rubit.constants.IntentConstants;
@@ -36,6 +35,7 @@ import com.coderschool.android2.rubit.detailsTask.DetailsTaskActivity;
 import com.coderschool.android2.rubit.login.LoginActivity;
 import com.coderschool.android2.rubit.models.RequestModel;
 import com.coderschool.android2.rubit.models.UserModel;
+import com.coderschool.android2.rubit.portfolio.PortfolioActivity;
 import com.coderschool.android2.rubit.requestList.RequestListActivity;
 import com.coderschool.android2.rubit.utils.ConnectionUtils;
 import com.coderschool.android2.rubit.utils.FirebaseUtils;
@@ -339,7 +339,7 @@ public class FaceFragment extends Fragment
                         .child(FirebaseUtils.getCurrentUserId()).child(DatabaseConstants.REQUEST)
                         .updateChildren(requests, (databaseError, databaseReference) -> {
 
-                            final Intent intent = new Intent(FaceFragment.this.getContext(), ChatActivity.class);
+                            final Intent intent = new Intent(FaceFragment.this.getContext(), PortfolioActivity.class);
                             intent.putExtra(IntentConstants.QUEST, edtQuestBar.getText().toString());
                             intent.putExtra(IntentConstants.USER_ID, FirebaseUtils.getCurrentUserId());
                             FaceFragment.this.startActivity(intent);
@@ -375,6 +375,6 @@ public class FaceFragment extends Fragment
      * set up Firebase
      */
     private void setUpFirebase() {
-        mFirebaseAuth = FirebaseUtils.getFirebaseNewInstnace();
+        mFirebaseAuth = FirebaseUtils.getFirebaseNewInstance();
     }
 }

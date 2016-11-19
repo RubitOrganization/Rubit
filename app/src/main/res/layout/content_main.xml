@@ -1,34 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
+  -->
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:context=".portfolio.PortfolioActivity"
-            tools:showIn="@layout/activity_portfolio">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".portfolio.PortfolioActivity"
+    tools:showIn="@layout/activity_portfolio">
 
     <RelativeLayout
         android:id="@+id/rvRoot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <!--profile picture-->
         <RelativeLayout
             android:id="@+id/rlPortfolio"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray">
 
             <ImageView
                 android:id="@+id/imgProfilePicture"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:contentDescription="@string/image_content_description"
-                android:src="@drawable/image_placeholder"/>
+                android:padding="@dimen/activity_horizontal_padding"
+                android:src="@drawable/image_placeholder" />
 
             <TextView
                 android:id="@+id/txtUserName"
@@ -36,7 +41,11 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/imgProfilePicture"
                 android:layout_toRightOf="@id/imgProfilePicture"
-                tools:text="Lo Nguyen"/>
+                android:paddingTop="@dimen/activity_horizontal_padding"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_big"
+                android:textStyle="bold"
+                tools:text="Lo Nguyen" />
 
             <TextView
                 android:id="@+id/txtJobTitle"
@@ -45,7 +54,9 @@
                 android:layout_below="@id/txtUserName"
                 android:layout_toEndOf="@id/imgProfilePicture"
                 android:layout_toRightOf="@id/imgProfilePicture"
-                tools:text="Photographer"/>
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_small"
+                tools:text="Photographer" />
         </RelativeLayout>
 
         <!--Info Quote About the user-->
@@ -54,19 +65,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rlPortfolio"
+            android:background="@android:color/background_dark"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/txtAbout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="About"/>
+                android:paddingEnd="@dimen/activity_horizontal_padding"
+                android:paddingLeft="@dimen/activity_horizontal_padding"
+                android:paddingRight="@dimen/activity_horizontal_padding"
+                android:paddingStart="@dimen/activity_horizontal_padding"
+                android:text="@string/text_about"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_normal" />
+
+            <View
+                android:id="@+id/separateLine0"
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray"
+                android:paddingEnd="@dimen/activity_horizontal_padding"
+                android:paddingLeft="@dimen/activity_horizontal_padding"
+                android:paddingRight="@dimen/activity_horizontal_padding"
+                android:paddingStart="@dimen/activity_horizontal_padding" />
 
             <TextView
                 android:id="@+id/txtQuote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="I don't trust words. I trust pictures."/>
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_normal"
+                tools:text="I don't trust words. I trust pictures." />
         </LinearLayout>
 
         <!--User badges-->
@@ -80,21 +112,22 @@
                 android:id="@+id/txtBadgeTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Badges"/>
+                tools:text="Badges" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvBadges"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txtBadgeTitle"/>
+                android:layout_below="@id/txtBadgeTitle" />
         </RelativeLayout>
+
         <!--horizontal view below badges-->
         <View
             android:id="@+id/separateLine1"
             android:layout_width="match_parent"
             android:layout_height="1dip"
             android:layout_below="@id/rlBadges"
-            android:background="#000000"/>
+            android:background="@android:color/black" />
 
         <!--overView About user-->
         <RelativeLayout
@@ -107,7 +140,7 @@
                 android:id="@+id/txtOverviewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Overview"/>
+                tools:text="Overview" />
 
             <ImageView
                 android:id="@+id/imgEditTitle"
@@ -116,14 +149,14 @@
                 android:layout_toEndOf="@id/txtOverviewTitle"
                 android:layout_toRightOf="@id/txtOverviewTitle"
                 android:contentDescription="@string/image_content_description"
-                android:src="@drawable/image_placeholder"/>
+                android:src="@drawable/image_placeholder" />
 
             <TextView
                 android:id="@+id/txtOverviewText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtOverviewTitle"
-                tools:text="I love Photography. I love traveling. For me, taking great pictures from different countries is what I call Living"/>
+                tools:text="I love Photography. I love traveling. For me, taking great pictures from different countries is what I call Living" />
         </RelativeLayout>
 
         <!--horizontal line below overView-->
@@ -132,7 +165,8 @@
             android:layout_width="match_parent"
             android:layout_height="1dip"
             android:layout_below="@id/rlOverview"
-            android:background="#000000"/>
+            android:background="@android:color/black" />
+
         <!--Tags lists-->
         <RelativeLayout
             android:id="@+id/rlTags"
@@ -144,7 +178,7 @@
                 android:id="@+id/txtTags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Tags"/>
+                tools:text="Tags" />
 
             <ImageView
                 android:id="@+id/imgEditTags"
@@ -153,10 +187,10 @@
                 android:layout_toEndOf="@id/txtTags"
                 android:layout_toRightOf="@id/txtTags"
                 android:contentDescription="@string/image_content_description"
-                android:src="@drawable/image_placeholder"/>
+                android:src="@drawable/image_placeholder" />
 
-
-            <com.wefika.flowlayout.FlowLayout
+            <!-- TODO: Vinay -->
+            <!--<com.wefika.flowlayout.FlowLayout
                 android:id="@+id/chips_box_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -168,16 +202,17 @@
                     android:layout_gravity="start|top"
                     android:layout_margin="0dp"/>
 
-            </com.wefika.flowlayout.FlowLayout>
+            </com.wefika.flowlayout.FlowLayout>-->
 
         </RelativeLayout>
+
         <!--horizontal line after tags list-->
         <View
             android:id="@+id/separateLine3"
             android:layout_width="match_parent"
             android:layout_height="1dip"
             android:layout_below="@id/rlTags"
-            android:background="#000000"/>
+            android:background="@android:color/black" />
 
         <!--review for the user-->
         <RelativeLayout
@@ -190,7 +225,7 @@
                 android:id="@+id/txtReviewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Reviews"/>
+                tools:text="Reviews" />
 
             <ImageView
                 android:id="@+id/imgReview"
@@ -199,21 +234,22 @@
                 android:layout_toEndOf="@id/txtReviewTitle"
                 android:layout_toRightOf="@id/txtReviewTitle"
                 android:contentDescription="@string/image_content_description"
-                android:src="@drawable/image_placeholder"/>
+                android:src="@drawable/image_placeholder" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvReview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txtReviewTitle"/>
+                android:layout_below="@id/txtReviewTitle" />
         </RelativeLayout>
+
         <!--horizontal line below review-->
         <View
             android:id="@+id/separateLine4"
             android:layout_width="match_parent"
             android:layout_height="1dip"
             android:layout_below="@id/rlReviews"
-            android:background="#000000"/>
+            android:background="@android:color/black" />
 
         <!--Bottom Images-->
         <RelativeLayout
@@ -226,7 +262,7 @@
                 android:id="@+id/txtImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Images"/>
+                tools:text="Images" />
 
             <ImageView
                 android:id="@+id/imgEditImage"
@@ -235,13 +271,13 @@
                 android:layout_toEndOf="@id/txtImage"
                 android:layout_toRightOf="@id/txtImage"
                 android:contentDescription="@string/image_content_description"
-                android:src="@drawable/image_placeholder"/>
+                android:src="@drawable/image_placeholder" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvPortfolios"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/imgEditImage"/>
+                android:layout_below="@id/imgEditImage" />
         </RelativeLayout>
 
     </RelativeLayout>

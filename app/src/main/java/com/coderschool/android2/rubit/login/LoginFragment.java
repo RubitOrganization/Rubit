@@ -87,7 +87,7 @@ public class LoginFragment extends Fragment
 
         mGoogleApiClient = GoogleApiClientUtils.authGoogleApiClient(getActivity(), getActivity(), this, googleSignInOptions);
         //Initialise FirebaseAuth
-        mFirebaseAuth = FirebaseUtils.getFirebaseNewInstnace();
+        mFirebaseAuth = FirebaseUtils.getFirebaseNewInstance();
 
     }
 
@@ -173,7 +173,7 @@ public class LoginFragment extends Fragment
                                 if (!dataSnapshot.exists()) {
                                     UserModel user = FirebaseUtils.getUserDetails();
                                     rubitUser.child(currentUserId).setValue(user);
-                                    Toast.makeText(getActivity(), "Login Success", Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(getActivity(), "Login Success", Toast.LENGTH_LONG).show(); //Exception
                                 }
                             }
 

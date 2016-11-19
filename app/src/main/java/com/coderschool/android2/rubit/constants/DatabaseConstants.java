@@ -30,6 +30,26 @@ public class DatabaseConstants {
     public final static String USER_ID = "userId";
 
     /**
+     * DISPLAY_NAME
+     */
+    public final static String DISPLAY_NAME = "displayName";
+
+    /**
+     * JOB_TITLE
+     */
+    public final static String JOB_TITLE = "jobTitle";
+
+    /**
+     * ABOUT
+     */
+    public final static String ABOUT = "about";
+
+    /**
+     * QUOTE
+     */
+    public final static String QUOTE = "quote";
+
+    /**
      * UID
      */
     public final static String UID = "uid";

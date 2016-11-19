@@ -1,8 +1,3 @@
-package com.coderschool.android2.rubit.models;
-
-import android.os.Parcelable;
-
-import java.util.Map;
 /*
  * Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
@@ -10,6 +5,11 @@ import java.util.Map;
  * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
  */
 
+package com.coderschool.android2.rubit.models;
+
+import android.os.Parcelable;
+
+import java.util.Map;
 
 /**
  * {@link UserModel}
@@ -30,6 +30,8 @@ public class UserModel implements Parcelable {
     };
 
     private String uid;
+    private String jobTitle;
+    private String quote;
     private String email;
     private String displayName;
     private String photoUrl;
@@ -42,6 +44,8 @@ public class UserModel implements Parcelable {
     }
 
     public UserModel(String uid,
+                     String jobTitle,
+                     String quote,
                      String email,
                      String displayName,
                      String photoUrl,
@@ -50,6 +54,8 @@ public class UserModel implements Parcelable {
                      Map<String, Boolean> tags,
                      Map<String, Boolean> requests) {
         this.uid = uid;
+        this.jobTitle = jobTitle;
+        this.quote = quote;
         this.email = email;
         this.displayName = displayName;
         this.photoUrl = photoUrl;
@@ -61,6 +67,8 @@ public class UserModel implements Parcelable {
 
     private UserModel(android.os.Parcel in) {
         uid = in.readString();
+        jobTitle = in.readString();
+        quote = in.readString();
         email = in.readString();
         displayName = in.readString();
         photoUrl = in.readString();
@@ -74,6 +82,22 @@ public class UserModel implements Parcelable {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public String getQuote() {
+        return quote;
+    }
+
+    public void setQuote(String quote) {
+        this.quote = quote;
     }
 
     public String getEmail() {
@@ -140,6 +164,8 @@ public class UserModel implements Parcelable {
     @Override
     public void writeToParcel(android.os.Parcel parcel, int i) {
         parcel.writeString(uid);
+        parcel.writeString(jobTitle);
+        parcel.writeString(quote);
         parcel.writeString(email);
         parcel.writeString(displayName);
         parcel.writeString(photoUrl);
