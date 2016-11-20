@@ -119,6 +119,11 @@ dependencies {
     // Facebook Android SDK (only required for Facebook Login)
     compile 'com.facebook.android:facebook-android-sdk:4.9.0'
 
+    //Google locations
+    compile 'com.google.android.gms:play-services-location:9.4.0'
+    //Google maps
+    compile 'com.google.android.gms:play-services-maps:9.4.0'
+
     //Rounded corner Image view library
     compile 'com.makeramen:roundedimageview:2.2.1'
     //snap center

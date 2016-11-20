@@ -5,11 +5,189 @@
   ~ Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
   -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_details_task"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".detailsTask.DetailsTaskActivity">
+<RelativeLayout android:id="@+id/activity_details_task"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:map="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".detailsTask.DetailsTaskActivity">
+
+    <fragment
+        android:id="@+id/map"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        map:cameraBearing="112.5"
+        map:cameraTargetLat="-33.796923"
+        map:cameraTargetLng="150.922433"
+        map:cameraTilt="30"
+        map:cameraZoom="13"
+        map:mapType="normal"
+        map:uiCompass="true"
+        map:uiRotateGestures="true"
+        map:uiScrollGestures="true"
+        map:uiTiltGestures="true"
+        map:uiZoomControls="true"
+        map:uiZoomGestures="true"/>
+
+    <RelativeLayout
+        android:id="@+id/addressRl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/map"
+        android:background="#40403E">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/addressLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:text="Address"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <View
+            android:id="@+id/verticalSeparator"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/addressLabel"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/addressLabel"
+            android:background="@color/colorWhite"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/verticalSeparator"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:textColor="@android:color/white"
+            tools:text="76 Nugyen ho vin,Tan phu, Ho chi min ."/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/searchIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:padding="5dp"
+            map:srcCompat="@drawable/ic_search"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/detailsRl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addressRl"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/firstItemIv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            map:srcCompat="@drawable/ic_clipboard"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/firstEdtTxtView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/firstItemIv"
+            android:layout_alignTop="@id/firstItemIv"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/firstItemIv"
+            android:background="@drawable/rounded_shape"
+            android:gravity="center"
+            tools:text="Help me to cook a party, Please."/>
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/secondItemIv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/firstItemIv"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            map:srcCompat="@drawable/ic_exclamation_mark"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/secondEdtTxtView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/secondItemIv"
+            android:layout_alignTop="@id/secondItemIv"
+            android:layout_below="@id/firstItemIv"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/secondItemIv"
+            android:background="@drawable/rounded_shape"
+            android:gravity="center"
+            tools:text="Must know How too cook curry."/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/thirdItemIv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/secondItemIv"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            map:srcCompat="@drawable/ic_pencil"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/thirdEdtTxtView"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_below="@id/secondItemIv"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/thirdItemIv"
+            android:background="@drawable/rounded_shape"
+            android:gravity="center"
+            android:padding="3dp"
+            tools:text="- show have 3 years of exp. in cooking curry \n - should have enough tools for cooking\nFemale chef is prefered."/>
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/fourthItemIv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/thirdEdtTxtView"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            map:srcCompat="@drawable/ic_landscape"/>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/detailedImageView"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/detailsRl"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/image_placeholder"/>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/addImages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/detailsRl"
+        android:layout_toRightOf="@id/detailedImageView"
+        android:src="@android:drawable/ic_input_add"/>
+
 
 </RelativeLayout>
