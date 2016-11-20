@@ -6,26 +6,128 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorLightGreen">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorLightGreen">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/magicBulbIv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/magic_bulb_marginTop"
+        app:srcCompat="@drawable/magic_bulb"/>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/goButtonInLoginIv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/magicBulbIv"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:text="@string/sign_in"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/go_button_marginTop"
+        app:srcCompat="@drawable/go_button_black_bg"/>
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
+
+    <RelativeLayout
+        android:id="@+id/emailIv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/goButtonInLoginIv"
+        android:layout_marginBottom="@dimen/margin_bottom_email"
+        android:layout_marginLeft="@dimen/margin_side_login"
+        android:layout_marginRight="@dimen/margin_side_login"
+        android:layout_marginTop="@dimen/marginTop_email"
+        android:background="@drawable/email_bar"
+        android:gravity="center">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/edtTxtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:hint="Email"
+            android:paddingLeft="@dimen/padding_login_credentials"
+            tools:text="vinaymaneti@gmail.com"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/passwordIv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/emailIv"
+        android:layout_marginLeft="@dimen/margin_side_login"
+        android:layout_marginRight="@dimen/margin_side_login"
+        android:background="@drawable/password_bar">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/edtTxtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical"
+            android:inputType="numberPassword"
+            android:maxLines="1"
+            android:hint="Password"
+            android:paddingLeft="@dimen/padding_login_credentials"
+            tools:text="vinaymaneti@gmail.com"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:visibility="visible" />
+        android:layout_alignParentBottom="true">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="@dimen/no_account_marginLeft"
+            android:layout_marginRight="@dimen/no_account_marginRight"
+            android:text="@string/don_t_have_a_account"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/margin_side_login">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/facebookLoginIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            app:srcCompat="@drawable/facebook_login"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/facebookLoginIv"
+            app:srcCompat="@drawable/google_login"/>
+
+    </RelativeLayout>
+
+    <!--<com.google.android.gms.common.SignInButton-->
+    <!--android:id="@+id/sign_in_button"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:background="@drawable/google_login"-->
+    <!--android:visibility="visible"/>-->
 
 </RelativeLayout>

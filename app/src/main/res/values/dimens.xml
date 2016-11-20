@@ -21,5 +21,16 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="card_corner_radius">8dp</dimen>
     <dimen name="card_elevation">8dp</dimen>
+
+    <!--login screen start-->
+    <dimen name="magic_bulb_marginTop">70dp</dimen>
+    <dimen name="go_button_marginTop">30dp</dimen>
+    <dimen name="margin_bottom_email">5dp</dimen>
+    <dimen name="margin_side_login">15dp</dimen>
+    <dimen name="marginTop_email">30dp</dimen>
+    <dimen name="padding_login_credentials">50dp</dimen>
+    <dimen name="no_account_marginLeft">30dp</dimen>
+    <dimen name="no_account_marginRight">10dp</dimen>
+    <!--login screen end-->
     <!--<dimen name="headerbar_elevation">4dp</dimen>-->
 </resources>

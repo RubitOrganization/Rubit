@@ -20,4 +20,5 @@
     <string name="textRequestPop">Request Pop</string>
     <string name="text_about">About</string>
     <string name="review_comment">\"Great landscape photographer. Hope to more chance to work with Lo Nguyen.\"</string>
+    <string name="don_t_have_a_account"><u>Don\'t have a account?</u></string>
 </resources>

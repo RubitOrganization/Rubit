@@ -12,10 +12,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.coderschool.android2.rubit.R;
@@ -31,7 +34,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -57,7 +59,16 @@ public class LoginFragment extends Fragment
     public static final String TAG = LoginFragment.class.getSimpleName();
     private static final int RC_SIGN_IN = 9001;
     @BindView(R.id.sign_in_button)
-    SignInButton mSignInButton;
+    AppCompatImageView mSignInButton;
+    @BindView(R.id.emailIv)
+    RelativeLayout emailEdt;
+    @BindView(R.id.passwordIv)
+    RelativeLayout passwordEdt;
+    @BindView(R.id.edtTxtEmail)
+    AppCompatEditText edtTxtEmail;
+    @BindView(R.id.edtTxtPassword)
+    AppCompatEditText edtTxtPassword;
+
     private LoginContact.Presenter mPresenter;
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mFirebaseAuth;
@@ -88,6 +99,7 @@ public class LoginFragment extends Fragment
         mGoogleApiClient = GoogleApiClientUtils.authGoogleApiClient(getActivity(), getActivity(), this, googleSignInOptions);
         //Initialise FirebaseAuth
         mFirebaseAuth = FirebaseUtils.getFirebaseNewInstance();
+
 
     }
 
