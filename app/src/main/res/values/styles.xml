@@ -46,8 +46,14 @@
         <item name="android:background">@drawable/text_background</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
-
+    <!--AppBarLayout style-->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
+    <!--toolBar style theme-->
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <!--RatingBar style-->
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#616161</item>
+        <item name="colorControlActivated">#424242</item>
+    </style>
 </resources>

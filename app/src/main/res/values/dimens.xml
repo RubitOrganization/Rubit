@@ -19,5 +19,7 @@
     <dimen name="text_size_normal">12sp</dimen>
     <dimen name="text_size_small">10sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="card_corner_radius">8dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
     <!--<dimen name="headerbar_elevation">4dp</dimen>-->
 </resources>

@@ -119,6 +119,11 @@ dependencies {
     // Facebook Android SDK (only required for Facebook Login)
     compile 'com.facebook.android:facebook-android-sdk:4.9.0'
 
+    //Rounded corner Image view library
+    compile 'com.makeramen:roundedimageview:2.2.1'
+    //snap center
+    compile 'com.github.rubensousa:gravitysnaphelper:1.0'
+
     // Firebase
     compile 'com.google.firebase:firebase-database:9.4.0'
     /*firebase-auth allows easy management of authenticated users of your application*/

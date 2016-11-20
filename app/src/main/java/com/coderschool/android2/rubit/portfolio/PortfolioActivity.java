@@ -11,12 +11,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -29,8 +33,11 @@ import com.coderschool.android2.rubit.constants.IntentConstants;
 import com.coderschool.android2.rubit.login.LoginActivity;
 import com.coderschool.android2.rubit.utils.ConnectionUtils;
 import com.coderschool.android2.rubit.utils.FirebaseUtils;
+import com.coderschool.android2.rubit.utils.FlowLayout;
 import com.coderschool.android2.rubit.utils.GoogleApiClientUtils;
 import com.coderschool.android2.rubit.utils.ImageUtils;
+import com.coderschool.android2.rubit.utils.LoadFakeImages;
+import com.coderschool.android2.rubit.utils.PostFakeDataForReviewComments;
 import com.coderschool.android2.rubit.utils.TextViewUtils;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
@@ -38,7 +45,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
@@ -53,6 +59,9 @@ public class PortfolioActivity extends AppCompatActivity
     FloatingActionButton fab;
     @BindView(R.id.rvRoot)
     RelativeLayout rvRoot;
+
+    @BindView(R.id.includePortfolio)
+    View includePortfolio;
 
     /* PROFILE */
     @BindView(R.id.rlPortfolio)
@@ -79,8 +88,8 @@ public class PortfolioActivity extends AppCompatActivity
     RelativeLayout rlBadges;
     @BindView(R.id.txtBadgeTitle)
     TextView txtBadgeTitle;
-    @BindView(R.id.rvBadges)
-    RecyclerView rvBadges;
+//    @BindView(R.id.rvBadges)
+//    RecyclerView rvBadges;
 
     /* OVERVIEW */
     @BindView(R.id.separateLine1)
@@ -103,6 +112,8 @@ public class PortfolioActivity extends AppCompatActivity
     TextView txtTags;
     @BindView(R.id.imgEditTags)
     ImageView imgEditTags;
+    @BindView(R.id.fl_content)
+    FlowLayout mFlowLayout;
 
     /* REVIEWS */
     @BindView(R.id.separateLine3)
@@ -111,6 +122,8 @@ public class PortfolioActivity extends AppCompatActivity
     RelativeLayout rlReviews;
     @BindView(R.id.txtReviewTitle)
     TextView txtReviewTitle;
+    @BindView(R.id.txtReviewCount)
+    TextView txtReviewCount;
     @BindView(R.id.imgReview)
     ImageView imgReview;
     @BindView(R.id.rvReview)
@@ -128,11 +141,17 @@ public class PortfolioActivity extends AppCompatActivity
     @BindView(R.id.rvPortfolios)
     RecyclerView rvPortfolios;
 
-    private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mFirebaseAuth;
     private GoogleApiClient mGoogleApiClient;
     private String mQuest;
     private String mUserId;
+
+
+    // once after we get the real tags from user
+    private String[] strs = new String[]{
+            "#Android", "#iOS", "#Nodejs", "#Ruby"
+    };
+    private int value = 0; // boolean value for click event
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +165,7 @@ public class PortfolioActivity extends AppCompatActivity
             verifyDoesUserExists();
             fetchIntentData();
             fetchingData();
+
         }
     }
 
@@ -163,8 +183,7 @@ public class PortfolioActivity extends AppCompatActivity
      * fetching Data
      */
     private void fetchingData() {
-        mFirebaseDatabase.getReference(DatabaseConstants.RUBIT_USERS)
-                .child(mUserId) //TODO: Un-know for TAG
+        FirebaseUtils.getCurrentUserRef()//TODO: Un-know for TAG
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -173,6 +192,8 @@ public class PortfolioActivity extends AppCompatActivity
                         updateDataForBadges();
                         updateDataForOverviews();
                         updateDataForTags();
+                        updateReviewComments();
+                        updateSupporterImages();
                     }
 
                     @Override
@@ -180,6 +201,33 @@ public class PortfolioActivity extends AppCompatActivity
                         System.out.println("The read failed in user (Portfolio): " + databaseError.getCode());
                     }
                 });
+    }
+
+    private void updateSupporterImages() {
+        //allows for optimizations  // in future we need to remove this below line for nwo i'm placing
+        rvPortfolios.setHasFixedSize(true);
+        // Define Grid Layout Manager layout
+        final LinearLayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        //pass the layout to recyclerView layout manager
+        rvPortfolios.setLayoutManager(layout);
+        //create adapter
+        DisplaySupporterImagesAdapter supporterImagesAdapter = new DisplaySupporterImagesAdapter(this, LoadFakeImages.getImages());
+        //assign adapter to recyclerView
+        rvPortfolios.setAdapter(supporterImagesAdapter);
+
+    }
+
+    private void updateReviewComments() {
+        //allows for optimizations  // in future we need to remove this below line for nwo i'm placing
+        rvReview.setHasFixedSize(true);
+        // Define Linear Layout Manager layout
+        final LinearLayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        //pass the layout to recyclerView layout manager
+        rvReview.setLayoutManager(layout);
+        //create a adapter
+        ReviewCommentsAdapter adapter = new ReviewCommentsAdapter(this, PostFakeDataForReviewComments.reviewComments());
+        //assign adapter to recyclerView
+        rvReview.setAdapter(adapter);
     }
 
     /**
@@ -206,6 +254,30 @@ public class PortfolioActivity extends AppCompatActivity
      * updateDataForTags
      */
     private void updateDataForTags() {
+        for (int i = 0; i < strs.length; i++) {
+            final TextView tv = new TextView(this);
+            tv.setPadding(50, 8, 50, 8);
+            tv.setGravity(Gravity.CENTER);
+
+            FlowLayout.LayoutParams lp = new FlowLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            lp.setMargins(25, 25, 25, 25);
+            tv.setLayoutParams(lp);
+            tv.setTextColor(ContextCompat.getColor(this, R.color.colorWhite));
+            tv.setText(strs[i]);
+//            tv.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (value == 0) {
+//                        tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_highlight_off_black_24dp, 0);
+//                        value = 1;
+//                    } else {
+//                        tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+//                        value = 0;
+//                    }
+//                }
+//            });
+            mFlowLayout.addView(tv);
+        }
     }
 
     /**
@@ -281,7 +353,6 @@ public class PortfolioActivity extends AppCompatActivity
      * set up Firebase
      */
     private void setUpFirebase() {
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseUtils.getFirebaseNewInstance();
     }
 }

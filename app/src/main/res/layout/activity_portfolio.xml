@@ -32,6 +32,8 @@
         app:elevation="6dp"
         app:pressedTranslationZ="12dp"/>
 
-    <include layout="@layout/content_main"/>
+    <include
+        android:id="@+id/includePortfolio"
+        layout="@layout/content_main"/>
 
 </android.support.design.widget.CoordinatorLayout>
