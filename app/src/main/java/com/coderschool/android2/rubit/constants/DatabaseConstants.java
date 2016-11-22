@@ -50,6 +50,11 @@ public class DatabaseConstants {
     public final static String QUOTE = "quote";
 
     /**
+     * OVERVIEW
+     */
+    public final static String OVERVIEW = "overview";
+
+    /**
      * UID
      */
     public final static String UID = "uid";

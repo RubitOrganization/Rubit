@@ -18,7 +18,6 @@
     <dimen name="text_size_big">16sp</dimen>
     <dimen name="text_size_normal">12sp</dimen>
     <dimen name="text_size_small">10sp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
     <dimen name="card_corner_radius">8dp</dimen>
     <dimen name="card_elevation">8dp</dimen>
 
@@ -33,4 +32,10 @@
     <dimen name="no_account_marginRight">10dp</dimen>
     <!--login screen end-->
     <!--<dimen name="headerbar_elevation">4dp</dimen>-->
+
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fab_margin_subtitle">100dp</dimen>
+    <dimen name="fab_margin_cancel">230dp</dimen>
+    <dimen name="fab_margin_pin">160dp</dimen>
+    <dimen name="fab_margin_chat">70dp</dimen>
 </resources>

@@ -32,6 +32,7 @@ public class UserModel implements Parcelable {
     private String uid;
     private String jobTitle;
     private String quote;
+    private String overview;
     private String email;
     private String displayName;
     private String photoUrl;
@@ -46,6 +47,7 @@ public class UserModel implements Parcelable {
     public UserModel(String uid,
                      String jobTitle,
                      String quote,
+                     String overview,
                      String email,
                      String displayName,
                      String photoUrl,
@@ -56,6 +58,7 @@ public class UserModel implements Parcelable {
         this.uid = uid;
         this.jobTitle = jobTitle;
         this.quote = quote;
+        this.overview = overview;
         this.email = email;
         this.displayName = displayName;
         this.photoUrl = photoUrl;
@@ -69,6 +72,7 @@ public class UserModel implements Parcelable {
         uid = in.readString();
         jobTitle = in.readString();
         quote = in.readString();
+        overview = in.readString();
         email = in.readString();
         displayName = in.readString();
         photoUrl = in.readString();
@@ -98,6 +102,14 @@ public class UserModel implements Parcelable {
 
     public void setQuote(String quote) {
         this.quote = quote;
+    }
+
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
 
     public String getEmail() {
@@ -166,6 +178,7 @@ public class UserModel implements Parcelable {
         parcel.writeString(uid);
         parcel.writeString(jobTitle);
         parcel.writeString(quote);
+        parcel.writeString(overview);
         parcel.writeString(email);
         parcel.writeString(displayName);
         parcel.writeString(photoUrl);

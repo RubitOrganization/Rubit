@@ -63,6 +63,7 @@ public class FirebaseUtils {
                 getCurrentUserId(),
                 null,
                 null,
+                null,
                 email,
                 name,
                 String.valueOf(picture),

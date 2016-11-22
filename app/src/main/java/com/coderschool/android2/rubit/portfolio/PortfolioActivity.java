@@ -25,11 +25,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.coderschool.android2.rubit.R;
+import com.coderschool.android2.rubit.chat.ChatActivity;
 import com.coderschool.android2.rubit.connectionDialog.ConnectionDialogListener;
 import com.coderschool.android2.rubit.constants.DatabaseConstants;
 import com.coderschool.android2.rubit.constants.IntentConstants;
+import com.coderschool.android2.rubit.face.FaceActivity;
 import com.coderschool.android2.rubit.login.LoginActivity;
 import com.coderschool.android2.rubit.utils.ConnectionUtils;
 import com.coderschool.android2.rubit.utils.FirebaseUtils;
@@ -55,8 +58,6 @@ public class PortfolioActivity extends AppCompatActivity
 
     private static final String TAG = PortfolioActivity.class.getSimpleName();
 
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
     @BindView(R.id.rvRoot)
     RelativeLayout rvRoot;
 
@@ -141,6 +142,22 @@ public class PortfolioActivity extends AppCompatActivity
     @BindView(R.id.rvPortfolios)
     RecyclerView rvPortfolios;
 
+    /* EXPANDABLE*/
+    @BindView(R.id.fabCancelRequest)
+    FloatingActionButton fabCancelRequest;
+    @BindView(R.id.fabCancelRequestSubtitle)
+    FloatingActionButton fabCancelRequestSubtitle;
+    @BindView(R.id.fabPinProfile)
+    FloatingActionButton fabPinProfile;
+    @BindView(R.id.fabPinProfileSubtitle)
+    FloatingActionButton fabPinProfileSubtitle;
+    @BindView(R.id.fabStartChatting)
+    FloatingActionButton fabStartChatting;
+    @BindView(R.id.fabStartChattingSubtitle)
+    FloatingActionButton fabStartChattingSubtitle;
+    @BindView(R.id.fabExpandableGo)
+    FloatingActionButton fabExpandableGo;
+
     private FirebaseAuth mFirebaseAuth;
     private GoogleApiClient mGoogleApiClient;
     private String mQuest;
@@ -163,10 +180,68 @@ public class PortfolioActivity extends AppCompatActivity
             setUpGoogleApiClient();
             setUpFirebase();
             verifyDoesUserExists();
+            verifyCurrentUser();
             fetchIntentData();
             fetchingData();
-
+            setUpFloatingButtons();
         }
+    }
+
+    /**
+     * update mode for current user
+     */
+    private void verifyCurrentUser() {
+        if (mUserId.equals(FirebaseUtils.getCurrentUserId())) {
+            imgEditTitle.setVisibility(View.VISIBLE);
+            imgEditTags.setVisibility(View.VISIBLE);
+            imgEditImage.setVisibility(View.VISIBLE);
+        } else {
+            imgEditTitle.setVisibility(View.GONE);
+            imgEditTags.setVisibility(View.GONE);
+            imgEditImage.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * setUpFloatingButtons
+     */
+    private void setUpFloatingButtons() {
+        fabCancelRequest.setOnClickListener(view -> {
+            final Intent intent = new Intent(this, FaceActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        fabPinProfile.setOnClickListener(view -> {
+            // TODO: Don't know how to implemented
+            Toast.makeText(this, "Not Support at the moment", Toast.LENGTH_SHORT).show();
+        });
+
+        fabStartChatting.setOnClickListener(view -> {
+            final Intent intent = new Intent(this, ChatActivity.class);
+            intent.putExtra(IntentConstants.QUEST, mQuest);
+            intent.putExtra(IntentConstants.USER_ID, mUserId);
+            startActivity(intent);
+            finish();
+        });
+
+        fabExpandableGo.setOnClickListener(view -> {
+            if (fabCancelRequest.getVisibility() == View.VISIBLE) {
+                fabCancelRequest.setVisibility(View.GONE);
+                fabCancelRequestSubtitle.setVisibility(View.GONE);
+                fabPinProfile.setVisibility(View.GONE);
+                fabPinProfileSubtitle.setVisibility(View.GONE);
+                fabStartChatting.setVisibility(View.GONE);
+                fabStartChattingSubtitle.setVisibility(View.GONE);
+            } else {
+                fabCancelRequest.setVisibility(View.VISIBLE);
+                fabCancelRequestSubtitle.setVisibility(View.VISIBLE);
+                fabPinProfile.setVisibility(View.VISIBLE);
+                fabPinProfileSubtitle.setVisibility(View.VISIBLE);
+                fabStartChatting.setVisibility(View.VISIBLE);
+                fabStartChattingSubtitle.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     /**
@@ -190,7 +265,7 @@ public class PortfolioActivity extends AppCompatActivity
                         updateDataForProfile(dataSnapshot);
                         updateDataForQuote(dataSnapshot);
                         updateDataForBadges();
-                        updateDataForOverviews();
+                        updateDataForOverviews(dataSnapshot);
                         updateDataForTags();
                         updateReviewComments();
                         updateSupporterImages();
@@ -282,16 +357,21 @@ public class PortfolioActivity extends AppCompatActivity
 
     /**
      * updateDataForOverviews
+     *
+     * @param dataSnapshot {@link DataSnapshot}
      */
-    private void updateDataForOverviews() {
-
+    private void updateDataForOverviews(DataSnapshot dataSnapshot) {
+        TextViewUtils.setTextView(txtOverviewText, dataSnapshot.child(DatabaseConstants.OVERVIEW).getValue());
+        imgEditTitle.setOnClickListener(view -> {
+            // TODO:?
+        });
     }
 
     /**
      * updateDataForBadges
      */
     private void updateDataForBadges() {
-
+        // TODO: FAKE
     }
 
     /**

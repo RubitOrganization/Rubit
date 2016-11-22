@@ -1,5 +1,11 @@
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+  ~ Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
+  -->
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -21,19 +27,95 @@
 
     <!--</android.support.design.widget.AppBarLayout>-->
 
+    <include
+        android:id="@+id/includePortfolio"
+        layout="@layout/content_main" />
+
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabCancelRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/fab_margin_cancel"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:src="@android:drawable/ic_menu_revert"
+        android:visibility="invisible"
+        app:backgroundTint="@color/colorDarkGray"
+        app:layout_anchorGravity="bottom|right" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabCancelRequestSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/fab_margin_cancel"
+        android:layout_marginEnd="@dimen/fab_margin_subtitle"
+        android:layout_marginRight="@dimen/fab_margin_subtitle"
+        android:src="@android:drawable/ic_menu_share"
+        android:visibility="invisible"
+        app:backgroundTint="@color/colorDarkGray"
+        app:layout_anchorGravity="bottom|right" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabPinProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/fab_margin_pin"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:src="@android:drawable/checkbox_on_background"
+        android:visibility="invisible"
+        app:backgroundTint="@color/colorDarkGray"
+        app:layout_anchorGravity="bottom|right" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabPinProfileSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/fab_margin_pin"
+        android:layout_marginEnd="@dimen/fab_margin_subtitle"
+        android:layout_marginRight="@dimen/fab_margin_subtitle"
+        android:src="@android:drawable/alert_dark_frame"
+        android:visibility="invisible"
+        app:backgroundTint="@color/colorDarkGray"
+        app:layout_anchorGravity="bottom|right" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabStartChatting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/fab_margin_chat"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:src="@android:drawable/alert_light_frame"
+        android:visibility="invisible"
+        app:backgroundTint="@color/colorDarkGray"
+        app:layout_anchorGravity="bottom|right" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabStartChattingSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/fab_margin_chat"
+        android:layout_marginEnd="@dimen/fab_margin_subtitle"
+        android:layout_marginRight="@dimen/fab_margin_subtitle"
+        android:src="@android:drawable/arrow_up_float"
+        android:visibility="invisible"
+        app:backgroundTint="@color/colorDarkGray"
+        app:layout_anchorGravity="bottom|right" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabExpandableGo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="@color/colorAccent"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"/>
-
-    <include
-        android:id="@+id/includePortfolio"
-        layout="@layout/content_main"/>
+        android:src="@drawable/go_button_black_bg"
+        app:backgroundTint="@color/colorDarkGray" />
 
 </android.support.design.widget.CoordinatorLayout>
