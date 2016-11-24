@@ -34,4 +34,6 @@
     <string name="text_coderschool">CoderSchool</string>
     <string name="text_overview_fake">I love Photography. I love traveling. For me, taking great pictures from different countries is what I call Living</string>
     <string name="text_fake_count">(12)</string>
+    <!--google map api key-->
+    <string name="GOOGLE_MAP_API_KEY">AIzaSyDtatUvIayZ6gq9iCTbSiTapYiDvAoJbbU</string>
 </resources>

@@ -13,4 +13,16 @@
     <color name="colorDarkGray">#403F3E</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorBlueGenie">#189dd7</color>
+    <color name="colorGrayBeard">#575553</color>
+    <color name="colorWhiteTeeth">#e7e8e8</color>
+    <color name="colorRed">#e7e8e8</color>
+    <color name="colorGreen">#6fc173</color>
+    <color name="colorYellow">#f7bd38</color>
+    <color name="colorOrange">#f7bd38</color>
+    <color name="colorBrown">#7a574a</color>
+    <color name="colorPurple">#803879</color>
+    <color name="colorGoldSepia">#bf935e</color>
+    <color name="colorSilverStar">#7f8c8d</color>
+
 </resources>
