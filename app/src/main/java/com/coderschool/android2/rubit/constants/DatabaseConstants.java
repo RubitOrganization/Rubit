@@ -15,9 +15,14 @@ package com.coderschool.android2.rubit.constants;
 public class DatabaseConstants {
 
     /**
-     * REQUEST
+     * REQUESTS
      */
-    public final static String REQUEST = "requests";
+    public final static String REQUESTS = "requests";
+
+    /**
+     * TAGS
+     */
+    public final static String TAGS = "tags";
 
     /**
      * RUBIT_USERS
@@ -73,4 +78,29 @@ public class DatabaseConstants {
      * COMPLETED
      */
     public final static String COMPLETED = "completed";
+
+    /**
+     * TAG_OTHERS
+     */
+    public final static String TAG_OTHERS = "Others";
+
+    /**
+     * TAG_ANDROID
+     */
+    public final static String TAG_ANDROID = "Android";
+
+    /**
+     * TAG_IOS
+     */
+    public final static String TAG_IOS = "iOs";
+
+    /**
+     * TAG_RUBY
+     */
+    public final static String TAG_RUBY = "Ruby";
+
+    /**
+     * TAG_PYTHON
+     */
+    public final static String TAG_PYTHON = "Python";
 }

@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
+ */
+
 package com.coderschool.android2.rubit.utils;
 
 import android.app.Activity;
@@ -7,7 +14,6 @@ import android.content.Context;
 /**
  * Created by vinay on 04/11/16.
  */
-
 public class ProgressDialogHelper {
 
     static ProgressDialog mProgressDialog;
@@ -18,7 +24,7 @@ public class ProgressDialogHelper {
     }
 
     public ProgressDialogHelper(Activity context) {
-        this.mcontext = context;
+        mcontext = context;
         mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setTitle("Please wait");
         mProgressDialog.setMessage("Loading");
@@ -33,6 +39,24 @@ public class ProgressDialogHelper {
         mProgressDialog.show();
     }
 
+    public static void show() {
+        if (mProgressDialog != null && !mProgressDialog.isShowing()) {
+            mProgressDialog.show();
+        }
+    }
+
+    public static void dismiss() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mcontext.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mProgressDialog.dismiss();
+                }
+            });
+            mProgressDialog = null;
+        }
+    }
+
     public ProgressDialog getProgressDialog() {
         return mProgressDialog;
     }
@@ -40,13 +64,7 @@ public class ProgressDialogHelper {
     public void setProgressDialog(ProgressDialog mProgressDialog) {
         //make sure the previous dialog is hidden
         hide();
-        this.mProgressDialog = mProgressDialog;
-    }
-
-    public static void show() {
-        if (mProgressDialog != null && !mProgressDialog.isShowing()) {
-            mProgressDialog.show();
-        }
+        ProgressDialogHelper.mProgressDialog = mProgressDialog;
     }
 
     public void create(Context context, String title, String message) {
@@ -59,18 +77,6 @@ public class ProgressDialogHelper {
     public void hide() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
-            mProgressDialog = null;
-        }
-    }
-
-    public static void dismiss() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mcontext.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mProgressDialog.dismiss();
-                }
-            });
             mProgressDialog = null;
         }
     }

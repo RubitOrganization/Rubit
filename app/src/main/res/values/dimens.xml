@@ -38,4 +38,5 @@
     <dimen name="fab_margin_cancel">230dp</dimen>
     <dimen name="fab_margin_pin">160dp</dimen>
     <dimen name="fab_margin_chat">70dp</dimen>
+    <dimen name="small_text">8sp</dimen>
 </resources>

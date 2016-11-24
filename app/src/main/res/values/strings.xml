@@ -25,4 +25,13 @@
     <string name="text_images">Images</string>
     <string name="review_comment">\"Great landscape photographer. Hope to more chance to work with Lo Nguyen.\"</string>
     <string name="don_t_have_a_account"><u>Don\'t have a account?</u></string>
+    <string name="text_overview">Overview</string>
+    <string name="text_hint_email">Email</string>
+    <string name="text_hint_password">Password</string>
+    <string name="text_done">DONE</string>
+    <string name="text_verified">VERIFIED</string>
+    <string name="text_on_time">On-time</string>
+    <string name="text_coderschool">CoderSchool</string>
+    <string name="text_overview_fake">I love Photography. I love traveling. For me, taking great pictures from different countries is what I call Living</string>
+    <string name="text_fake_count">(12)</string>
 </resources>

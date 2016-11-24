@@ -180,8 +180,8 @@ public class PortfolioActivity extends AppCompatActivity
             setUpGoogleApiClient();
             setUpFirebase();
             verifyDoesUserExists();
-            verifyCurrentUser();
             fetchIntentData();
+            verifyCurrentUser();
             fetchingData();
             setUpFloatingButtons();
         }
@@ -258,7 +258,8 @@ public class PortfolioActivity extends AppCompatActivity
      * fetching Data
      */
     private void fetchingData() {
-        FirebaseUtils.getCurrentUserRef()//TODO: Un-know for TAG
+        FirebaseUtils.getRubitUser()
+                .child(mUserId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -329,7 +330,7 @@ public class PortfolioActivity extends AppCompatActivity
      * updateDataForTags
      */
     private void updateDataForTags() {
-        for (int i = 0; i < strs.length; i++) {
+        for (String str : strs) {
             final TextView tv = new TextView(this);
             tv.setPadding(50, 8, 50, 8);
             tv.setGravity(Gravity.CENTER);
@@ -338,7 +339,7 @@ public class PortfolioActivity extends AppCompatActivity
             lp.setMargins(25, 25, 25, 25);
             tv.setLayoutParams(lp);
             tv.setTextColor(ContextCompat.getColor(this, R.color.colorWhite));
-            tv.setText(strs[i]);
+            tv.setText(str);
 //            tv.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {

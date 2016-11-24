@@ -9,6 +9,8 @@ package com.coderschool.android2.rubit.models;
 
 import android.os.Parcelable;
 
+import java.util.Map;
+
 /**
  * {@link RequestModel}
  *
@@ -31,19 +33,21 @@ public class RequestModel implements Parcelable {
     private String subject;
     private boolean isConnected;
     private boolean isCompleted;
+    private Map<String, Boolean> tags;
 
     public RequestModel() {
     }
 
-    public RequestModel(String uid, String requestId, String subject, boolean isConnected, boolean isCompleted) {
+    public RequestModel(String uid, String requestId, String subject, boolean isConnected, boolean isCompleted, Map<String, Boolean> tags) {
         this.uid = uid;
         this.requestId = requestId;
         this.subject = subject;
         this.isConnected = isConnected;
         this.isCompleted = isCompleted;
+        this.tags = tags;
     }
 
-    protected RequestModel(android.os.Parcel in) {
+    private RequestModel(android.os.Parcel in) {
         uid = in.readString();
         requestId = in.readString();
         subject = in.readString();
@@ -89,6 +93,14 @@ public class RequestModel implements Parcelable {
 
     public void setCompleted(boolean completed) {
         isCompleted = completed;
+    }
+
+    public Map<String, Boolean> getTags() {
+        return tags;
+    }
+
+    public void setTags(Map<String, Boolean> tags) {
+        this.tags = tags;
     }
 
     @Override

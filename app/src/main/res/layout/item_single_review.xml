@@ -1,16 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
+  -->
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/commentImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignBottom="@+id/rlLeftPart"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/rlLeftPart"
         android:layout_centerVertical="true"
@@ -21,13 +28,14 @@
         app:riv_corner_radius="10dip"
         app:riv_mutate_background="true"
         app:riv_oval="false"
-        app:riv_tile_mode="clamp"/>
+        app:riv_tile_mode="clamp" />
 
     <RelativeLayout
         android:id="@+id/rlLeftPart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/commentImageView">
+        android:layout_toLeftOf="@id/commentImageView"
+        android:layout_toStartOf="@id/commentImageView">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/reviewerImageAvatar"
@@ -37,7 +45,7 @@
             android:src="@drawable/default_avatar"
             app:riv_corner_radius="30dip"
             app:riv_oval="true"
-            app:riv_tile_mode="clamp"/>
+            app:riv_tile_mode="clamp" />
 
         <RelativeLayout
             android:id="@+id/rlReviewerAvatar"
@@ -45,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/reviewerImageAvatar"
             android:layout_alignTop="@id/reviewerImageAvatar"
+            android:layout_toEndOf="@id/reviewerImageAvatar"
             android:layout_toRightOf="@id/reviewerImageAvatar"
             android:gravity="center">
 
@@ -52,12 +61,12 @@
                 android:id="@+id/reviewerUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:maxLines="1"
                 android:paddingLeft="3dp"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                tools:text="Lo Nguyen"/>
+                tools:text="Lo Nguyen" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
@@ -69,7 +78,7 @@
                 android:numStars="5"
                 android:rating="3.5"
                 android:stepSize="0.5"
-                android:theme="@style/RatingBar"/>
+                android:theme="@style/RatingBar" />
         </RelativeLayout>
 
         <TextView
@@ -79,7 +88,7 @@
             android:layout_below="@id/rlReviewerAvatar"
             android:padding="10dp"
             android:textColor="@color/colorLightGreen"
-            tools:text="Take me a photo of Qatar"/>
+            tools:text="Take me a photo of Qatar" />
 
         <TextView
             android:id="@+id/reviewerComments"
@@ -88,7 +97,7 @@
             android:layout_below="@id/requestNameTv"
             android:lineSpacingExtra="5dp"
             android:padding="10dp"
-            tools:text="@string/review_comment"/>
+            tools:text="@string/review_comment" />
     </RelativeLayout>
 
 

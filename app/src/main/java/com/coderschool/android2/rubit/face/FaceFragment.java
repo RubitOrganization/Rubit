@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.coderschool.android2.rubit.R;
 import com.coderschool.android2.rubit.connectionDialog.ConnectionDialogListener;
@@ -45,9 +46,9 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -83,7 +84,6 @@ public class FaceFragment extends Fragment
     private FaceContact.Presenter mPresenter;
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mFirebaseAuth;
-    private FirebaseUser mFirebaseUser;
     private GoogleApiClient mGoogleApiClient;
     private Handler handler = new Handler();
     private RequestModel mRequestModel = new RequestModel();
@@ -145,23 +145,25 @@ public class FaceFragment extends Fragment
      */
     public void startRunnableForPop() {
         handler.postDelayed(runnable, IntentConstants.POP_REQUEST_TIME);
-        if (FirebaseUtils.getCurrentUserId() != null) {
-            mFirebaseDatabase = FirebaseDatabase.getInstance();
-            mFirebaseDatabase.getReference(DatabaseConstants.REQUEST)
-                    .orderByChild(FirebaseUtils.getCurrentUserId())
+
+        String userId = FirebaseUtils.getCurrentUserId();
+        if (userId != null) {
+            FirebaseUtils.getRequests()
+                    .orderByChild(userId)
                     .equalTo(null)
                     .limitToFirst(1)
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                mRequestModel = dataSnapshot.getValue(RequestModel.class);
                                 mRequestModel.setSubject(String.valueOf(snapshot.child(DatabaseConstants.SUBJECT).getValue()));
                                 mFirebaseDatabase.getReference(DatabaseConstants.RUBIT_USERS)
                                         .child(String.valueOf(snapshot.child(DatabaseConstants.UID).getValue()))
                                         .addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                                mUserMode.setPhotoUrl(String.valueOf(dataSnapshot.child(DatabaseConstants.PHOTO_URL).getValue()));
+                                                mUserMode = dataSnapshot.getValue(UserModel.class);
                                                 showProfilePicture();
                                                 showRequestPop();
                                             }
@@ -218,7 +220,6 @@ public class FaceFragment extends Fragment
                 // we need to make name, photourl and email to null on logout
                 mFirebaseAuth.signOut();
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient);
-                mFirebaseUser = null;
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -314,39 +315,58 @@ public class FaceFragment extends Fragment
     public void btnGoOnclick() {
         imgGo.setOnClickListener(view -> {
             if (0 >= edtQuestBar.getText().length()) {
+                Toast.makeText(getContext(), "Quest cannot be empty!", Toast.LENGTH_SHORT).show();
+                edtQuestBar.requestFocus();
                 return;
             }
 
             stopRunnableForPop();
 
+            String currentUserId = FirebaseUtils.getCurrentUserId();
+            if (currentUserId == null) {
+                return;
+            }
+
+            // TODO: Temper solution
+            Map<String, Boolean> tags = new HashMap<>();
+            tags.put(DatabaseConstants.TAG_OTHERS, true);
+
             final RequestModel newRequest = new RequestModel();
             newRequest.setSubject(edtQuestBar.getText().toString());
-            newRequest.setUid(FirebaseUtils.getCurrentUserId());
+            newRequest.setTags(tags);
+            newRequest.setUid(currentUserId);
             newRequest.setConnected(false);
             newRequest.setCompleted(false);
 
             mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+            // Create new record
+            DatabaseReference newRequestReference = mFirebaseDatabase.getReference()
+                    .child(DatabaseConstants.REQUESTS)
+                    .push();
+            newRequestReference.setValue(newRequest);
+            newRequest.setRequestId(newRequestReference.getKey());
+
+            // Update that record & current user record too
             mFirebaseDatabase.getReference()
-                    .child(DatabaseConstants.REQUEST)
-                    .child(edtQuestBar.getText().toString())
+                    .child(DatabaseConstants.REQUESTS)
+                    .child(newRequest.getRequestId())
                     .setValue(newRequest).addOnCompleteListener(task -> {
 
                 Map<String, Object> requests = new HashMap<>();
-                requests.put(newRequest.getSubject(), true);
+                requests.put(newRequest.getRequestId(), true);
 
                 mFirebaseDatabase.getReference()
                         .child(DatabaseConstants.RUBIT_USERS)
-                        .child(FirebaseUtils.getCurrentUserId()).child(DatabaseConstants.REQUEST)
+                        .child(currentUserId).child(DatabaseConstants.REQUESTS)
                         .updateChildren(requests, (databaseError, databaseReference) -> {
 
                             final Intent intent = new Intent(FaceFragment.this.getContext(), PortfolioActivity.class);
                             intent.putExtra(IntentConstants.QUEST, edtQuestBar.getText().toString());
-                            intent.putExtra(IntentConstants.USER_ID, FirebaseUtils.getCurrentUserId());
+                            intent.putExtra(IntentConstants.USER_ID, currentUserId);
                             FaceFragment.this.startActivity(intent);
                         });
             });
-
-
         });
     }
 
@@ -362,6 +382,7 @@ public class FaceFragment extends Fragment
 
             final Intent intent = new Intent(getContext(), DetailsTaskActivity.class);
             intent.putExtra(IntentConstants.QUEST, edtQuestBar.getText().toString());
+            intent.putExtra(IntentConstants.USER, mUserMode);
             startActivity(intent);
         });
     }

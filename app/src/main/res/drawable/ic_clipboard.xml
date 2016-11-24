@@ -1,5 +1,15 @@
-<vector android:height="24dp" android:viewportHeight="505.0"
-    android:viewportWidth="505.0" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+<!--
+  ~ Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportHeight="505.0"
+    android:viewportWidth="505.0">
     <path android:fillColor="#FFD05B" android:pathData="M252.5,252.5m-252.5,0a252.5,252.5 0,1 1,505 0a252.5,252.5 0,1 1,-505 0"/>
     <path android:fillColor="#324A5E" android:pathData="M379.9,427H125.1c-2.6,0 -4.7,-2.1 -4.7,-4.7v-323c0,-2.6 2.1,-4.7 4.7,-4.7H380c2.6,0 4.7,2.1 4.7,4.7v323C384.6,424.9 382.5,427 379.9,427z"/>
     <path android:fillColor="#FFFFFF" android:pathData="M146.4,113.7l0,262.8l175.2,0l0,-37l37,0l0,-225.8z"/>

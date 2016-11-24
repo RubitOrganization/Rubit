@@ -115,7 +115,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/go_button_black_bg"
-        app:backgroundTint="@color/colorDarkGray" />
+        android:src="@drawable/go_button" />
 
 </android.support.design.widget.CoordinatorLayout>

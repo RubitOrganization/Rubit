@@ -56,7 +56,7 @@ public class ImageUtils {
 
         if (isRoundTransform) {
             RoundedCornersTransformation transformation = new RoundedCornersTransformation(context,
-                    35, 0, RoundedCornersTransformation.CornerType.ALL);
+                    50, 0, RoundedCornersTransformation.CornerType.ALL);
 
             request.bitmapTransform(transformation);
         }

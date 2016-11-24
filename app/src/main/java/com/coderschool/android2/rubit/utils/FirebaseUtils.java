@@ -15,37 +15,68 @@ import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by vinay on 18/11/16.
  */
-
 public class FirebaseUtils {
 
-
+    /**
+     * New Instance
+     *
+     * @return FirebaseAuth
+     */
     public static FirebaseAuth getFirebaseNewInstance() {
         return FirebaseAuth.getInstance();
     }
 
-
-    //Base reference
+    /**
+     * Base reference
+     *
+     * @return DatabaseReference
+     */
     public static DatabaseReference getBaseRef() {
         return FirebaseDatabase.getInstance().getReference();
     }
 
-    //get currentUserId
+    /**
+     * get current User Id
+     *
+     * @return String
+     */
     public static String getCurrentUserId() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = getFirebaseNewInstance().getCurrentUser();
         if (user != null) {
             return user.getUid();
         }
         return null;
     }
 
-    //get user details
+    /**
+     * get current User Name
+     *
+     * @return String
+     */
+    public static String getCurrentUserName() {
+        FirebaseUser user = getFirebaseNewInstance().getCurrentUser();
+        if (user != null) {
+            return user.getDisplayName();
+        }
+        return null;
+    }
+
+    /**
+     * get user details
+     *
+     * @return UserModel
+     */
     public static UserModel getUserDetails() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser user = getFirebaseNewInstance().getCurrentUser();
         if (user == null)
             return null;
+
         String name = user.getDisplayName();
         String email = user.getEmail();
         String picture = user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : null;
@@ -57,8 +88,16 @@ public class FirebaseUtils {
             if (email == null && userInfo.getEmail() != null) {
                 email = userInfo.getEmail();
             }
-
         }
+
+        // Tag
+        Map<String, Boolean> tags = new HashMap<>();
+        tags.put(DatabaseConstants.TAG_OTHERS, true);
+        tags.put(DatabaseConstants.TAG_ANDROID, false);
+        tags.put(DatabaseConstants.TAG_IOS, false);
+        tags.put(DatabaseConstants.TAG_RUBY, false);
+        tags.put(DatabaseConstants.TAG_PYTHON, false);
+
         return new UserModel(
                 getCurrentUserId(),
                 null,
@@ -66,28 +105,42 @@ public class FirebaseUtils {
                 null,
                 email,
                 name,
-                String.valueOf(picture),
+                picture,
                 0,
-                false, null, null);
+                false,
+                tags,
+                null);
     }
 
-    // get Current userRef
+    /**
+     * get Current userRef
+     *
+     * @return DatabaseReference
+     */
     public static DatabaseReference getCurrentUserRef() {
         String uid = getCurrentUserId();
         if (uid != null) {
-            return getBaseRef().child(DatabaseConstants.RUBIT_USERS).child(getCurrentUserId());
+            return getRubitUser().child(uid);
         }
         return null;
     }
 
-    //get reference for user table
+    /**
+     * get reference for user table
+     *
+     * @return DatabaseReference
+     */
     public static DatabaseReference getRubitUser() {
         return getBaseRef().child(DatabaseConstants.RUBIT_USERS);
     }
 
-    //get reference for request table
-    public static DatabaseReference getRequest() {
-        return getBaseRef().child(DatabaseConstants.REQUEST);
+    /**
+     * get reference for request table
+     *
+     * @return DatabaseReference
+     */
+    public static DatabaseReference getRequests() {
+        return getBaseRef().child(DatabaseConstants.REQUESTS);
     }
 }
 

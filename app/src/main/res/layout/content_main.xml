@@ -6,14 +6,14 @@
   -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:context=".portfolio.PortfolioActivity"
-            tools:showIn="@layout/activity_portfolio">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".portfolio.PortfolioActivity"
+    tools:showIn="@layout/activity_portfolio">
 
     <RelativeLayout
         android:id="@+id/rvRoot"
@@ -34,13 +34,13 @@
                 android:layout_height="70dp"
                 android:contentDescription="@string/image_content_description"
                 android:padding="@dimen/activity_horizontal_padding"
-                android:src="@drawable/image_placeholder"/>
+                android:src="@drawable/image_placeholder" />
 
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:background="#50000000"/>
+                android:background="#50000000" />
 
             <TextView
                 android:id="@+id/txtUserName"
@@ -52,7 +52,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/text_size_big"
                 android:textStyle="bold"
-                tools:text="Lo Nguyen"/>
+                tools:text="Lo Nguyen" />
 
             <TextView
                 android:id="@+id/txtJobTitle"
@@ -63,7 +63,7 @@
                 android:layout_toRightOf="@id/imgProfilePicture"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/text_size_small"
-                tools:text="Photographer"/>
+                tools:text="Photographer" />
         </RelativeLayout>
 
         <!--Info Quote About the user-->
@@ -85,7 +85,7 @@
                 android:paddingStart="@dimen/activity_horizontal_padding"
                 android:text="@string/text_about"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_normal"/>
+                android:textSize="@dimen/text_size_normal" />
 
             <View
                 android:id="@+id/separateLine0"
@@ -95,7 +95,7 @@
                 android:paddingEnd="@dimen/activity_horizontal_padding"
                 android:paddingLeft="@dimen/activity_horizontal_padding"
                 android:paddingRight="@dimen/activity_horizontal_padding"
-                android:paddingStart="@dimen/activity_horizontal_padding"/>
+                android:paddingStart="@dimen/activity_horizontal_padding" />
 
             <TextView
                 android:id="@+id/txtQuote"
@@ -105,7 +105,7 @@
                 android:maxLines="1"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/text_size_normal"
-                tools:text="I don't trust words. I trust pictures."/>
+                tools:text="I don't trust words. I trust pictures." />
         </LinearLayout>
 
         <RelativeLayout
@@ -126,9 +126,9 @@
                     android:id="@+id/txtBadgeTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Badges"
+                    android:text="@string/text_badges"
                     android:textStyle="bold"
-                    tools:text="Badges"/>
+                    tools:text="Badges" />
 
                 <LinearLayout
                     android:id="@+id/badgesTop"
@@ -148,7 +148,7 @@
                         android:background="@drawable/ic_polygon"
                         android:gravity="center"
                         android:text="4.8"
-                        android:textColor="@color/colorWhite"/>
+                        android:textColor="@color/colorWhite" />
 
                     <TextView
                         android:id="@+id/doneTextView"
@@ -159,7 +159,7 @@
                         android:background="@drawable/ic_hexagon"
                         android:gravity="center"
                         android:text="23"
-                        android:textColor="@color/colorWhite"/>
+                        android:textColor="@color/colorWhite" />
 
                     <TextView
                         android:id="@+id/verifyTextView"
@@ -167,7 +167,7 @@
                         android:layout_height="40dp"
                         android:layout_margin="10dp"
                         android:layout_weight="2"
-                        android:background="@drawable/rounded_shape"/>
+                        android:background="@drawable/rounded_shape" />
 
                     <TextView
                         android:id="@+id/onTimeTextView"
@@ -175,15 +175,15 @@
                         android:layout_height="40dp"
                         android:layout_margin="10dp"
                         android:layout_weight="2"
-                        android:background="@drawable/rounded_shape"/>
+                        android:background="@drawable/rounded_shape" />
 
                     <TextView
-                        android:id="@+id/coderSchooletextView"
+                        android:id="@+id/coderSchoolTextView"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_margin="10dp"
                         android:layout_weight="2"
-                        android:background="@drawable/rounded_shape"/>
+                        android:background="@drawable/rounded_shape" />
                 </LinearLayout>
 
 
@@ -205,7 +205,7 @@
                         android:layout_weight="2"
                         android:gravity="center"
                         android:text="15"
-                        android:textSize="8sp"/>
+                        android:textSize="@dimen/small_text" />
 
                     <TextView
                         android:id="@+id/doneTextViewBottom"
@@ -215,8 +215,8 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight="2"
                         android:gravity="center"
-                        android:text="DONE"
-                        android:textSize="8sp"/>
+                        android:text="@string/text_done"
+                        android:textSize="@dimen/small_text" />
 
                     <TextView
                         android:id="@+id/verifyTextViewBottom"
@@ -226,8 +226,8 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight="2"
                         android:gravity="center"
-                        android:text="VERIFIED"
-                        android:textSize="8sp"/>
+                        android:text="@string/text_verified"
+                        android:textSize="@dimen/small_text" />
 
                     <TextView
                         android:id="@+id/onTimeTextViewBottom"
@@ -237,8 +237,8 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight="2"
                         android:gravity="center"
-                        android:text="On-time"
-                        android:textSize="8sp"/>
+                        android:text="@string/text_on_time"
+                        android:textSize="@dimen/small_text" />
 
                     <TextView
                         android:id="@+id/coderSchooletextViewBotttom"
@@ -250,8 +250,8 @@
                         android:ellipsize="end"
                         android:gravity="center"
                         android:maxLines="1"
-                        android:text="CoderSchool"
-                        android:textSize="8sp"/>
+                        android:text="@string/text_coderschool"
+                        android:textSize="@dimen/small_text" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -266,7 +266,7 @@
                 android:layout_marginLeft="75dp"
                 android:layout_marginRight="75dp"
                 android:layout_marginTop="10dp"
-                android:background="@android:color/black"/>
+                android:background="@android:color/black" />
 
             <!--overView About user-->
             <RelativeLayout
@@ -279,9 +279,10 @@
                     android:id="@+id/imgEditTitle"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_toEndOf="@+id/txtOverviewTitle"
                     android:layout_toRightOf="@+id/txtOverviewTitle"
                     android:contentDescription="@string/image_content_description"
-                    android:src="@drawable/fab_button"/>
+                    android:src="@drawable/fab_button" />
 
                 <TextView
                     android:id="@+id/txtOverviewTitle"
@@ -290,9 +291,9 @@
                     android:layout_alignBottom="@id/imgEditTitle"
                     android:layout_alignTop="@id/imgEditTitle"
                     android:gravity="center"
-                    android:text="Overview"
+                    android:text="@string/text_overview"
                     android:textStyle="bold"
-                    tools:text="Overview"/>
+                    tools:text="Overview" />
 
 
                 <TextView
@@ -302,8 +303,8 @@
                     android:layout_below="@id/txtOverviewTitle"
                     android:gravity="center"
                     android:lineSpacingExtra="5sp"
-                    android:text="I love Photography. I love traveling. For me, taking great pictures from different countries is what I call Living"
-                    tools:text="I love Photography. I love traveling. For me, taking great pictures from different countries is what I call Living"/>
+                    android:text="@string/text_overview_fake"
+                    tools:text="I love Photography. I love traveling. For me, taking great pictures from different countries is what I call Living" />
             </RelativeLayout>
 
             <!--horizontal line below overView-->
@@ -316,7 +317,7 @@
                 android:layout_marginLeft="75dp"
                 android:layout_marginRight="75dp"
                 android:layout_marginTop="10dp"
-                android:background="@android:color/black"/>
+                android:background="@android:color/black" />
 
             <!--Tags lists-->
             <RelativeLayout
@@ -329,9 +330,10 @@
                     android:id="@+id/imgEditTags"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_toEndOf="@+id/txtTags"
                     android:layout_toRightOf="@+id/txtTags"
                     android:contentDescription="@string/image_content_description"
-                    android:src="@drawable/fab_button"/>
+                    android:src="@drawable/fab_button" />
 
                 <TextView
                     android:id="@+id/txtTags"
@@ -340,9 +342,9 @@
                     android:layout_alignBottom="@id/imgEditTags"
                     android:layout_alignTop="@id/imgEditTags"
                     android:gravity="center"
-                    android:text="Tags"
+                    android:text="@string/text_tags"
                     android:textStyle="bold"
-                    tools:text="Tags"/>
+                    tools:text="Tags" />
 
                 <com.coderschool.android2.rubit.utils.FlowLayout
                     android:id="@+id/fl_content"
@@ -351,7 +353,7 @@
                     android:layout_below="@id/imgEditTags"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:padding="5dp"/>
+                    android:padding="5dp" />
 
 
             </RelativeLayout>
@@ -366,7 +368,7 @@
                 android:layout_marginLeft="75dp"
                 android:layout_marginRight="75dp"
                 android:layout_marginTop="10dp"
-                android:background="@android:color/black"/>
+                android:background="@android:color/black" />
 
             <!--review for the user-->
             <RelativeLayout
@@ -380,9 +382,10 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_toEndOf="@+id/txtReviewCount"
                     android:layout_toRightOf="@+id/txtReviewCount"
                     android:contentDescription="@string/image_content_description"
-                    android:src="@drawable/fab_button"/>
+                    android:src="@drawable/fab_button" />
 
                 <TextView
                     android:id="@+id/txtReviewTitle"
@@ -391,9 +394,9 @@
                     android:layout_alignBottom="@id/imgReview"
                     android:layout_alignTop="@id/imgReview"
                     android:gravity="center"
-                    android:text="Reviews"
+                    android:text="@string/text_reviews"
                     android:textStyle="bold"
-                    tools:text="Reviews"/>
+                    tools:text="Reviews" />
 
                 <TextView
                     android:id="@+id/txtReviewCount"
@@ -401,18 +404,19 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/imgReview"
                     android:layout_alignTop="@id/imgReview"
+                    android:layout_toEndOf="@id/txtReviewTitle"
                     android:layout_toRightOf="@id/txtReviewTitle"
                     android:gravity="center"
-                    android:text="(12)"
+                    android:text="@string/text_fake_count"
                     android:textStyle="bold"
-                    tools:text="(12)"/>
+                    tools:text="(12)" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvReview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtReviewTitle"
-                    tools:layout="@layout/item_single_review"/>
+                    tools:layout="@layout/item_single_review" />
             </RelativeLayout>
 
             <!--horizontal line below review-->
@@ -425,7 +429,7 @@
                 android:layout_marginLeft="75dp"
                 android:layout_marginRight="75dp"
                 android:layout_marginTop="10dp"
-                android:background="@android:color/black"/>
+                android:background="@android:color/black" />
         </RelativeLayout>
 
 
@@ -440,9 +444,10 @@
                 android:id="@+id/imgEditImage"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_toEndOf="@+id/txtImagesCount"
                 android:layout_toRightOf="@+id/txtImagesCount"
                 android:contentDescription="@string/image_content_description"
-                android:src="@drawable/fab_button"/>
+                android:src="@drawable/fab_button" />
 
             <TextView
                 android:id="@+id/txtImage"
@@ -451,10 +456,11 @@
                 android:layout_alignBottom="@id/imgEditImage"
                 android:layout_alignTop="@id/imgEditImage"
                 android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:gravity="center"
-                android:text="Images"
+                android:text="@string/text_images"
                 android:textStyle="bold"
-                tools:text="Images"/>
+                tools:text="Images" />
 
             <TextView
                 android:id="@+id/txtImagesCount"
@@ -462,17 +468,18 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/imgEditImage"
                 android:layout_alignTop="@id/imgEditImage"
+                android:layout_toEndOf="@id/txtImage"
                 android:layout_toRightOf="@id/txtImage"
                 android:gravity="center"
-                android:text="(12)"
+                android:text="@string/text_fake_count"
                 android:textStyle="bold"
-                tools:text="(12)"/>
+                tools:text="(12)" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvPortfolios"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/imgEditImage"/>
+                android:layout_below="@id/imgEditImage" />
         </RelativeLayout>
 
     </RelativeLayout>

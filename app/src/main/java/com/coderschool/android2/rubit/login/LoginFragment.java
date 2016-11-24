@@ -35,10 +35,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
@@ -56,8 +53,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class LoginFragment extends Fragment
         implements ConnectionDialogListener, LoginContact.View, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+
     public static final String TAG = LoginFragment.class.getSimpleName();
     private static final int RC_SIGN_IN = 9001;
+
     @BindView(R.id.sign_in_button)
     AppCompatImageView mSignInButton;
     @BindView(R.id.emailIv)
@@ -73,11 +72,18 @@ public class LoginFragment extends Fragment
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mFirebaseAuth;
 
-
+    /**
+     * Constructor
+     */
     public LoginFragment() {
 
     }
 
+    /**
+     * newInstance
+     *
+     * @return LoginFragment
+     */
     public static LoginFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -99,8 +105,6 @@ public class LoginFragment extends Fragment
         mGoogleApiClient = GoogleApiClientUtils.authGoogleApiClient(getActivity(), getActivity(), this, googleSignInOptions);
         //Initialise FirebaseAuth
         mFirebaseAuth = FirebaseUtils.getFirebaseNewInstance();
-
-
     }
 
     @Nullable
@@ -151,33 +155,39 @@ public class LoginFragment extends Fragment
         }
     }
 
+    /**
+     * firebase Auth With Google
+     *
+     * @param account GoogleSignInAccount
+     */
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mFirebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        ProgressDialogHelper.dismiss();
-                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, String.format("signInWithCredential:%s", task.getException()));
-                            Toast.makeText(getActivity(), "Authentication Failed", Toast.LENGTH_LONG).show();
-                        } else {
-                            createUserIfNotExists();
-                        }
+                .addOnCompleteListener(getActivity(), task -> {
+                    ProgressDialogHelper.dismiss();
+
+                    Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
+                    // If sign in fails, display a message to the user. If sign in succeeds
+                    // the auth state listener will be notified and logic to handle the
+                    // signed in user can be handled in the listener.
+                    if (!task.isSuccessful()) {
+                        Log.w(TAG, String.format("signInWithCredential:%s", task.getException()));
+                        Toast.makeText(getActivity(), "Authentication Failed", Toast.LENGTH_LONG).show();
+                    } else {
+                        createUserIfNotExists();
                     }
                 });
     }
 
+    /**
+     * create User If Not Exists
+     */
     private void createUserIfNotExists() {
         if (null != FirebaseUtils.getCurrentUserRef()) {
-            final DatabaseReference rubitUser = FirebaseUtils.getRubitUser();
             final String currentUserId = FirebaseUtils.getCurrentUserId();
             if (currentUserId != null) {
+                final DatabaseReference rubitUser = FirebaseUtils.getRubitUser();
                 rubitUser.child(currentUserId)
                         .addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -185,7 +195,6 @@ public class LoginFragment extends Fragment
                                 if (!dataSnapshot.exists()) {
                                     UserModel user = FirebaseUtils.getUserDetails();
                                     rubitUser.child(currentUserId).setValue(user);
-                                    //Toast.makeText(getActivity(), "Login Success", Toast.LENGTH_LONG).show(); //Exception
                                 }
                             }
 
@@ -194,6 +203,8 @@ public class LoginFragment extends Fragment
                                 System.out.println("failed to create new User in rubit_users: " + databaseError.getCode());
                             }
                         });
+
+                Toast.makeText(getActivity(), "Login Success, Welcome " + FirebaseUtils.getCurrentUserName() + "!", Toast.LENGTH_LONG).show();
                 startMainActivity();
             }
         }
@@ -215,6 +226,9 @@ public class LoginFragment extends Fragment
 //        new Handler().postDelayed(this::runnableAction, IntentConstants.SPLASH_TIME_OUT);
 //    }
 
+    /**
+     * startMainActivity
+     */
     private void startMainActivity() {
         Intent intent = new Intent(getActivity(), FaceActivity.class);
         startActivity(intent);
@@ -240,12 +254,12 @@ public class LoginFragment extends Fragment
             case R.id.sign_in_button:
                 signIn();
                 break;
-            default:
-                return;
-
         }
     }
 
+    /**
+     * sign In
+     */
     private void signIn() {
         if (ConnectionUtils.verifyConnectionDialogForFragment(getActivity(), this, getActivity().getSupportFragmentManager())) {
             new ProgressDialogHelper(getActivity());

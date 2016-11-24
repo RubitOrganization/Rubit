@@ -41,7 +41,7 @@ public class MessageModel implements Parcelable {
         this.messageText = messageText;
     }
 
-    protected MessageModel(android.os.Parcel in) {
+    private MessageModel(android.os.Parcel in) {
         uid = in.readString();
         requestId = in.readString();
         messageId = in.readString();

@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
+ */
+
 package com.coderschool.android2.rubit.models;
 
 import android.os.Parcel;
@@ -6,24 +13,7 @@ import android.os.Parcelable;
 /**
  * Created by vinay on 20/11/16.
  */
-
 public class ReviewCommentsModel implements Parcelable {
-    private String reviewerAvatar;
-    private String reviewerName;
-    private float ratingCount;
-    private String headingRequestName;
-    private String commentText;
-    private String imageUrl;
-
-    public ReviewCommentsModel(Parcel in) {
-        reviewerAvatar = in.readString();
-        reviewerName = in.readString();
-        ratingCount = in.readFloat();
-        headingRequestName = in.readString();
-        commentText = in.readString();
-        imageUrl = in.readString();
-    }
-
     public static final Creator<ReviewCommentsModel> CREATOR = new Creator<ReviewCommentsModel>() {
         @Override
         public ReviewCommentsModel createFromParcel(Parcel in) {
@@ -35,6 +25,21 @@ public class ReviewCommentsModel implements Parcelable {
             return new ReviewCommentsModel[size];
         }
     };
+    private String reviewerAvatar;
+    private String reviewerName;
+    private float ratingCount;
+    private String headingRequestName;
+    private String commentText;
+    private String imageUrl;
+
+    private ReviewCommentsModel(Parcel in) {
+        reviewerAvatar = in.readString();
+        reviewerName = in.readString();
+        ratingCount = in.readFloat();
+        headingRequestName = in.readString();
+        commentText = in.readString();
+        imageUrl = in.readString();
+    }
 
     public ReviewCommentsModel(String reviewerAvatar, String reviewerName, float ratingBarCount, String headingText, String commentText, String imageUrl) {
         this.reviewerAvatar = reviewerAvatar;

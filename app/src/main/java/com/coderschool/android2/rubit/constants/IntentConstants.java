@@ -45,6 +45,11 @@ public class IntentConstants {
     public final static String QUEST = "QUEST";
 
     /**
+     * USER
+     */
+    public final static String USER = "USER";
+
+    /**
      * USER_ID
      */
     public final static String USER_ID = "USER_ID";
