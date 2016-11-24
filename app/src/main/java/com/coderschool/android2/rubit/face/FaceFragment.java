@@ -17,6 +17,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -158,7 +159,8 @@ public class FaceFragment extends Fragment
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 mRequestModel = dataSnapshot.getValue(RequestModel.class);
                                 mRequestModel.setSubject(String.valueOf(snapshot.child(DatabaseConstants.SUBJECT).getValue()));
-                                mFirebaseDatabase.getReference(DatabaseConstants.RUBIT_USERS)
+                                // mFirebaseDatabase.getReference(DatabaseConstants.RUBIT_USERS)
+                                FirebaseUtils.getRubitUser()
                                         .child(String.valueOf(snapshot.child(DatabaseConstants.UID).getValue()))
                                         .addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
@@ -191,8 +193,7 @@ public class FaceFragment extends Fragment
      */
     private void verifyDoesUserExists() {
         if (FirebaseUtils.getCurrentUserRef() == null) {
-            startActivity(new Intent(getActivity(), LoginActivity.class));
-            getActivity().finish();
+            moveBackToLoginActivity();
         }
     }
 
@@ -219,14 +220,19 @@ public class FaceFragment extends Fragment
             case R.id.signout:
                 // we need to make name, photourl and email to null on logout
                 mFirebaseAuth.signOut();
+                //TODO  here we need to make mFirebase = null --> on logout click event
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient);
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                moveBackToLoginActivity();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void moveBackToLoginActivity() {
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     @Override
@@ -372,7 +378,12 @@ public class FaceFragment extends Fragment
 
     @Override
     public void edtQuestBarOnKeyListener() {
-        edtQuestBar.setOnKeyListener((view, i, keyEvent) -> false);
+        edtQuestBar.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                return false;
+            }
+        });
     }
 
     @Override
