@@ -75,12 +75,12 @@ public class PortfolioActivity extends AppCompatActivity
     TextView txtJobTitle;
 
     /* QUOTE */
-    @BindView(R.id.separateLine0)
-    View separateLine0;
+//    @BindView(R.id.separateLine0)
+//    View separateLine0;
     @BindView(R.id.rlQuote)
     LinearLayout rlQuote;
     @BindView(R.id.txtAbout)
-    TextView txtAbout;
+    RelativeLayout txtAbout;
     @BindView(R.id.txtQuote)
     TextView txtQuote;
 

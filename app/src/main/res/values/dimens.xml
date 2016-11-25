@@ -33,10 +33,18 @@
     <!--login screen end-->
     <!--<dimen name="headerbar_elevation">4dp</dimen>-->
 
+    <!--portfolio screen dimens-->
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="fab_margin_subtitle">100dp</dimen>
     <dimen name="fab_margin_cancel">230dp</dimen>
     <dimen name="fab_margin_pin">160dp</dimen>
     <dimen name="fab_margin_chat">70dp</dimen>
     <dimen name="small_text">8sp</dimen>
+    <dimen name="portfolio_margin_main_left_right">16dp</dimen>
+    <dimen name="margin_top_portfolio">10dp</dimen>
+    <dimen name="margin_bottom_portfolio">5dp</dimen>
+    <dimen name="badge_margin">5dp</dimen>
+    <dimen name="portfolio_heading_right_margin">5dp</dimen>
+    <dimen name="portfolio_content_text_overview_margin">5dp</dimen>
+    <dimen name="edit_btn_width_height">30dp</dimen>
 </resources>
