@@ -65,4 +65,9 @@ public class IntentConstants {
     public static final String IS_SKIP = "is_skip";
 
     public static final String LIST_OF_CHOSEN_TAGS = "list_of_chosen_tags";
+
+    /**
+     * UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE
+     */
+    public final static int UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE = 2000;
 }

@@ -7,8 +7,10 @@
 
 package com.coderschool.android2.rubit.models;
 
+import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,9 +19,38 @@ import java.util.Map;
  * @author TienVNguyen
  */
 public class RequestModel implements Parcelable {
+
+    private String uid;
+    private String requestId;
+    private String subject;
+    private boolean isConnected;
+    private boolean isCompleted;
+    private Map<String, Boolean> tags;
+    private String detailEdtFirstQstTxt;
+    private String detailEdtSecondQstTxt;
+    private String detailEdtThirdQsttxt;
+    private List<String> detailImageQst;
+
+
+    public RequestModel() {
+    }
+
+
+    protected RequestModel(Parcel in) {
+        uid = in.readString();
+        requestId = in.readString();
+        subject = in.readString();
+        isConnected = in.readByte() != 0;
+        isCompleted = in.readByte() != 0;
+        detailEdtFirstQstTxt = in.readString();
+        detailEdtSecondQstTxt = in.readString();
+        detailEdtThirdQsttxt = in.readString();
+        detailImageQst = in.createStringArrayList();
+    }
+
     public static final Creator<RequestModel> CREATOR = new Creator<RequestModel>() {
         @Override
-        public RequestModel createFromParcel(android.os.Parcel in) {
+        public RequestModel createFromParcel(Parcel in) {
             return new RequestModel(in);
         }
 
@@ -28,32 +59,6 @@ public class RequestModel implements Parcelable {
             return new RequestModel[size];
         }
     };
-    private String uid;
-    private String requestId;
-    private String subject;
-    private boolean isConnected;
-    private boolean isCompleted;
-    private Map<String, Boolean> tags;
-
-    public RequestModel() {
-    }
-
-    public RequestModel(String uid, String requestId, String subject, boolean isConnected, boolean isCompleted, Map<String, Boolean> tags) {
-        this.uid = uid;
-        this.requestId = requestId;
-        this.subject = subject;
-        this.isConnected = isConnected;
-        this.isCompleted = isCompleted;
-        this.tags = tags;
-    }
-
-    private RequestModel(android.os.Parcel in) {
-        uid = in.readString();
-        requestId = in.readString();
-        subject = in.readString();
-        isConnected = in.readByte() != 0;
-        isCompleted = in.readByte() != 0;
-    }
 
     public String getUid() {
         return uid;
@@ -103,17 +108,53 @@ public class RequestModel implements Parcelable {
         this.tags = tags;
     }
 
+    public String getDetailEdtFirstQstTxt() {
+        return detailEdtFirstQstTxt;
+    }
+
+    public void setDetailEdtFirstQstTxt(String detailEdtFirstQstTxt) {
+        this.detailEdtFirstQstTxt = detailEdtFirstQstTxt;
+    }
+
+    public String getDetailEdtSecondQstTxt() {
+        return detailEdtSecondQstTxt;
+    }
+
+    public void setDetailEdtSecondQstTxt(String detailEdtSecondQstTxt) {
+        this.detailEdtSecondQstTxt = detailEdtSecondQstTxt;
+    }
+
+    public String getDetailEdtThirdQsttxt() {
+        return detailEdtThirdQsttxt;
+    }
+
+    public void setDetailEdtThirdQsttxt(String detailEdtThirdQsttxt) {
+        this.detailEdtThirdQsttxt = detailEdtThirdQsttxt;
+    }
+
+    public List<String> getDetailImageQst() {
+        return detailImageQst;
+    }
+
+    public void setDetailImageQst(List<String> detailImageQst) {
+        this.detailImageQst = detailImageQst;
+    }
+
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(android.os.Parcel parcel, int i) {
-        parcel.writeString(uid);
-        parcel.writeString(requestId);
-        parcel.writeString(subject);
-        parcel.writeByte((byte) (isConnected ? 1 : 0));
-        parcel.writeByte((byte) (isCompleted ? 1 : 0));
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(uid);
+        dest.writeString(requestId);
+        dest.writeString(subject);
+        dest.writeByte((byte) (isConnected ? 1 : 0));
+        dest.writeByte((byte) (isCompleted ? 1 : 0));
+        dest.writeString(detailEdtFirstQstTxt);
+        dest.writeString(detailEdtSecondQstTxt);
+        dest.writeString(detailEdtThirdQsttxt);
+        dest.writeStringList(detailImageQst);
     }
 }

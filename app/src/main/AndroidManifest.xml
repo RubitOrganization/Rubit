@@ -81,6 +81,9 @@
             android:name=".tag.ChooseTagActivity"
             android:theme="@style/AppTheme"/>
 
+        <activity
+            android:name=".detailsTask.CameraActivity"/>
+
     </application>
 
 </manifest>

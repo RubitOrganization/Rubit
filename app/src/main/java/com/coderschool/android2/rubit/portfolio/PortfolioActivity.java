@@ -436,4 +436,12 @@ public class PortfolioActivity extends AppCompatActivity
     private void setUpFirebase() {
         mFirebaseAuth = FirebaseUtils.getFirebaseNewInstance();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, FaceActivity.class);
+        startActivity(intent);
+
+    }
 }

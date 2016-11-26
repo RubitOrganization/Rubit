@@ -48,6 +48,8 @@ import com.coderschool.android2.rubit.utils.ImageUtils;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -381,21 +383,24 @@ public class FaceFragment extends Fragment
             mFirebaseDatabase.getReference()
                     .child(DatabaseConstants.REQUESTS)
                     .child(newRequest.getRequestId())
-                    .setValue(newRequest).addOnCompleteListener(task -> {
+                    .setValue(newRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
 
-                Map<String, Object> requests = new HashMap<>();
-                requests.put(newRequest.getRequestId(), true);
+                    Map<String, Object> requests = new HashMap<>();
+                    requests.put(newRequest.getRequestId(), true);
 
-                mFirebaseDatabase.getReference()
-                        .child(DatabaseConstants.RUBIT_USERS)
-                        .child(currentUserId).child(DatabaseConstants.REQUESTS)
-                        .updateChildren(requests, (databaseError, databaseReference) -> {
+                    mFirebaseDatabase.getReference()
+                            .child(DatabaseConstants.RUBIT_USERS)
+                            .child(currentUserId).child(DatabaseConstants.REQUESTS)
+                            .updateChildren(requests, (databaseError, databaseReference) -> {
 
-                            final Intent intent = new Intent(FaceFragment.this.getContext(), PortfolioActivity.class);
-                            intent.putExtra(IntentConstants.QUEST, edtQuestBar.getText().toString());
-                            intent.putExtra(IntentConstants.USER_ID, currentUserId);
-                            FaceFragment.this.startActivity(intent);
-                        });
+                                final Intent intent = new Intent(FaceFragment.this.getContext(), PortfolioActivity.class);
+                                intent.putExtra(IntentConstants.QUEST, edtQuestBar.getText().toString());
+                                intent.putExtra(IntentConstants.USER_ID, currentUserId);
+                                FaceFragment.this.startActivity(intent);
+                            });
+                }
             });
         });
     }

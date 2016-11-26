@@ -107,4 +107,8 @@ public class DatabaseConstants {
      * TAG_PYTHON
      */
     public final static String TAG_NODEJS = "Node JS";
+    /**
+     * Imgur url -- base url to upload Images
+     */
+    public static final String IMGUR_BASE_URL = "https://api.imgur.com/3/";
 }

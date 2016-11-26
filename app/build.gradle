@@ -145,6 +145,13 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-database:0.4.0'
     // Firebase Client
     compile 'com.firebase:firebase-client-android:2.5.2'
+
+    /*loggin interceptor*/
+    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+    /*retrofit okhttp*/
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    /*for converting json to json object*/
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
 }
 
 //apply Google Services Gradle Plugin

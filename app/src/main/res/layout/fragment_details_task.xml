@@ -17,10 +17,8 @@
         android:id="@+id/map"
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="120dp"
         map:cameraBearing="112.5"
-        map:cameraTargetLat="-33.796923"
-        map:cameraTargetLng="150.922433"
         map:cameraTilt="30"
         map:cameraZoom="13"
         map:mapType="normal"
@@ -96,9 +94,9 @@
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/firstItemIv"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginRight="8dp"
             map:srcCompat="@drawable/ic_clipboard"/>
 
@@ -109,7 +107,7 @@
             android:layout_alignBottom="@id/firstItemIv"
             android:layout_alignTop="@id/firstItemIv"
             android:layout_centerVertical="true"
-            android:layout_margin="5dp"
+            android:layout_margin="2dp"
             android:layout_toRightOf="@+id/firstItemIv"
             android:background="@drawable/rounded_shape"
             android:gravity="center"
@@ -118,10 +116,10 @@
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/secondItemIv"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_below="@id/firstItemIv"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginRight="8dp"
             map:srcCompat="@drawable/ic_exclamation_mark"/>
 
@@ -133,7 +131,7 @@
             android:layout_alignTop="@id/secondItemIv"
             android:layout_below="@id/firstItemIv"
             android:layout_centerVertical="true"
-            android:layout_margin="5dp"
+            android:layout_margin="2dp"
             android:layout_toRightOf="@+id/secondItemIv"
             android:background="@drawable/rounded_shape"
             android:gravity="center"
@@ -141,20 +139,20 @@
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/thirdItemIv"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_below="@id/secondItemIv"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginRight="8dp"
             map:srcCompat="@drawable/ic_pencil"/>
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/thirdEdtTxtView"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="100dp"
             android:layout_below="@id/secondItemIv"
             android:layout_centerVertical="true"
-            android:layout_margin="5dp"
+            android:layout_margin="2dp"
             android:layout_toRightOf="@+id/thirdItemIv"
             android:background="@drawable/rounded_shape"
             android:gravity="center"
@@ -171,23 +169,31 @@
             android:layout_marginRight="8dp"
             map:srcCompat="@drawable/ic_landscape"/>
 
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/goButtonDetailScreen"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/thirdEdtTxtView"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            map:srcCompat="@drawable/go_button_black_bg"/>
+
     </RelativeLayout>
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/detailedImageView"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/detailedImageRv"
         android:layout_width="200dp"
         android:layout_height="150dp"
-        android:layout_below="@id/detailsRl"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        tools:src="@drawable/image_placeholder"/>
+        android:layout_below="@id/detailsRl"/>
+
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/addImages"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/detailsRl"
-        android:layout_toRightOf="@id/detailedImageView"
+        android:layout_toRightOf="@id/detailedImageRv"
         android:src="@android:drawable/ic_input_add"/>
 
 

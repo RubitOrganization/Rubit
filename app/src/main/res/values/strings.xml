@@ -39,4 +39,6 @@
     <string name="choose_tag_message_top">Please choose what you are interested in !</string>
     <string name="skip">Skip</string>
     <string name="finish">Finish</string>
+    <!--IMGUR_CLIENT_ID-->
+    <string name="IMGUR_CLIENT_ID">513b74b2690c49d</string>
 </resources>
