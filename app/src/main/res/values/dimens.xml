@@ -31,6 +31,8 @@
     <dimen name="no_account_marginLeft">30dp</dimen>
     <dimen name="no_account_marginRight">10dp</dimen>
     <!--login screen end-->
+    <dimen name="spacing">10px</dimen>
+    <dimen name="tag_screen_bottom_buttons_padding">8dp</dimen>
     <!--<dimen name="headerbar_elevation">4dp</dimen>-->
 
     <!--portfolio screen dimens-->

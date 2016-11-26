@@ -36,4 +36,7 @@
     <string name="text_fake_count">(12)</string>
     <!--google map api key-->
     <string name="GOOGLE_MAP_API_KEY">AIzaSyDtatUvIayZ6gq9iCTbSiTapYiDvAoJbbU</string>
+    <string name="choose_tag_message_top">Please choose what you are interested in !</string>
+    <string name="skip">Skip</string>
+    <string name="finish">Finish</string>
 </resources>

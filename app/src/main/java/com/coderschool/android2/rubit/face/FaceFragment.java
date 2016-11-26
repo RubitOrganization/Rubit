@@ -7,6 +7,7 @@
 
 package com.coderschool.android2.rubit.face;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,6 +37,7 @@ import com.coderschool.android2.rubit.constants.IntentConstants;
 import com.coderschool.android2.rubit.detailsTask.DetailsTaskActivity;
 import com.coderschool.android2.rubit.login.LoginActivity;
 import com.coderschool.android2.rubit.models.RequestModel;
+import com.coderschool.android2.rubit.models.TagItems;
 import com.coderschool.android2.rubit.models.UserModel;
 import com.coderschool.android2.rubit.portfolio.PortfolioActivity;
 import com.coderschool.android2.rubit.requestList.RequestListActivity;
@@ -53,7 +55,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -112,6 +118,24 @@ public class FaceFragment extends Fragment
         final FaceFragment fragment = new FaceFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -408,5 +432,13 @@ public class FaceFragment extends Fragment
      */
     private void setUpFirebase() {
         mFirebaseAuth = FirebaseUtils.getFirebaseNewInstance();
+    }
+
+    @Subscribe
+    public void onEvent(FaceActivity.BundleData bundleData) {
+        boolean isSkip = bundleData.isSkip;
+        List<TagItems> tagItemsList = bundleData.tagItemsList;
+        Log.d(TAG, isSkip + "");
+        Log.d(TAG, tagItemsList.size() + "");
     }
 }

@@ -97,6 +97,7 @@ public class FirebaseUtils {
         tags.put(DatabaseConstants.TAG_IOS, false);
         tags.put(DatabaseConstants.TAG_RUBY, false);
         tags.put(DatabaseConstants.TAG_PYTHON, false);
+        tags.put(DatabaseConstants.TAG_NODEJS, false);
 
         return new UserModel(
                 getCurrentUserId(),
@@ -141,6 +142,10 @@ public class FirebaseUtils {
      */
     public static DatabaseReference getRequests() {
         return getBaseRef().child(DatabaseConstants.REQUESTS);
+    }
+
+    public static DatabaseReference getTagRubitUser() {
+        return getBaseRef().child(DatabaseConstants.RUBIT_USERS).child(DatabaseConstants.TAGS);
     }
 }
 

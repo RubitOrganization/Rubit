@@ -92,7 +92,7 @@ public class DatabaseConstants {
     /**
      * TAG_IOS
      */
-    public final static String TAG_IOS = "iOs";
+    public final static String TAG_IOS = "iOS";
 
     /**
      * TAG_RUBY
@@ -103,4 +103,8 @@ public class DatabaseConstants {
      * TAG_PYTHON
      */
     public final static String TAG_PYTHON = "Python";
+    /**
+     * TAG_PYTHON
+     */
+    public final static String TAG_NODEJS = "Node JS";
 }

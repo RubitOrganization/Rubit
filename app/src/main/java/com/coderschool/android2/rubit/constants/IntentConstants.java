@@ -53,4 +53,16 @@ public class IntentConstants {
      * USER_ID
      */
     public final static String USER_ID = "USER_ID";
+
+    /**
+     * to check for Tag Screen - show at first time launch app
+     */
+    public static final String IS_FIRST = "is_first";
+
+    /**
+     * to know does the user tap on slip button  -- we maintain true / false in firebase
+     */
+    public static final String IS_SKIP = "is_skip";
+
+    public static final String LIST_OF_CHOSEN_TAGS = "list_of_chosen_tags";
 }

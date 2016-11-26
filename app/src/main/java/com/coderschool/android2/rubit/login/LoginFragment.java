@@ -25,6 +25,7 @@ import com.coderschool.android2.rubit.R;
 import com.coderschool.android2.rubit.connectionDialog.ConnectionDialogListener;
 import com.coderschool.android2.rubit.face.FaceActivity;
 import com.coderschool.android2.rubit.models.UserModel;
+import com.coderschool.android2.rubit.tag.ChooseTagActivity;
 import com.coderschool.android2.rubit.utils.ConnectionUtils;
 import com.coderschool.android2.rubit.utils.FirebaseUtils;
 import com.coderschool.android2.rubit.utils.GoogleApiClientUtils;
@@ -230,7 +231,7 @@ public class LoginFragment extends Fragment
      * startMainActivity
      */
     private void startMainActivity() {
-        Intent intent = new Intent(getActivity(), FaceActivity.class);
+        Intent intent = new Intent(getActivity(), ChooseTagActivity.class);
         startActivity(intent);
         getActivity().finish();
     }

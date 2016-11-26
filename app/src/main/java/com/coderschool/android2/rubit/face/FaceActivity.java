@@ -10,9 +10,17 @@ package com.coderschool.android2.rubit.face;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.coderschool.android2.rubit.R;
+import com.coderschool.android2.rubit.constants.IntentConstants;
+import com.coderschool.android2.rubit.models.TagItems;
 import com.coderschool.android2.rubit.utils.ActivityUtils;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,17 +36,42 @@ public class FaceActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar_actionbar)
     Toolbar mToolbar;
+    Bundle bundle;
 
     private FaceFragment mFaceFragment;
-    private FacePresenter mMainPresenter;
+    private FacePresenter mFacePresenter;
+    boolean is_skip;
+    List<TagItems> tagItemsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getDataFromTagScreenBundle();
         setUpLayout();
         setUpFragment();
         setUpPresenter();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EventBus.getDefault().post(new BundleData(is_skip, tagItemsList));
+    }
+
+    private void getDataFromTagScreenBundle() {
+        bundle = getIntent().getExtras();
+        if (bundle != null) {
+            is_skip = bundle.getBoolean(IntentConstants.IS_SKIP, false);
+            tagItemsList = bundle.getParcelableArrayList(IntentConstants.LIST_OF_CHOSEN_TAGS);
+            if (tagItemsList != null) {
+                for (TagItems listOfTags : tagItemsList) {
+                    String tagName = listOfTags.getTagName();
+                    Log.d("tagName", tagName + "");
+                }
+            }
+//            Log.d("is_skip", is_skip + "");
+//            Log.d("is_skip", tagItemsList.size() + "");
+        }
     }
 
     /**
@@ -57,7 +90,7 @@ public class FaceActivity extends AppCompatActivity {
      * set up presenter
      */
     private void setUpPresenter() {
-        mMainPresenter = new FacePresenter(mFaceFragment);
+        mFacePresenter = new FacePresenter(mFaceFragment);
     }
 
 
@@ -71,6 +104,17 @@ public class FaceActivity extends AppCompatActivity {
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                     mFaceFragment,
                     R.id.contentFrame);
+        }
+    }
+
+    public class BundleData {
+        public final boolean isSkip;
+        public List<TagItems> tagItemsList = new ArrayList<>();
+
+
+        public BundleData(boolean isSkip, List<TagItems> tagItemsList) {
+            this.isSkip = isSkip;
+            this.tagItemsList = tagItemsList;
         }
     }
 }
