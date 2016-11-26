@@ -32,7 +32,7 @@
         android:layout_below="@id/registerLabelTv"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/avatar_margin"
-        android:src="@drawable/upload_image"
+        android:src="@drawable/upload_image_avatar"
         app:riv_oval="false"
         app:riv_tile_mode="clamp"/>
 
