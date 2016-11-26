@@ -462,30 +462,30 @@ public class DetailsTaskFragment extends Fragment implements DetailsTaskContract
                 Map<String, Boolean> tags = new HashMap<>();
                 tags.put(DatabaseConstants.TAG_OTHERS, true);
 
-                final RequestModel newRequesDetailTaktModel = new RequestModel();
-                newRequesDetailTaktModel.setDetailEdtFirstQstTxt(mFirstEdtTxtView.getText().toString());
-                newRequesDetailTaktModel.setDetailEdtSecondQstTxt(mSecondEdtTxtView.getText().toString());
-                newRequesDetailTaktModel.setDetailEdtThirdQsttxt(mThirdEdtTxtView.getText().toString());
-                newRequesDetailTaktModel.setDetailImageQst(imagesUrls);
-                newRequesDetailTaktModel.setTags(tags);
-                newRequesDetailTaktModel.setUid(currentUserId);
-                newRequesDetailTaktModel.setConnected(false);
-                newRequesDetailTaktModel.setCompleted(false);
+                final RequestModel newRequestDetailTaskModel = new RequestModel();
+                newRequestDetailTaskModel.setDetailEdtFirstQstTxt(mFirstEdtTxtView.getText().toString());
+                newRequestDetailTaskModel.setDetailEdtSecondQstTxt(mSecondEdtTxtView.getText().toString());
+                newRequestDetailTaskModel.setDetailEdtThirdQsttxt(mThirdEdtTxtView.getText().toString());
+                newRequestDetailTaskModel.setDetailImageQst(imagesUrls);
+                newRequestDetailTaskModel.setTags(tags);
+                newRequestDetailTaskModel.setUid(currentUserId);
+                newRequestDetailTaskModel.setConnected(false);
+                newRequestDetailTaskModel.setCompleted(false);
                 // Create new detail record in request table
                 DatabaseReference newDetailRequestReference = FirebaseUtils.getRequests().push();
-                newDetailRequestReference.setValue(newRequesDetailTaktModel);
-                newRequesDetailTaktModel.setRequestId(newDetailRequestReference.getKey());
+                newDetailRequestReference.setValue(newRequestDetailTaskModel);
+                newRequestDetailTaskModel.setRequestId(newDetailRequestReference.getKey());
 
 
                 // Update that record & current user record too
                 FirebaseUtils.getRequests()
-                        .child(newRequesDetailTaktModel.getRequestId())
-                        .setValue(newRequesDetailTaktModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        .child(newRequestDetailTaskModel.getRequestId())
+                        .setValue(newRequestDetailTaskModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
                         Map<String, Object> detailTaskRequests = new HashMap<>();
-                        detailTaskRequests.put(newRequesDetailTaktModel.getRequestId(), true);
+                        detailTaskRequests.put(newRequestDetailTaskModel.getRequestId(), true);
 
                         FirebaseUtils.getRubitUser()
                                 .child(currentUserId).child(DatabaseConstants.REQUESTS)
