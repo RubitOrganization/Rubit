@@ -41,4 +41,6 @@
     <string name="finish">Finish</string>
     <!--IMGUR_CLIENT_ID-->
     <string name="IMGUR_CLIENT_ID">513b74b2690c49d</string>
+    <string name="please_enter_first_name">Please enter first name</string>
+    <string name="please_enter_last_name">Please enter last name</string>
 </resources>

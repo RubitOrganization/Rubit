@@ -23,8 +23,8 @@ import android.widget.Toast;
 
 import com.coderschool.android2.rubit.R;
 import com.coderschool.android2.rubit.connectionDialog.ConnectionDialogListener;
-import com.coderschool.android2.rubit.face.FaceActivity;
 import com.coderschool.android2.rubit.models.UserModel;
+import com.coderschool.android2.rubit.register.RegisterActivity;
 import com.coderschool.android2.rubit.tag.ChooseTagActivity;
 import com.coderschool.android2.rubit.utils.ConnectionUtils;
 import com.coderschool.android2.rubit.utils.FirebaseUtils;
@@ -68,6 +68,8 @@ public class LoginFragment extends Fragment
     AppCompatEditText edtTxtEmail;
     @BindView(R.id.edtTxtPassword)
     AppCompatEditText edtTxtPassword;
+    @BindView(R.id.createAccountTv)
+    RelativeLayout createAccountTv;
 
     private LoginContact.Presenter mPresenter;
     private GoogleApiClient mGoogleApiClient;
@@ -106,6 +108,7 @@ public class LoginFragment extends Fragment
         mGoogleApiClient = GoogleApiClientUtils.authGoogleApiClient(getActivity(), getActivity(), this, googleSignInOptions);
         //Initialise FirebaseAuth
         mFirebaseAuth = FirebaseUtils.getFirebaseNewInstance();
+
     }
 
     @Nullable
@@ -128,6 +131,7 @@ public class LoginFragment extends Fragment
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mSignInButton.setOnClickListener(this);
+        createAccountTv.setOnClickListener(this);
     }
 
     @Override
@@ -255,6 +259,9 @@ public class LoginFragment extends Fragment
             case R.id.sign_in_button:
                 signIn();
                 break;
+            case R.id.createAccountTv:
+                Intent intent = new Intent(getContext(), RegisterActivity.class);
+                getActivity().startActivity(intent);
         }
     }
 

@@ -49,4 +49,7 @@
     <dimen name="portfolio_heading_right_margin">5dp</dimen>
     <dimen name="portfolio_content_text_overview_margin">5dp</dimen>
     <dimen name="edit_btn_width_height">30dp</dimen>
+    <dimen name="register_top_title">32sp</dimen>
+    <dimen name="register_image_avatar_width_height">100dp</dimen>
+    <dimen name="avatar_margin">10dp</dimen>
 </resources>

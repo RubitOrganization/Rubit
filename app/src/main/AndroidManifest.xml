@@ -5,19 +5,18 @@
   ~ Proprietary and confidential
   ~ Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
 -->
-
 <manifest package="com.coderschool.android2.rubit"
           xmlns:android="http://schemas.android.com/apk/res/android">
-    <!--for internet connection-->
+
+    <!-- for internet connection -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <!--for google maps to get location-->
+    <!-- for google maps to get location -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <!--for reading and writing file to system-->
+    <!-- for reading and writing file to system -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
 
     <application
         android:name="android.support.multidex.MultiDexApplication"
@@ -28,7 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--this are use for google maps -->
+        <!-- this are use for google maps -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
@@ -76,14 +75,13 @@
         <activity
             android:name=".portfolio.PortfolioActivity"
             android:theme="@style/AppTheme"/>
-        <!-- ChooseTag Screen-->
+        <!-- ChooseTag Screen -->
         <activity
             android:name=".tag.ChooseTagActivity"
             android:theme="@style/AppTheme"/>
-
-        <activity
-            android:name=".detailsTask.CameraActivity"/>
-
+        <activity android:name=".detailsTask.CameraActivity"/>
+        <activity android:name=".register.RegisterActivity">
+        </activity>
     </application>
 
 </manifest>
