@@ -31,22 +31,14 @@ class FacePresenter implements FaceContact.Presenter {
 
     @Override
     public void start() {
-        selectRequestPopUp();
         selectGo();
         updateEdtQuestBar();
         selectDetails();
 
-        mvView.showRequestPop();
-        mvView.showProfilePicture();
+        mvView.setUpRecyclerView();
         mvView.showImagePositive();
         mvView.showImageNegative();
         mvView.showDetails();
-    }
-
-    @Override
-    public void selectRequestPopUp() {
-        mvView.txtPopOnClick();
-        mvView.imgProfilePictureOnClick();
     }
 
     @Override

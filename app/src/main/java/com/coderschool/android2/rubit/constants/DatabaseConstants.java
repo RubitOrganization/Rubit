@@ -75,6 +75,11 @@ public class DatabaseConstants {
     public final static String SUBJECT = "subject";
 
     /**
+     * CONNECTED
+     */
+    public final static String CONNECTED = "connected";
+
+    /**
      * COMPLETED
      */
     public final static String COMPLETED = "completed";

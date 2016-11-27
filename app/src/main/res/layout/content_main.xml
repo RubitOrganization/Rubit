@@ -34,13 +34,13 @@
                 android:layout_height="70dp"
                 android:contentDescription="@string/image_content_description"
                 android:padding="@dimen/activity_horizontal_padding"
-                android:src="@drawable/image_placeholder"/>
+                android:src="@drawable/image_placeholder" />
 
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:background="#50000000"/>
+                android:background="#50000000" />
 
             <TextView
                 android:id="@+id/txtUserName"
@@ -52,7 +52,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/text_size_big"
                 android:textStyle="bold"
-                tools:text="Lo Nguyen"/>
+                tools:text="Lo Nguyen" />
 
             <TextView
                 android:id="@+id/txtJobTitle"
@@ -63,7 +63,7 @@
                 android:layout_toRightOf="@id/imgProfilePicture"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/text_size_small"
-                tools:text="Photographer"/>
+                tools:text="Photographer" />
         </RelativeLayout>
 
         <!--Info Quote About the user-->
@@ -95,8 +95,7 @@
                     android:paddingLeft="120dp"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp"
-                    tools:text="I don't trust words, I trust pictures"
-                    />
+                    tools:text="I don't trust words, I trust pictures" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -123,7 +122,7 @@
                     android:layout_marginBottom="@dimen/margin_bottom_portfolio"
                     android:text="@string/text_badges"
                     android:textStyle="bold"
-                    tools:text="Badges"/>
+                    tools:text="Badges" />
 
                 <LinearLayout
                     android:id="@+id/badgesTop"
@@ -140,7 +139,7 @@
                         android:layout_margin="@dimen/badge_margin"
                         android:layout_weight="2"
                         android:background="@drawable/score_badge"
-                        android:textColor="@color/colorWhite"/>
+                        android:textColor="@color/colorWhite" />
 
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/doneTextView"
@@ -149,7 +148,7 @@
                         android:layout_margin="@dimen/badge_margin"
                         android:layout_weight="2"
                         android:background="@drawable/done_badge"
-                        android:textColor="@color/colorWhite"/>
+                        android:textColor="@color/colorWhite" />
 
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/verifyTextView"
@@ -157,7 +156,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/badge_margin"
                         android:layout_weight="2"
-                        android:background="@drawable/verified_badge"/>
+                        android:background="@drawable/verified_badge" />
 
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/onTimeTextView"
@@ -165,7 +164,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/badge_margin"
                         android:layout_weight="2"
-                        android:background="@drawable/ontime_badge"/>
+                        android:background="@drawable/ontime_badge" />
 
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/coderSchoolTextView"
@@ -173,7 +172,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/badge_margin"
                         android:layout_weight="2"
-                        android:background="@drawable/coderschool_badge"/>
+                        android:background="@drawable/coderschool_badge" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -186,7 +185,7 @@
                 android:layout_below="@id/rlBadges"
                 android:layout_marginBottom="@dimen/margin_bottom_portfolio"
                 android:layout_marginTop="@dimen/margin_top_portfolio"
-                app:srcCompat="@drawable/seperate_line"/>
+                app:srcCompat="@drawable/seperate_line" />
 
             <!--overView About user-->
             <RelativeLayout
@@ -204,7 +203,7 @@
                     android:layout_toRightOf="@+id/txtOverviewTitle"
                     android:contentDescription="@string/image_content_description"
                     android:src="@drawable/edit_button"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
 
                 <TextView
@@ -213,11 +212,12 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/imgEditTitle"
                     android:layout_alignTop="@id/imgEditTitle"
+                    android:layout_marginEnd="@dimen/portfolio_heading_right_margin"
                     android:layout_marginRight="@dimen/portfolio_heading_right_margin"
                     android:gravity="center"
                     android:text="@string/text_overview"
                     android:textStyle="bold"
-                    tools:text="Overview"/>
+                    tools:text="Overview" />
 
                 <TextView
                     android:id="@+id/txtOverviewText"
@@ -228,7 +228,7 @@
                     android:gravity="center"
                     android:lineSpacingExtra="5sp"
                     android:text="@string/text_overview_fake"
-                    tools:text="@string/text_overview_fake"/>
+                    tools:text="@string/text_overview_fake" />
             </RelativeLayout>
 
             <!--horizontal line below overView-->
@@ -239,7 +239,7 @@
                 android:layout_below="@id/rlOverview"
                 android:layout_marginBottom="@dimen/margin_bottom_portfolio"
                 android:layout_marginTop="@dimen/margin_top_portfolio"
-                app:srcCompat="@drawable/seperate_line"/>
+                app:srcCompat="@drawable/seperate_line" />
 
             <!--Tags lists-->
             <RelativeLayout
@@ -257,7 +257,7 @@
                     android:layout_toRightOf="@+id/txtTags"
                     android:contentDescription="@string/image_content_description"
                     android:src="@drawable/edit_button"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/txtTags"
@@ -265,11 +265,12 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/imgEditTags"
                     android:layout_alignTop="@id/imgEditTags"
+                    android:layout_marginEnd="@dimen/portfolio_heading_right_margin"
                     android:layout_marginRight="@dimen/portfolio_heading_right_margin"
                     android:gravity="center"
                     android:text="@string/text_tags"
                     android:textStyle="bold"
-                    tools:text="Tags"/>
+                    tools:text="Tags" />
                 <!--need to give padding= 5dp need to think-->
                 <com.coderschool.android2.rubit.utils.FlowLayout
                     android:id="@+id/fl_content"
@@ -278,7 +279,7 @@
                     android:layout_below="@id/imgEditTags"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:layout_margin="@dimen/portfolio_content_text_overview_margin"/>
+                    android:layout_margin="@dimen/portfolio_content_text_overview_margin" />
 
 
             </RelativeLayout>
@@ -291,7 +292,7 @@
                 android:layout_below="@id/rlTags"
                 android:layout_marginBottom="@dimen/margin_bottom_portfolio"
                 android:layout_marginTop="@dimen/margin_top_portfolio"
-                app:srcCompat="@drawable/seperate_line"/>
+                app:srcCompat="@drawable/seperate_line" />
 
             <!--review for the user-->
             <RelativeLayout
@@ -310,7 +311,7 @@
                     android:layout_toRightOf="@+id/txtReviewCount"
                     android:contentDescription="@string/image_content_description"
                     android:src="@drawable/edit_button"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/txtReviewTitle"
@@ -321,7 +322,7 @@
                     android:gravity="center"
                     android:text="@string/text_reviews"
                     android:textStyle="bold"
-                    tools:text="Reviews"/>
+                    tools:text="Reviews" />
 
                 <TextView
                     android:id="@+id/txtReviewCount"
@@ -329,13 +330,14 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/imgReview"
                     android:layout_alignTop="@id/imgReview"
+                    android:layout_marginEnd="@dimen/portfolio_heading_right_margin"
                     android:layout_marginRight="@dimen/portfolio_heading_right_margin"
                     android:layout_toEndOf="@id/txtReviewTitle"
                     android:layout_toRightOf="@id/txtReviewTitle"
                     android:gravity="center"
                     android:text="@string/text_fake_count"
                     android:textStyle="bold"
-                    tools:text="(12)"/>
+                    tools:text="(12)" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvReview"
@@ -343,7 +345,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtReviewTitle"
                     android:layout_marginTop="@dimen/margin_top_portfolio"
-                    tools:layout="@layout/item_single_review"/>
+                    tools:layout="@layout/item_single_review" />
             </RelativeLayout>
 
             <!--horizontal line below review-->
@@ -354,7 +356,7 @@
                 android:layout_below="@id/rlReviews"
                 android:layout_marginBottom="@dimen/margin_bottom_portfolio"
                 android:layout_marginTop="@dimen/margin_top_portfolio"
-                app:srcCompat="@drawable/seperate_line"/>
+                app:srcCompat="@drawable/seperate_line" />
         </RelativeLayout>
 
 
@@ -374,7 +376,7 @@
                 android:layout_toRightOf="@+id/txtImagesCount"
                 android:contentDescription="@string/image_content_description"
                 android:src="@drawable/edit_button"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/txtImage"
@@ -388,7 +390,7 @@
                 android:gravity="center"
                 android:text="@string/text_images"
                 android:textStyle="bold"
-                tools:text="Images"/>
+                tools:text="Images" />
 
             <TextView
                 android:id="@+id/txtImagesCount"
@@ -396,20 +398,21 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/txtImage"
                 android:layout_alignTop="@id/txtImage"
+                android:layout_marginEnd="@dimen/portfolio_heading_right_margin"
                 android:layout_marginRight="@dimen/portfolio_heading_right_margin"
                 android:layout_toEndOf="@id/txtImage"
                 android:layout_toRightOf="@id/txtImage"
                 android:gravity="center"
                 android:text="@string/text_fake_count"
                 android:textStyle="bold"
-                tools:text="(12)"/>
+                tools:text="(12)" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvPortfolios"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtImage"
-                android:layout_marginTop="@dimen/margin_top_portfolio"/>
+                android:layout_marginTop="@dimen/margin_top_portfolio" />
         </RelativeLayout>
 
     </RelativeLayout>

@@ -10,7 +10,6 @@ package com.coderschool.android2.rubit.portfolio;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,6 +33,7 @@ import com.coderschool.android2.rubit.constants.DatabaseConstants;
 import com.coderschool.android2.rubit.constants.IntentConstants;
 import com.coderschool.android2.rubit.face.FaceActivity;
 import com.coderschool.android2.rubit.login.LoginActivity;
+import com.coderschool.android2.rubit.models.UserModel;
 import com.coderschool.android2.rubit.utils.ConnectionUtils;
 import com.coderschool.android2.rubit.utils.FirebaseUtils;
 import com.coderschool.android2.rubit.utils.FlowLayout;
@@ -48,6 +48,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
@@ -144,25 +145,25 @@ public class PortfolioActivity extends AppCompatActivity
 
     /* EXPANDABLE*/
     @BindView(R.id.fabCancelRequest)
-    FloatingActionButton fabCancelRequest;
+    ImageView fabCancelRequest;
     @BindView(R.id.fabCancelRequestSubtitle)
-    FloatingActionButton fabCancelRequestSubtitle;
+    ImageView fabCancelRequestSubtitle;
     @BindView(R.id.fabPinProfile)
-    FloatingActionButton fabPinProfile;
+    ImageView fabPinProfile;
     @BindView(R.id.fabPinProfileSubtitle)
-    FloatingActionButton fabPinProfileSubtitle;
+    ImageView fabPinProfileSubtitle;
     @BindView(R.id.fabStartChatting)
-    FloatingActionButton fabStartChatting;
+    ImageView fabStartChatting;
     @BindView(R.id.fabStartChattingSubtitle)
-    FloatingActionButton fabStartChattingSubtitle;
+    ImageView fabStartChattingSubtitle;
     @BindView(R.id.fabExpandableGo)
-    FloatingActionButton fabExpandableGo;
+    ImageView fabExpandableGo;
 
     private FirebaseAuth mFirebaseAuth;
     private GoogleApiClient mGoogleApiClient;
     private String mQuest;
     private String mUserId;
-
+    private String mRequestId;
 
     // once after we get the real tags from user
     private String[] strs = new String[]{
@@ -182,8 +183,6 @@ public class PortfolioActivity extends AppCompatActivity
             verifyDoesUserExists();
             fetchIntentData();
             verifyCurrentUser();
-            fetchingData();
-            setUpFloatingButtons();
         }
     }
 
@@ -191,14 +190,46 @@ public class PortfolioActivity extends AppCompatActivity
      * update mode for current user
      */
     private void verifyCurrentUser() {
-        if (mUserId.equals(FirebaseUtils.getCurrentUserId())) {
+        String currentUserId = FirebaseUtils.getCurrentUserId();
+        if (currentUserId != null && mUserId == null) {
+            // If user click Go in the FaceActivity
+            FirebaseUtils.getRequests()
+                    .orderByChild(currentUserId)
+                    .equalTo(null)
+                    .limitToFirst(1)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                final UserModel userMode = snapshot.getValue(UserModel.class);
+                                mUserId = userMode.getUid();
+                                verifyCurrentUser();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            System.out.println("The read failed in user: " + databaseError.getCode());
+                        }
+                    });
+            return;
+        }
+
+        if (currentUserId != null && mUserId.equals(currentUserId)) {
+            fabExpandableGo.setVisibility(View.GONE);
             imgEditTitle.setVisibility(View.VISIBLE);
             imgEditTags.setVisibility(View.VISIBLE);
             imgEditImage.setVisibility(View.VISIBLE);
         } else {
+            fabExpandableGo.setVisibility(View.VISIBLE);
             imgEditTitle.setVisibility(View.GONE);
             imgEditTags.setVisibility(View.GONE);
             imgEditImage.setVisibility(View.GONE);
+        }
+
+        if (mUserId != null) {
+            fetchingData();
+            setUpFloatingButtons();
         }
     }
 
@@ -207,9 +238,31 @@ public class PortfolioActivity extends AppCompatActivity
      */
     private void setUpFloatingButtons() {
         fabCancelRequest.setOnClickListener(view -> {
-            final Intent intent = new Intent(this, FaceActivity.class);
-            startActivity(intent);
-            finish();
+            // Remove in Requests table
+            FirebaseUtils.getRequests().child(mRequestId).removeValue();
+
+            // Remove in User table
+            DatabaseReference currentUserRef = FirebaseUtils.getCurrentUserRef();
+            if (currentUserRef != null) {
+                currentUserRef.child(DatabaseConstants.REQUESTS)
+                        .orderByChild(mRequestId)
+                        .equalTo(mRequestId)
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                dataSnapshot.getRef().removeValue();
+
+                                final Intent intent = new Intent(getApplicationContext(), FaceActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                System.out.println("The read failed in request-remove for user (Portfolio): " + databaseError.getCode());
+                            }
+                        });
+            }
         });
 
         fabPinProfile.setOnClickListener(view -> {
@@ -221,12 +274,14 @@ public class PortfolioActivity extends AppCompatActivity
             final Intent intent = new Intent(this, ChatActivity.class);
             intent.putExtra(IntentConstants.QUEST, mQuest);
             intent.putExtra(IntentConstants.USER_ID, mUserId);
+            intent.putExtra(IntentConstants.REQUEST_ID, mRequestId);
             startActivity(intent);
             finish();
         });
 
         fabExpandableGo.setOnClickListener(view -> {
             if (fabCancelRequest.getVisibility() == View.VISIBLE) {
+                fabExpandableGo.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.go_button));
                 fabCancelRequest.setVisibility(View.GONE);
                 fabCancelRequestSubtitle.setVisibility(View.GONE);
                 fabPinProfile.setVisibility(View.GONE);
@@ -234,6 +289,7 @@ public class PortfolioActivity extends AppCompatActivity
                 fabStartChatting.setVisibility(View.GONE);
                 fabStartChattingSubtitle.setVisibility(View.GONE);
             } else {
+                fabExpandableGo.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.go_button_black_bg));
                 fabCancelRequest.setVisibility(View.VISIBLE);
                 fabCancelRequestSubtitle.setVisibility(View.VISIBLE);
                 fabPinProfile.setVisibility(View.VISIBLE);
@@ -251,6 +307,7 @@ public class PortfolioActivity extends AppCompatActivity
         final Intent intent = getIntent();
         if (null == intent) return;
         mQuest = intent.getStringExtra(IntentConstants.QUEST);
+        mRequestId = intent.getStringExtra(IntentConstants.REQUEST_ID);
         mUserId = intent.getStringExtra(IntentConstants.USER_ID);
     }
 

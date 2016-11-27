@@ -19,19 +19,13 @@ interface FaceContact {
 
     interface View extends BaseView<Presenter> {
 
-        void showRequestPop();
-
-        void showProfilePicture();
+        void setUpRecyclerView();
 
         void showImagePositive();
 
         void showImageNegative();
 
         void showDetails();
-
-        void txtPopOnClick();
-
-        void imgProfilePictureOnClick();
 
         void btnGoOnclick();
 
@@ -41,8 +35,6 @@ interface FaceContact {
     }
 
     interface Presenter extends BasePresenter {
-
-        void selectRequestPopUp();
 
         void selectGo();
 

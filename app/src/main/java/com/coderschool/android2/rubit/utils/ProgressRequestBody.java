@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
+ */
+
 package com.coderschool.android2.rubit.utils;
 
 import android.os.Handler;
@@ -14,21 +21,11 @@ import okio.BufferedSink;
 /**
  * Created by vinay on 27/11/16.
  */
-
 public class ProgressRequestBody extends RequestBody {
+    private static final int DEFAULT_BUFFER_SIZE = 2048;
     private File mFile;
     private String mPath;
     private UploadCallbacks mListener;
-
-    private static final int DEFAULT_BUFFER_SIZE = 2048;
-
-    public interface UploadCallbacks {
-        void onProgressUpdate(int percentage);
-
-        void onError();
-
-        void onFinish();
-    }
 
     public ProgressRequestBody(final File file, final UploadCallbacks listener) {
         mFile = file;
@@ -67,6 +64,14 @@ public class ProgressRequestBody extends RequestBody {
         } finally {
             in.close();
         }
+    }
+
+    public interface UploadCallbacks {
+        void onProgressUpdate(int percentage);
+
+        void onError();
+
+        void onFinish();
     }
 
     private class ProgressUpdater implements Runnable {

@@ -5,13 +5,13 @@
   ~ Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
   -->
 
-<RelativeLayout android:id="@+id/activity_details_task"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:map="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".detailsTask.DetailsTaskActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_details_task"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".detailsTask.DetailsTaskActivity">
 
     <fragment
         android:id="@+id/map"
@@ -42,10 +42,10 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:padding="5dp"
-            android:text="Address"
+            android:text="@string/text_address"
             android:textColor="@color/colorWhite"
             android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <View
             android:id="@+id/verticalSeparator"
@@ -54,8 +54,9 @@
             android:layout_alignBottom="@id/addressLabel"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="2dp"
+            android:layout_toEndOf="@id/addressLabel"
             android:layout_toRightOf="@id/addressLabel"
-            android:background="@color/colorWhite"/>
+            android:background="@color/colorWhite" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/addressTxt"
@@ -63,23 +64,27 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/verticalSeparator"
             android:layout_toRightOf="@id/verticalSeparator"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
             android:padding="5dp"
             android:textColor="@android:color/white"
-            tools:text="76 Nugyen ho vin,Tan phu, Ho chi min ."/>
+            tools:text="76 Nugyen ho vin,Tan phu, Ho chi min ." />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/searchIv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
             android:padding="5dp"
-            map:srcCompat="@drawable/ic_search"/>
+            map:srcCompat="@drawable/ic_search" />
 
     </RelativeLayout>
 
@@ -97,8 +102,9 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            map:srcCompat="@drawable/ic_clipboard"/>
+            map:srcCompat="@drawable/ic_clipboard" />
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/firstEdtTxtView"
@@ -108,10 +114,11 @@
             android:layout_alignTop="@id/firstItemIv"
             android:layout_centerVertical="true"
             android:layout_margin="2dp"
+            android:layout_toEndOf="@+id/firstItemIv"
             android:layout_toRightOf="@+id/firstItemIv"
             android:background="@drawable/rounded_shape"
             android:gravity="center"
-            tools:text="Help me to cook a party, Please."/>
+            tools:text="Help me to cook a party, Please." />
 
 
         <android.support.v7.widget.AppCompatImageView
@@ -120,8 +127,9 @@
             android:layout_height="45dp"
             android:layout_below="@id/firstItemIv"
             android:layout_marginBottom="5dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            map:srcCompat="@drawable/ic_exclamation_mark"/>
+            map:srcCompat="@drawable/ic_exclamation_mark" />
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/secondEdtTxtView"
@@ -132,10 +140,11 @@
             android:layout_below="@id/firstItemIv"
             android:layout_centerVertical="true"
             android:layout_margin="2dp"
+            android:layout_toEndOf="@+id/secondItemIv"
             android:layout_toRightOf="@+id/secondItemIv"
             android:background="@drawable/rounded_shape"
             android:gravity="center"
-            tools:text="Must know How too cook curry."/>
+            tools:text="Must know How too cook curry." />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/thirdItemIv"
@@ -143,8 +152,9 @@
             android:layout_height="45dp"
             android:layout_below="@id/secondItemIv"
             android:layout_marginBottom="5dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            map:srcCompat="@drawable/ic_pencil"/>
+            map:srcCompat="@drawable/ic_pencil" />
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/thirdEdtTxtView"
@@ -153,11 +163,12 @@
             android:layout_below="@id/secondItemIv"
             android:layout_centerVertical="true"
             android:layout_margin="2dp"
+            android:layout_toEndOf="@+id/thirdItemIv"
             android:layout_toRightOf="@+id/thirdItemIv"
             android:background="@drawable/rounded_shape"
             android:gravity="center"
             android:padding="3dp"
-            tools:text="- show have 3 years of exp. in cooking curry \n - should have enough tools for cooking\nFemale chef is prefered."/>
+            tools:text="- show have 3 years of exp. in cooking curry \n - should have enough tools for cooking\nFemale chef is prefered." />
 
 
         <android.support.v7.widget.AppCompatImageView
@@ -166,18 +177,21 @@
             android:layout_height="50dp"
             android:layout_below="@id/thirdEdtTxtView"
             android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            map:srcCompat="@drawable/ic_landscape"/>
+            map:srcCompat="@drawable/ic_landscape" />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/goButtonDetailScreen"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@id/thirdEdtTxtView"
             android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            map:srcCompat="@drawable/go_button_black_bg"/>
+            map:srcCompat="@drawable/go_button_black_bg" />
 
     </RelativeLayout>
 
@@ -185,7 +199,7 @@
         android:id="@+id/detailedImageRv"
         android:layout_width="200dp"
         android:layout_height="150dp"
-        android:layout_below="@id/detailsRl"/>
+        android:layout_below="@id/detailsRl" />
 
 
     <android.support.v7.widget.AppCompatImageView
@@ -193,8 +207,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/detailsRl"
+        android:layout_toEndOf="@id/detailedImageRv"
         android:layout_toRightOf="@id/detailedImageRv"
-        android:src="@android:drawable/ic_input_add"/>
+        android:src="@android:drawable/ic_input_add" />
 
     <RelativeLayout
         android:id="@+id/progressTextRl"

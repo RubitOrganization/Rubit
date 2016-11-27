@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
+ */
+
 package com.coderschool.android2.rubit.tag;
 
 import android.os.Bundle;
@@ -8,6 +15,9 @@ import com.coderschool.android2.rubit.utils.ActivityUtils;
 
 import butterknife.ButterKnife;
 
+/**
+ * ChooseTagActivity
+ */
 public class ChooseTagActivity extends AppCompatActivity {
 
     public static final String TAG = ChooseTagActivity.class.getSimpleName();

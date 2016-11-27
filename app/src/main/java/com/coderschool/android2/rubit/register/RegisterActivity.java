@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
+ */
+
 package com.coderschool.android2.rubit.register;
 
 import android.content.Intent;
@@ -12,6 +19,9 @@ import com.coderschool.android2.rubit.login.LoginActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * RegisterActivity
+ */
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.goButtonInLoginIv)

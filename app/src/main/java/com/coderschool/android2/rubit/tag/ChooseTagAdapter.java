@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
+ */
+
 package com.coderschool.android2.rubit.tag;
 
 import android.content.Context;
@@ -27,7 +34,6 @@ import butterknife.ButterKnife;
 /**
  * Created by vinay on 12/11/16.
  */
-
 public class ChooseTagAdapter extends RecyclerView.Adapter<ChooseTagAdapter.ViewHolder> {
 
     private List<TagItems> mTagTitles;
@@ -106,6 +112,10 @@ public class ChooseTagAdapter extends RecyclerView.Adapter<ChooseTagAdapter.View
         return mTagTitles.size();
     }
 
+    public interface TagScreenAdapterCallback {
+        void onTagSelectedCallback(List<TagItems> selectedTags);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.imageView1)
@@ -124,9 +134,5 @@ public class ChooseTagAdapter extends RecyclerView.Adapter<ChooseTagAdapter.View
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-    }
-
-    public interface TagScreenAdapterCallback {
-        void onTagSelectedCallback(List<TagItems> selectedTags);
     }
 }

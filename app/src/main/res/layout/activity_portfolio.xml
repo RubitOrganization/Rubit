@@ -6,7 +6,6 @@
   -->
 
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,90 +30,85 @@
         android:id="@+id/includePortfolio"
         layout="@layout/content_main" />
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageView
         android:id="@+id/fabCancelRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="@dimen/fab_margin_cancel"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_revert"
-        android:visibility="invisible"
-        app:backgroundTint="@color/colorDarkGray"
-        app:layout_anchorGravity="bottom|right" />
+        android:layout_marginEnd="@dimen/fab_margin_small"
+        android:layout_marginRight="@dimen/fab_margin_small"
+        android:contentDescription="@string/image_content_description"
+        android:src="@drawable/cancel_request_button"
+        android:visibility="invisible" />
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageView
         android:id="@+id/fabCancelRequestSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/fab_margin_cancel"
+        android:layout_marginBottom="@dimen/fab_margin_cancel_subtitle"
         android:layout_marginEnd="@dimen/fab_margin_subtitle"
         android:layout_marginRight="@dimen/fab_margin_subtitle"
-        android:src="@android:drawable/ic_menu_share"
-        android:visibility="invisible"
-        app:backgroundTint="@color/colorDarkGray"
-        app:layout_anchorGravity="bottom|right" />
+        android:contentDescription="@string/image_content_description"
+        android:src="@drawable/cancel_request_subtitle"
+        android:visibility="invisible" />
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageView
         android:id="@+id/fabPinProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="@dimen/fab_margin_pin"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/fab_margin"
-        android:src="@android:drawable/checkbox_on_background"
-        android:visibility="invisible"
-        app:backgroundTint="@color/colorDarkGray"
-        app:layout_anchorGravity="bottom|right" />
+        android:layout_marginEnd="@dimen/fab_margin_small"
+        android:layout_marginRight="@dimen/fab_margin_small"
+        android:contentDescription="@string/image_content_description"
+        android:src="@drawable/pin_profile_button"
+        android:visibility="invisible" />
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageView
         android:id="@+id/fabPinProfileSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/fab_margin_pin"
+        android:layout_marginBottom="@dimen/fab_margin_pin_subtitle"
         android:layout_marginEnd="@dimen/fab_margin_subtitle"
         android:layout_marginRight="@dimen/fab_margin_subtitle"
-        android:src="@android:drawable/alert_dark_frame"
-        android:visibility="invisible"
-        app:backgroundTint="@color/colorDarkGray"
-        app:layout_anchorGravity="bottom|right" />
+        android:contentDescription="@string/image_content_description"
+        android:src="@drawable/pin_this_profile_subtitle"
+        android:visibility="invisible" />
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageView
         android:id="@+id/fabStartChatting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="@dimen/fab_margin_chat"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/fab_margin"
-        android:src="@android:drawable/alert_light_frame"
-        android:visibility="invisible"
-        app:backgroundTint="@color/colorDarkGray"
-        app:layout_anchorGravity="bottom|right" />
+        android:layout_marginEnd="@dimen/fab_margin_small"
+        android:layout_marginRight="@dimen/fab_margin_small"
+        android:contentDescription="@string/image_content_description"
+        android:src="@drawable/start_chatting_button"
+        android:visibility="invisible" />
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageView
         android:id="@+id/fabStartChattingSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/fab_margin_chat"
+        android:layout_marginBottom="@dimen/fab_margin_chat_subtitle"
         android:layout_marginEnd="@dimen/fab_margin_subtitle"
         android:layout_marginRight="@dimen/fab_margin_subtitle"
-        android:src="@android:drawable/arrow_up_float"
-        android:visibility="invisible"
-        app:backgroundTint="@color/colorDarkGray"
-        app:layout_anchorGravity="bottom|right" />
+        android:contentDescription="@string/image_content_description"
+        android:src="@drawable/start_chatting_subtitile"
+        android:visibility="invisible" />
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageView
         android:id="@+id/fabExpandableGo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_margin="@dimen/fab_margin_big"
+        android:contentDescription="@string/image_content_description"
         android:src="@drawable/go_button" />
 
 </android.support.design.widget.CoordinatorLayout>

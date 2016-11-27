@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
+ */
+
 package com.coderschool.android2.rubit.tag;
 
 import android.content.Intent;
@@ -34,11 +41,10 @@ import butterknife.ButterKnife;
 /**
  * Created by vinay on 12/11/16.
  */
-
-public class ChooseTagFragment extends Fragment implements ChooseTagContract.View, View.OnClickListener, ChooseTagAdapter.TagScreenAdapterCallback {
+public class ChooseTagFragment extends Fragment
+        implements ChooseTagContract.View, View.OnClickListener, ChooseTagAdapter.TagScreenAdapterCallback {
 
     public static final String TAG = ChooseTagFragment.class.getSimpleName();
-    private ChooseTagContract.Presenter mPresenter;
     public static final String[] tagTitles = new String[]{"#Android", "#iOS", "#Ruby", "#Node js", "#Python", "#Others"};
     public static final Integer[] tagImages = {
             R.drawable.android,
@@ -48,15 +54,14 @@ public class ChooseTagFragment extends Fragment implements ChooseTagContract.Vie
             R.drawable.python_icon,
             R.drawable.img_others
     };
-    private List<TagItems> mTagItems;
     @BindView(R.id.recyclerViewHashTagGridView)
     RecyclerView recyclerViewHashTagGridView;
-
     @BindView(R.id.skipBtn)
     AppCompatButton skipBtn;
-
     @BindView(R.id.finishBtn)
     AppCompatButton finishBtn;
+    private ChooseTagContract.Presenter mPresenter;
+    private List<TagItems> mTagItems;
     private ChooseTagAdapter mChooseTagAdapter;
     private List<TagItems> selectedTags;
 

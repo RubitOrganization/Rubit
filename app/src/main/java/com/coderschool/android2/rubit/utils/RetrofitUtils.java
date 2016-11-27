@@ -1,13 +1,17 @@
+/*
+ * Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
+ */
+
 package com.coderschool.android2.rubit.utils;
 
 import com.coderschool.android2.rubit.constants.DatabaseConstants;
 
-import java.io.IOException;
-
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -15,7 +19,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by vinay on 26/11/16.
  */
-
 public class RetrofitUtils {
     public static Retrofit get(String apiKey) {
         return new Retrofit.Builder()
@@ -35,15 +38,12 @@ public class RetrofitUtils {
     }
 
     private static Interceptor clientIdInterceptor(final String clientId) {
-        return new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request();
-                request = request.newBuilder()
-                        .addHeader("Authorization", "Client-ID " + clientId)
-                        .build();
-                return chain.proceed(request);
-            }
+        return chain -> {
+            Request request = chain.request();
+            request = request.newBuilder()
+                    .addHeader("Authorization", "Client-ID " + clientId)
+                    .build();
+            return chain.proceed(request);
         };
     }
 }

@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2016. Self Training Systems, Inc - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
+ */
+
 package com.coderschool.android2.rubit.detailsTask;
 
 import android.content.Context;
@@ -50,15 +57,12 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 
 import java.io.File;
@@ -82,12 +86,8 @@ import static com.coderschool.android2.rubit.constants.IntentConstants.UPLOAD_IM
 /**
  * Created by vinay on 22/11/16.
  */
-
 public class DetailsTaskFragment extends Fragment implements DetailsTaskContract.View, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         LocationListener, View.OnClickListener, ProgressRequestBody.UploadCallbacks {
-
-    private DetailsTaskContract.Presenter mPresenter;
-    private GoogleMap mGoogleMap;
 
     @BindView(R.id.addressTxt)
     AppCompatTextView mAddressTxt;
@@ -113,21 +113,31 @@ public class DetailsTaskFragment extends Fragment implements DetailsTaskContract
     RelativeLayout progressTextRl;
     @BindView(R.id.actualPercentage)
     AppCompatTextView actualPercentage;
+    SupportMapFragment mapFragment;
+    PermissionUtils permissionUtils;
+    Context mContext;
+    DetailTakImagesAdapter detailTakImagesAdapter;
+    private DetailsTaskContract.Presenter mPresenter;
+    private GoogleMap mGoogleMap;
     private GoogleApiClient mGoogleApiClient;
     private LatLng mCurrentLatLng;
     private LocationRequest mLocationRequest;
     private Marker mMarker;
-    SupportMapFragment mapFragment;
-    PermissionUtils permissionUtils;
-    Context mContext;
     private String mCurrentPhotoPath;
     private List<String> imagesUrls;
-
-    DetailTakImagesAdapter detailTakImagesAdapter;
 
     //Default Constructor
     public DetailsTaskFragment() {
 
+    }
+
+    public static DetailsTaskFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        DetailsTaskFragment fragment = new DetailsTaskFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -202,15 +212,6 @@ public class DetailsTaskFragment extends Fragment implements DetailsTaskContract
         goButtonDetailScreen.setOnClickListener(this);
     }
 
-    public static DetailsTaskFragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        DetailsTaskFragment fragment = new DetailsTaskFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -230,12 +231,9 @@ public class DetailsTaskFragment extends Fragment implements DetailsTaskContract
         if (mapFragment == null) {
             mapFragment = (SupportMapFragment) this.getChildFragmentManager()
                     .findFragmentById(map);
-            mapFragment.getMapAsync(new OnMapReadyCallback() {
-                @Override
-                public void onMapReady(GoogleMap googleMap) {
-                    mGoogleMap = googleMap;
-                    updateCamera();
-                }
+            mapFragment.getMapAsync(googleMap -> {
+                mGoogleMap = googleMap;
+                updateCamera();
             });
         }
     }
@@ -331,13 +329,10 @@ public class DetailsTaskFragment extends Fragment implements DetailsTaskContract
 
     @Override
     public void plusButtonOnClick() {
-        mAddImages.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mAddImages.setOnClickListener(v -> {
 //                Intent intent = new Intent(getActivity(), CameraActivity.class);
 //                startActivity(intent);
-                openCamera(IntentConstants.UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE);
-            }
+            openCamera(IntentConstants.UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE);
         });
     }
 
@@ -513,26 +508,23 @@ public class DetailsTaskFragment extends Fragment implements DetailsTaskContract
                 // Update that record & current user record too
                 FirebaseUtils.getRequests()
                         .child(newRequestDetailTaskModel.getRequestId())
-                        .setValue(newRequestDetailTaskModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                        .setValue(newRequestDetailTaskModel).addOnCompleteListener(task -> {
 
-                        Map<String, Object> detailTaskRequests = new HashMap<>();
-                        detailTaskRequests.put(newRequestDetailTaskModel.getRequestId(), true);
+                    Map<String, Object> detailTaskRequests = new HashMap<>();
+                    detailTaskRequests.put(newRequestDetailTaskModel.getRequestId(), true);
 
-                        FirebaseUtils.getRubitUser()
-                                .child(currentUserId).child(DatabaseConstants.REQUESTS)
-                                .updateChildren(detailTaskRequests, (databaseError, databaseReference) -> {
+                    FirebaseUtils.getRubitUser()
+                            .child(currentUserId).child(DatabaseConstants.REQUESTS)
+                            .updateChildren(detailTaskRequests, (databaseError, databaseReference) -> {
 
-                                    final Intent intent = new Intent(DetailsTaskFragment.this.getContext(), PortfolioActivity.class);
-                                    intent.putExtra(IntentConstants.QUEST, mFirstEdtTxtView.getText().toString());
-                                    intent.putExtra(IntentConstants.QUEST, mSecondEdtTxtView.getText().toString());
-                                    intent.putExtra(IntentConstants.QUEST, mThirdEdtTxtView.getText().toString());
-                                    intent.putExtra(IntentConstants.QUEST, String.valueOf(imagesUrls));
-                                    intent.putExtra(IntentConstants.USER_ID, currentUserId);
-                                    DetailsTaskFragment.this.startActivity(intent);
-                                });
-                    }
+                                final Intent intent = new Intent(DetailsTaskFragment.this.getContext(), PortfolioActivity.class);
+                                intent.putExtra(IntentConstants.QUEST, mFirstEdtTxtView.getText().toString());
+                                intent.putExtra(IntentConstants.QUEST, mSecondEdtTxtView.getText().toString());
+                                intent.putExtra(IntentConstants.QUEST, mThirdEdtTxtView.getText().toString());
+                                intent.putExtra(IntentConstants.QUEST, String.valueOf(imagesUrls));
+                                intent.putExtra(IntentConstants.USER_ID, currentUserId);
+                                DetailsTaskFragment.this.startActivity(intent);
+                            });
                 });
                 break;
         }

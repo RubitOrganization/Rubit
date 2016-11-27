@@ -12,6 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.coderschool.android2.rubit.R;
 
+/**
+ * RequestListActivity
+ */
 public class RequestListActivity extends AppCompatActivity {
 
     @Override

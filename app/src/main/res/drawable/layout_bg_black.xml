@@ -8,5 +8,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="#000000"></solid>
 
-    <corners android:radius="30dip"/>
+    <corners android:radius="30dip" />
 </shape>
