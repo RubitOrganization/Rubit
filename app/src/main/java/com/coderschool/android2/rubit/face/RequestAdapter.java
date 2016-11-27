@@ -76,6 +76,9 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
         return mRequests.size();
     }
 
+    /**
+     * View Holder
+     */
     class RequestViewHolder extends RecyclerView.ViewHolder {
         private final Context mContext;
         private final List<RequestSimpleModel> mRequests;

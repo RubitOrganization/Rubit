@@ -120,7 +120,7 @@ public class LoginFragment extends Fragment
         if (container != null) {
             root = LayoutInflater
                     .from(container.getContext())
-                    .inflate(R.layout.login_fragment, container, false);
+                    .inflate(R.layout.fragment_login, container, false);
             ButterKnife.bind(this, root);
 
         }
@@ -149,35 +149,36 @@ public class LoginFragment extends Fragment
                 if (account != null)
                     firebaseAuthWithGoogle(account);
                 else
-                    Log.e(TAG, "Account value is null");
+                    Log.e(TAG, "[LOGIN_ACTIVITY] Account value is null");
             } else {
                 // Google Sign In failed
-                Log.e(TAG, "Google Sign In failed.");
+                Log.e(TAG, "[LOGIN_ACTIVITY] Google Sign In failed.");
             }
         } else {
             // Google Sign In failed
-            Log.e(TAG, "Google Sign In failed.");
+            Log.e(TAG, "[LOGIN_ACTIVITY] Google Sign In failed.");
         }
     }
 
     /**
-     * firebase Auth With Google
+     * Firebase Auth With Google
      *
      * @param account GoogleSignInAccount
      */
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
+        Log.d(TAG, "FirebaseAuthWithGoogle:" + account.getId());
+
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     ProgressDialogHelper.dismiss();
 
-                    Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
+                    Log.d(TAG, "[LOGIN_ACTIVITY] SignInWithCredential:onComplete:" + task.isSuccessful());
                     // If sign in fails, display a message to the user. If sign in succeeds
                     // the auth state listener will be notified and logic to handle the
                     // signed in user can be handled in the listener.
                     if (!task.isSuccessful()) {
-                        Log.w(TAG, String.format("signInWithCredential:%s", task.getException()));
+                        Log.w(TAG, String.format("[LOGIN_ACTIVITY] SignInWithCredential:%s", task.getException()));
                         Toast.makeText(getActivity(), "Authentication Failed", Toast.LENGTH_LONG).show();
                     } else {
                         createUserIfNotExists();
@@ -205,7 +206,7 @@ public class LoginFragment extends Fragment
 
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
-                                System.out.println("failed to create new User in rubit_users: " + databaseError.getCode());
+                                System.out.println("[LOGIN_ACTIVITY] Failed to create new User in rubit_users: " + databaseError.getCode());
                             }
                         });
 
@@ -249,7 +250,7 @@ public class LoginFragment extends Fragment
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         // An unresolvable error has occurred and Google APIs (including Sign-In) will not
         // be available.
-        Log.d(TAG, "onConnectionFailed:" + connectionResult);
+        Log.d(TAG, "[LOGIN_ACTIVITY] onConnectionFailed:" + connectionResult);
         Toast.makeText(getActivity(), R.string.google_play_services_error, Toast.LENGTH_LONG).show();
     }
 

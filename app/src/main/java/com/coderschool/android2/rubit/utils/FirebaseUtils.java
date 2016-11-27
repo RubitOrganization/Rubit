@@ -150,7 +150,7 @@ public class FirebaseUtils {
      * @return DatabaseReference
      */
     public static DatabaseReference getTagRubitUser() {
-        return getBaseRef().child(DatabaseConstants.RUBIT_USERS).child(DatabaseConstants.TAGS);
+        return getRubitUser().child(DatabaseConstants.TAGS);
     }
 }
 

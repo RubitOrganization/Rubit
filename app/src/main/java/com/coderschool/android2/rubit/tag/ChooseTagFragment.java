@@ -127,7 +127,7 @@ public class ChooseTagFragment extends Fragment
             if (currentUserId != null) {
                 ArrayList<String> ar = new ArrayList<>();
                 if (selectedTags == null) {
-                    Toast.makeText(getActivity(), "please choose at-least 1 tags or select skip button", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Please choose at-least 1 tags or select skip button", Toast.LENGTH_LONG).show();
                 } else {
                     for (TagItems selectedTag : selectedTags) {
                         TagItems tag = selectedTag;

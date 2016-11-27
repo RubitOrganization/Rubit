@@ -28,7 +28,7 @@
 
     <include
         android:id="@+id/includePortfolio"
-        layout="@layout/content_main" />
+        layout="@layout/content_main_portfolio" />
 
     <ImageView
         android:id="@+id/fabCancelRequest"

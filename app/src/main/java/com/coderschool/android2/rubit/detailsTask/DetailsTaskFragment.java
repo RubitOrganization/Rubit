@@ -86,7 +86,8 @@ import static com.coderschool.android2.rubit.constants.IntentConstants.UPLOAD_IM
 /**
  * Created by vinay on 22/11/16.
  */
-public class DetailsTaskFragment extends Fragment implements DetailsTaskContract.View, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
+public class DetailsTaskFragment extends Fragment implements
+        DetailsTaskContract.View, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         LocationListener, View.OnClickListener, ProgressRequestBody.UploadCallbacks {
 
     @BindView(R.id.addressTxt)
@@ -397,7 +398,7 @@ public class DetailsTaskFragment extends Fragment implements DetailsTaskContract
                         }
                     });
         } else {
-            Log.e("Error with Image path", "Error");
+            Log.e("Error with Image path", "[DETAILS_TASK_ACTIVITY] Error");
         }
     }
 

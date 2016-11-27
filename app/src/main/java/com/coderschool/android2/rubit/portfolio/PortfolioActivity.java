@@ -193,7 +193,7 @@ public class PortfolioActivity extends AppCompatActivity
         String currentUserId = FirebaseUtils.getCurrentUserId();
         if (currentUserId != null && mUserId == null) {
             // If user click Go in the FaceActivity
-            FirebaseUtils.getRequests()
+            FirebaseUtils.getRubitUser()
                     .orderByChild(currentUserId)
                     .equalTo(null)
                     .limitToFirst(1)
@@ -209,7 +209,7 @@ public class PortfolioActivity extends AppCompatActivity
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-                            System.out.println("The read failed in user: " + databaseError.getCode());
+                            System.out.println("[PORTFOLIO_ACTIVITY] The read failed in user: " + databaseError.getCode());
                         }
                     });
             return;
@@ -259,7 +259,7 @@ public class PortfolioActivity extends AppCompatActivity
 
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
-                                System.out.println("The read failed in request-remove for user (Portfolio): " + databaseError.getCode());
+                                System.out.println("[PORTFOLIO_ACTIVITY] The read failed in request-remove for user: " + databaseError.getCode());
                             }
                         });
             }
@@ -331,7 +331,7 @@ public class PortfolioActivity extends AppCompatActivity
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        System.out.println("The read failed in user (Portfolio): " + databaseError.getCode());
+                        System.out.println("[PORTFOLIO_ACTIVITY] The read failed in user (Portfolio): " + databaseError.getCode());
                     }
                 });
     }
@@ -472,7 +472,7 @@ public class PortfolioActivity extends AppCompatActivity
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.d(TAG, "onConnectionFailed:-" + connectionResult);
+        Log.d(TAG, "[PORTFOLIO_ACTIVITY] onConnectionFailed:-" + connectionResult);
     }
 
     @Override

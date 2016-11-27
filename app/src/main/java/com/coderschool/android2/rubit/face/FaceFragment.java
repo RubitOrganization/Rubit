@@ -67,6 +67,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 /**
  * {@link FaceFragment}
@@ -191,14 +192,15 @@ public class FaceFragment extends Fragment
                     .equalTo(false)
                     .orderByChild(DatabaseConstants.CONNECTED)
                     .equalTo(false)*/ //TODO: Firebase doesn't allow multiple conditions
-                    .limitToFirst(3)
+                    .limitToFirst(7)
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 final RequestModel requestModel = snapshot.getValue(RequestModel.class);
 
-                                if (numberCurrentRow == 3) {
+                                if (numberCurrentRow == 7) {
+                                    imgLogo.setVisibility(View.VISIBLE);
                                     numberCurrentRow = 0;
                                     requests.clear();
                                     requestAdapter.notifyDataSetChanged();
@@ -216,7 +218,7 @@ public class FaceFragment extends Fragment
 
                                             @Override
                                             public void onCancelled(DatabaseError databaseError) {
-                                                System.out.println("The read failed in user: " + databaseError.getCode());
+                                                System.out.println("[FACE_ACTIVITY] The read failed in user: " + databaseError.getCode());
                                             }
                                         });
                             }
@@ -224,11 +226,11 @@ public class FaceFragment extends Fragment
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-                            System.out.println("The read failed in requests: " + databaseError.getCode());
+                            System.out.println("[FACE_ACTIVITY] The read failed in requests: " + databaseError.getCode());
                         }
                     });
         } else {
-            Log.e(TAG, "Current user Id is null, we need to handle this case");
+            Log.e(TAG, "[FACE_ACTIVITY] Current user Id is null, we need to handle this case");
         }
     }
 
@@ -286,7 +288,7 @@ public class FaceFragment extends Fragment
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.d(TAG, "onConnectionFailed:-" + connectionResult);
+        Log.d(TAG, "[FACE_ACTIVITY] onConnectionFailed:-" + connectionResult);
     }
 
     @Override
@@ -317,14 +319,28 @@ public class FaceFragment extends Fragment
         int last = requests.size();
         requestAdapter.notifyItemRangeInserted(first, last);
         numberCurrentRow++;
+
+        if (first > 0) {
+            imgLogo.setVisibility(View.INVISIBLE);
+        } else {
+            imgLogo.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public void setUpRecyclerView() {
-        requests = new ArrayList<>();
+        rvRequests.setItemAnimator(new SlideInLeftAnimator());
+        rvRequests.getItemAnimator().setAddDuration(500);
+        rvRequests.getItemAnimator().setRemoveDuration(500);
+        rvRequests.getItemAnimator().setMoveDuration(500);
+        rvRequests.getItemAnimator().setChangeDuration(500);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        rvRequests.setLayoutManager(layoutManager);
+
         requestAdapter = new RequestAdapter(getContext(), requests, handler, runnable);
-        rvRequests.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         rvRequests.setAdapter(requestAdapter);
+
     }
 
     @Override
@@ -374,18 +390,13 @@ public class FaceFragment extends Fragment
             newRequest.setConnected(false);
             newRequest.setCompleted(false);
 
-            mFirebaseDatabase = FirebaseDatabase.getInstance();
-
             // Create new record in Request table
-            DatabaseReference newRequestReference = mFirebaseDatabase.getReference()
-                    .child(DatabaseConstants.REQUESTS)
-                    .push();
+            DatabaseReference newRequestReference = FirebaseUtils.getRequests().push();
             newRequestReference.setValue(newRequest);
             newRequest.setRequestId(newRequestReference.getKey());
 
             // Update that record & current user record too
-            mFirebaseDatabase.getReference()
-                    .child(DatabaseConstants.REQUESTS)
+            FirebaseUtils.getRequests()
                     .child(newRequest.getRequestId())
                     .setValue(newRequest)
                     .addOnCompleteListener(task -> {
@@ -393,8 +404,7 @@ public class FaceFragment extends Fragment
                         Map<String, Object> requests1 = new HashMap<>();
                         requests1.put(newRequest.getRequestId(), true);
 
-                        mFirebaseDatabase.getReference()
-                                .child(DatabaseConstants.RUBIT_USERS)
+                        FirebaseUtils.getRubitUser()
                                 .child(currentUserId)
                                 .child(DatabaseConstants.REQUESTS)
                                 .updateChildren(requests1, (databaseError, databaseReference) -> {

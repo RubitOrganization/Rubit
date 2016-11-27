@@ -93,7 +93,7 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.1'
 
     // Recyclerview
-    compile 'jp.wasabeef:recyclerview-animators:1.2.2'
+    compile 'jp.wasabeef:recyclerview-animators:2.2.4'
 
     // Eventbus
     compile 'org.greenrobot:eventbus:3.0.0'
