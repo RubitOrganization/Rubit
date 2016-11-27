@@ -71,7 +71,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
-import static com.coderschool.android2.rubit.detailsTask.CameraActivity.UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE;
+import static com.coderschool.android2.rubit.constants.IntentConstants.UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE;
 
 /**
  * Created by vinay on 22/11/16.
@@ -314,7 +314,7 @@ public class DetailsTaskFragment extends Fragment implements DetailsTaskContract
             public void onClick(View v) {
 //                Intent intent = new Intent(getActivity(), CameraActivity.class);
 //                startActivity(intent);
-                openCamera(UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE);
+                openCamera(IntentConstants.UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE);
             }
         });
     }
