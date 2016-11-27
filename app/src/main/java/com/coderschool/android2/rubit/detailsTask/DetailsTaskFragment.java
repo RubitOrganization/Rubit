@@ -3,6 +3,7 @@ package com.coderschool.android2.rubit.detailsTask;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -23,6 +25,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.Interpolator;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.coderschool.android2.rubit.R;
@@ -36,6 +40,7 @@ import com.coderschool.android2.rubit.utils.FileUtils;
 import com.coderschool.android2.rubit.utils.FirebaseUtils;
 import com.coderschool.android2.rubit.utils.ImgurApi;
 import com.coderschool.android2.rubit.utils.PermissionUtils;
+import com.coderschool.android2.rubit.utils.ProgressRequestBody;
 import com.coderschool.android2.rubit.utils.RetrofitUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -71,6 +76,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
+import static com.coderschool.android2.rubit.R.id.map;
 import static com.coderschool.android2.rubit.constants.IntentConstants.UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE;
 
 /**
@@ -78,11 +84,9 @@ import static com.coderschool.android2.rubit.constants.IntentConstants.UPLOAD_IM
  */
 
 public class DetailsTaskFragment extends Fragment implements DetailsTaskContract.View, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        LocationListener, View.OnClickListener {
+        LocationListener, View.OnClickListener, ProgressRequestBody.UploadCallbacks {
 
     private DetailsTaskContract.Presenter mPresenter;
-    private long UPDATE_INTERVAL = 30 * 1000;
-    private long FASTEST_INTERVAL = 5 * 1000;
     private GoogleMap mGoogleMap;
 
     @BindView(R.id.addressTxt)
@@ -103,6 +107,12 @@ public class DetailsTaskFragment extends Fragment implements DetailsTaskContract
     RecyclerView detailedImageRv;
     @BindView(R.id.goButtonDetailScreen)
     AppCompatImageView goButtonDetailScreen;
+    @BindView(R.id.progressBar)
+    ProgressBar mProgressBar;
+    @BindView(R.id.progressTextRl)
+    RelativeLayout progressTextRl;
+    @BindView(R.id.actualPercentage)
+    AppCompatTextView actualPercentage;
     private GoogleApiClient mGoogleApiClient;
     private LatLng mCurrentLatLng;
     private LocationRequest mLocationRequest;
@@ -157,7 +167,7 @@ public class DetailsTaskFragment extends Fragment implements DetailsTaskContract
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_details_task, container, false);
         ButterKnife.bind(this, view);
-        initUI();
+        initUI(view);
         if (permissionUtils.checkPermissionForAccessFineAndCoarseLocations()) {
             showGoogleMap();
         } else {
@@ -167,7 +177,19 @@ public class DetailsTaskFragment extends Fragment implements DetailsTaskContract
         return view;
     }
 
-    private void initUI() {
+    private void initUI(View view) {
+
+        // Get the button view
+        View locationButton = ((View) view.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
+        // and next place it, on bottom right (as Google Maps app)
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
+                locationButton.getLayoutParams();
+        // position on right bottom
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        layoutParams.setMargins(0, 0, 30, 30);
+
         imagesUrls = new ArrayList<>();
         // Define Grid Layout Manager layout
         final LinearLayoutManager layout = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -207,7 +229,7 @@ public class DetailsTaskFragment extends Fragment implements DetailsTaskContract
     public void showGoogleMap() {
         if (mapFragment == null) {
             mapFragment = (SupportMapFragment) this.getChildFragmentManager()
-                    .findFragmentById(R.id.map);
+                    .findFragmentById(map);
             mapFragment.getMapAsync(new OnMapReadyCallback() {
                 @Override
                 public void onMapReady(GoogleMap googleMap) {
@@ -342,36 +364,46 @@ public class DetailsTaskFragment extends Fragment implements DetailsTaskContract
     }
 
     private void uploadImage() {
-        File file = new File(mCurrentPhotoPath);
-        RetrofitUtils.get(getString(R.string.IMGUR_CLIENT_ID))
-                .create(ImgurApi.class)
-                .create(FileUtils.partFromFile(file), FileUtils.requestBodyFromFile(file))
-                .enqueue(new Callback<ImageResponse>() {
-                    @Override
-                    public void onResponse(Call<ImageResponse> call, Response<ImageResponse> response) {
-                        if (response.isSuccessful()) {
-                            ImageResponse imageResponse = response.body();
-                            imagesUrls.add(imageResponse.getData().getLink());
+
+//        mProgressBar.setProgress(25);
+//        mProgressBar.setSecondaryProgress(50);
+//        mProgressBar.setMax(100);
+        //mProgressBar.setProgressDrawable(drawable);
+        if (mCurrentPhotoPath != null) {
+            File file = new File(mCurrentPhotoPath);
+            RetrofitUtils.get(getString(R.string.IMGUR_CLIENT_ID))
+                    .create(ImgurApi.class)
+                    .create(FileUtils.partFromFile(file, this), FileUtils.requestBodyFromFile(file))
+                    .enqueue(new Callback<ImageResponse>() {
+                        @Override
+                        public void onResponse(Call<ImageResponse> call, Response<ImageResponse> response) {
+                            if (response.isSuccessful()) {
+                                mProgressBar.setVisibility(View.GONE);
+                                ImageResponse imageResponse = response.body();
+                                imagesUrls.add(imageResponse.getData().getLink());
 //                            Glide.with(getContext())
 //                                    .load(imageResponse.getData().getLink())
 //                                    .placeholder(R.drawable.image_placeholder)
 //                                    .into(mDetailedImageView);
-                            Log.d("imagesUrl ::- ", imagesUrls.size() + "");
-                            String link = imageResponse.getData().getLink();
-                            imagesUrls.add(link);
-                            Set<String> hs = new HashSet<>();
-                            hs.addAll(imagesUrls);
-                            imagesUrls.clear();
-                            imagesUrls.addAll(hs);
-                            detailTakImagesAdapter.notifyDataSetChanged();
+                                Log.d("imagesUrl ::- ", imagesUrls.size() + "");
+                                String link = imageResponse.getData().getLink();
+                                imagesUrls.add(link);
+                                Set<String> hs = new HashSet<>();
+                                hs.addAll(imagesUrls);
+                                imagesUrls.clear();
+                                imagesUrls.addAll(hs);
+                                detailTakImagesAdapter.notifyDataSetChanged();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<ImageResponse> call, Throwable t) {
-                        Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<ImageResponse> call, Throwable t) {
+                            Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+        } else {
+            Log.e("Error with Image path", "Error");
+        }
     }
 
     @Override
@@ -392,6 +424,7 @@ public class DetailsTaskFragment extends Fragment implements DetailsTaskContract
             if (location != null) {
                 mCurrentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
                 updateCamera();
+                mGoogleMap.setMyLocationEnabled(true);
             }
             startLocationUpdates();
         }
@@ -400,10 +433,10 @@ public class DetailsTaskFragment extends Fragment implements DetailsTaskContract
     @SuppressWarnings("MissingPermission")
     private void startLocationUpdates() {
         if (permissionUtils.checkPermissionForAccessFineAndCoarseLocations()) {
+            long UPDATE_INTERVAL = 300 * 1000;
             mLocationRequest = LocationRequest.create()
                     .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                    .setInterval(UPDATE_INTERVAL)
-                    .setFastestInterval(FASTEST_INTERVAL);
+                    .setInterval(UPDATE_INTERVAL);
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
     }
@@ -503,5 +536,40 @@ public class DetailsTaskFragment extends Fragment implements DetailsTaskContract
                 });
                 break;
         }
+    }
+
+    @Override
+    public void onProgressUpdate(int percentage) {
+//        ObjectAnimator animation = ObjectAnimator.ofInt(mProgressBar, "progress", 0, percentage);
+//        animation.setDuration(990);
+//        animation.setInterpolator(new DecelerateInterpolator());
+//        animation.start();
+
+        if (percentage + 1 >= 0) {
+            progressTextRl.setVisibility(View.VISIBLE);
+            mProgressBar.setVisibility(View.VISIBLE);
+            Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.background_progress);
+            mProgressBar.setProgressDrawable(drawable);
+            actualPercentage.setText((percentage + 1) + "");
+            mProgressBar.setProgress(percentage);
+        } else {
+            progressTextRl.setVisibility(View.GONE);
+            mProgressBar.setProgress(View.GONE);
+        }
+        if (percentage + 1 == 100) {
+            progressTextRl.setVisibility(View.GONE);
+            mProgressBar.setVisibility(View.GONE);
+        }
+
+    }
+
+    @Override
+    public void onError() {
+
+    }
+
+    @Override
+    public void onFinish() {
+        mProgressBar.setProgress(100);
     }
 }

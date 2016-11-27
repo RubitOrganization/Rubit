@@ -26,7 +26,7 @@
         map:uiRotateGestures="true"
         map:uiScrollGestures="true"
         map:uiTiltGestures="true"
-        map:uiZoomControls="true"
+        map:uiZoomControls="false"
         map:uiZoomGestures="true"/>
 
     <RelativeLayout
@@ -195,6 +195,56 @@
         android:layout_below="@id/detailsRl"
         android:layout_toRightOf="@id/detailedImageRv"
         android:src="@android:drawable/ic_input_add"/>
+
+    <RelativeLayout
+        android:id="@+id/progressTextRl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/progressBar"
+        android:layout_alignBottom="@+id/progressBar"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/colorLightGreen"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/actualPercentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            tools:text="100"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/totalPercentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/actualPercentage"
+            android:gravity="center"
+            android:text="/100"
+            android:textColor="@color/colorWhite"/>
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/progressTextRl"
+        android:max="100"
+        android:progress="0"
+        android:visibility="gone"/>
 
 
 </RelativeLayout>

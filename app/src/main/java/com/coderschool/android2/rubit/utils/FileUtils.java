@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
+import com.coderschool.android2.rubit.detailsTask.DetailsTaskFragment;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,8 +30,8 @@ import okhttp3.RequestBody;
 public class FileUtils {
     public static final String APP_TAG = FileUtils.class.getSimpleName();
 
-    public static MultipartBody.Part partFromFile(File file) {
-        RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
+    public static MultipartBody.Part partFromFile(File file, DetailsTaskFragment detailsTaskFragment) {
+        ProgressRequestBody reqFile = new ProgressRequestBody(file, detailsTaskFragment);
         return MultipartBody.Part.createFormData("image", file.getName(), reqFile);
     }
 
