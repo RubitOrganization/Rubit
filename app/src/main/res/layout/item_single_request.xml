@@ -6,8 +6,8 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imgProfilePicture"
@@ -17,7 +17,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:contentDescription="@string/image_content_description"
-        android:src="@drawable/image_placeholder" />
+        android:src="@drawable/image_placeholder"/>
 
     <TextView
         android:id="@+id/txtPop"
@@ -32,6 +32,6 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:paddingTop="15dp"
-        android:text="@string/textRequestPop" />
+        android:text="@string/textRequestPop"/>
 
 </RelativeLayout>

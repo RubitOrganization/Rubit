@@ -5,66 +5,94 @@
   ~ Written by <tien.workinfo@gmail.com - rubit1359@gmail.com - manetivinay@gmail.com>, October 2016
   -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorLightGreen">
+<android.support.v4.widget.DrawerLayout android:id="@+id/drawerLayout"
+                                        xmlns:android="http://schemas.android.com/apk/res/android"
+                                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/rtLoading"
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#80FFFFFF"
-        android:visibility="invisible">
+        android:background="@color/colorPrimaryDark">
 
-        <ProgressBar
-            android:id="@+id/pbLoading"
+
+
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorLightGreen">
+
+        <RelativeLayout
+            android:id="@+id/rtLoading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80FFFFFF"
+            android:visibility="invisible">
+
+            <ProgressBar
+                android:id="@+id/pbLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imgLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/image_content_description"
+            android:src="@drawable/main_screen_logo"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvRequests"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/imgGo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="105dp"
+            android:contentDescription="@string/image_content_description"
+            android:src="@drawable/go_button"/>
+
+        <EditText
+            android:id="@+id/edtQuestBar"
+            style="@style/TextBorder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="38dp"
+            android:hint="@string/text_quest_bar"
+            android:padding="15dp"/>
+
+        <TextView
+            android:id="@+id/txtDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:text="@string/text_details"
+            android:textColor="@android:color/white"/>
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/imgLogo"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigationView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:contentDescription="@string/image_content_description"
-        android:src="@drawable/main_screen_logo" />
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/drawer_view"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvRequests"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <ImageView
-        android:id="@+id/imgGo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="105dp"
-        android:contentDescription="@string/image_content_description"
-        android:src="@drawable/go_button" />
-
-    <EditText
-        android:id="@+id/edtQuestBar"
-        style="@style/TextBorder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="38dp"
-        android:hint="@string/text_quest_bar"
-        android:padding="15dp" />
-
-    <TextView
-        android:id="@+id/txtDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:text="@string/text_details"
-        android:textColor="@android:color/white" />
-</RelativeLayout>
+</android.support.v4.widget.DrawerLayout>

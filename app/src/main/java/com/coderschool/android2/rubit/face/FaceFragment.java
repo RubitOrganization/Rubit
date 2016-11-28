@@ -13,8 +13,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
@@ -38,12 +42,14 @@ import com.coderschool.android2.rubit.connectionDialog.ConnectionDialogListener;
 import com.coderschool.android2.rubit.constants.DatabaseConstants;
 import com.coderschool.android2.rubit.constants.IntentConstants;
 import com.coderschool.android2.rubit.detailsTask.DetailsTaskActivity;
+import com.coderschool.android2.rubit.editProfile.EditProfileFragment;
 import com.coderschool.android2.rubit.login.LoginActivity;
 import com.coderschool.android2.rubit.models.RequestModel;
 import com.coderschool.android2.rubit.models.RequestSimpleModel;
 import com.coderschool.android2.rubit.models.TagItems;
 import com.coderschool.android2.rubit.models.UserModel;
 import com.coderschool.android2.rubit.portfolio.PortfolioActivity;
+import com.coderschool.android2.rubit.settings.SettingsFragment;
 import com.coderschool.android2.rubit.utils.ConnectionUtils;
 import com.coderschool.android2.rubit.utils.FirebaseUtils;
 import com.coderschool.android2.rubit.utils.GoogleApiClientUtils;
@@ -51,6 +57,7 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -90,6 +97,10 @@ public class FaceFragment extends Fragment
     TextView mTxtDetails;
     @BindView(R.id.edtQuestBar)
     EditText edtQuestBar;
+    @BindView(R.id.drawerLayout)
+    DrawerLayout mDrawerLayout;
+    @BindView(R.id.navigationView)
+    NavigationView mNavigationView;
 
     /**
      * Authenticate
@@ -110,6 +121,7 @@ public class FaceFragment extends Fragment
     private List<RequestSimpleModel> requests = new ArrayList<>();
     private int numberCurrentRow = 0;
     private Runnable runnable = this::startRunnableForPop;
+    private FirebaseUser mFirebaseUser;
 
     /**
      * Constructor
@@ -258,30 +270,10 @@ public class FaceFragment extends Fragment
         return view;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.signout:
-                // we need to make name, photourl and email to null on logout
-                mFirebaseAuth.signOut();
-                mFirebaseDatabase = null;
-                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
-                moveBackToLoginActivity();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     private void moveBackToLoginActivity() {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.main_menu, menu);
     }
 
     @Override
@@ -317,6 +309,78 @@ public class FaceFragment extends Fragment
         int last = requests.size();
         requestAdapter.notifyItemRangeInserted(first, last);
         numberCurrentRow++;
+    }
+
+    @Override
+    public void setUpNavigationDrawer() {
+        //setUp the drawer View
+        setDrawerContent(mNavigationView);
+    }
+
+    private void setDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                selectDrawerItem(item);
+                return true;
+            }
+        });
+    }
+
+    private void selectDrawerItem(MenuItem item) {
+        Fragment fragment = null;
+        Class fragmentClass = null;
+        switch (item.getItemId()) {
+            case R.id.edit_profile:
+                fragmentClass = EditProfileFragment.class;
+                break;
+            case R.id.settings:
+                fragmentClass = SettingsFragment.class;
+                break;
+            case R.id.logout:
+                //here we just implment firebaseUser and FirebaseAuth to logout
+                FirebaseUtils.setCurrentUserToNull(null);
+                mFirebaseAuth.signOut();
+                mFirebaseDatabase = null;
+                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+                moveBackToLoginActivity();
+                return;
+        }
+
+        if (fragmentClass != null) {
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (java.lang.InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.frameLayout, fragment)
+                    .commit();
+        }
+
+        // Highlight the selected item has been done by NavigationView
+        item.setChecked(true);
+        // Close the navigation drawer
+        mDrawerLayout.closeDrawers();
+
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.drawer_view, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.navigationView:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

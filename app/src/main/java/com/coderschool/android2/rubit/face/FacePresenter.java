@@ -34,7 +34,7 @@ class FacePresenter implements FaceContact.Presenter {
         selectGo();
         updateEdtQuestBar();
         selectDetails();
-
+        mvView.setUpNavigationDrawer();
         mvView.setUpRecyclerView();
         mvView.showImagePositive();
         mvView.showImageNegative();

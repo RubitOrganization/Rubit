@@ -18,6 +18,7 @@ import com.coderschool.android2.rubit.base.BaseView;
 interface FaceContact {
 
     interface View extends BaseView<Presenter> {
+        void setUpNavigationDrawer();
 
         void setUpRecyclerView();
 
