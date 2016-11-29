@@ -44,4 +44,8 @@
     <string name="IMGUR_CLIENT_ID">513b74b2690c49d</string>
     <string name="please_enter_first_name">Please enter first name</string>
     <string name="please_enter_last_name">Please enter last name</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="home">Home</string>
 </resources>

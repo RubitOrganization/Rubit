@@ -54,6 +54,10 @@ public class FirebaseUtils {
         return null;
     }
 
+//    public static void setCurrentUserToNull(Object o){
+//        FirebaseUser user = (FirebaseUser) o;
+//    }
+
     /**
      * get current User Name
      *
